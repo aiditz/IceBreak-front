@@ -24,19 +24,39 @@ new Vue({
     });
     */
 
-    const data = await API.startGame();
+    let data;
+    let initNeeded = true;
+
+    try {
+      data = await API.startGame();
+    } catch (err) {
+      data = require('./common/backend-response.dist.json');
+      initNeeded = false;
+      console.warn('TEST GAMESTATE DATA USED');
+    }
 
     API.setSession(data.id);
     this.$store.commit('setGamestate', data);
 
-    setInterval(async () => {
-      if ((this.$store.state.lastTs + 10000) < new Date().getTime()) {
-        this.$store.state.online = false;
+    if (!initNeeded) {
+      return;
+    }
+
+    while (true) {
+      const dateBefore = Date.now();
+      let data;
+
+      try {
+        if ((this.$store.state.lastTs + 10000) < new Date().getTime()) {
+          this.$store.state.online = false;
+        }
+        data = await API.getGamestate(store.lastEventId);
+        this.$store.commit('setGamestate', data);
+      } catch (err) {
+        console.error('Get gamestate loop error:', err);
+      } finally {
+        await helpers.wait(5000 - Math.min(5000, Date.now() - dateBefore));
       }
-
-      const data = await API.getGamestate(store.lastEventId);
-
-      this.$store.commit('setGamestate', data);
-    }, 5000);
+    }
   }
 }).$mount('#app');
