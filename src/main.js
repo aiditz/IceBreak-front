@@ -24,15 +24,36 @@ new Vue({
     });
     */
 
-    const data = await API.startGame();
+    let data;
+    let initNeeded = true;
+
+    try {
+      const data = await API.startGame();
+    } catch (err) {
+      data = require('./common/backend-response.dist.json');
+      initNeeded = false;
+      console.warn('TEST GAMESTATE DATA USED');
+    }
 
     API.setSession(data.id);
     this.$store.commit('setGamestate', data);
 
-    setInterval(async () => {
-      const data = await API.getGamestate(store.lastEventId);
+    if (!initNeeded) {
+      return;
+    }
 
-      this.$store.commit('setGamestate', data);
-    }, 5000);
+    while (true) {
+      const dateBefore = Date.now();
+      let data;
+
+      try {
+        data = await API.getGamestate(store.lastEventId);
+        this.$store.commit('setGamestate', data);
+      } catch (err) {
+        console.error('Get gamestate loop error:', err);
+      } finally {
+        await helpers.wait(5000 - Math.min(5000, Date.now() - dateBefore));
+      }
+    }
   }
 }).$mount('#app');

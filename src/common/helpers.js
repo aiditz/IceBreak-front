@@ -14,4 +14,8 @@ export default {
   formatMoney(value) {
     return new Intl.NumberFormat('ru', {currency: 'USD'}).format(value);
   },
+
+  async wait(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 };
