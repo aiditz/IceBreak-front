@@ -24,12 +24,9 @@
 
 <script>
   export default {
-    name: 'ShipCard',
+    name: 'SatelliteCard',
     props: ['item'],
     computed: {
-      secondsLeft() {
-        return Math.max(0, Math.round((this.item.maximum_progress - this.item.progress) / 10));
-      }
     }
   };
 </script>

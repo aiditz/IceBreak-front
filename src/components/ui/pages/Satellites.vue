@@ -1,18 +1,21 @@
 <template>
-  <Window title="Спутники">
-    Запустить спутник
-  </Window>
+  <Page title="Флот">
+    <span v-for="item in $store.state.gs.icebreakers">
+      <ShipCard :item="item"></ShipCard>
+      <br>
+    </span>
+  </Page>
 </template>
 
 <script>
-  import Window from '../Page.vue';
+  import Page from '../Page.vue';
+  import SatelliteCard from '../../elements/SatelliteCard.vue';
 
   export default {
-    name: 'BuyIcebreaker',
+    name: 'Satellites',
     components: {
-      Window
-    },
-    props: {
+      Page,
+      SatelliteCard
     },
     computed: {
     }
@@ -21,8 +24,13 @@
 
 <style scoped>
   .root {
-    width: 100%;
-    height: 100%;
-    background: #ff0;
+    overflow: auto;
+  }
+
+  .ship-card {
+  }
+
+  .description {
+    font-size: 12px;
   }
 </style>

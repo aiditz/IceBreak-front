@@ -50,6 +50,8 @@ export default new Vuex.Store({
         // Save last event id
         context.commit('set', {field: 'lastEventId', value: gs.events[gs.events.length - 1].id});
       }
-    }
+    },
+
+
   }
 });

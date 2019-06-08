@@ -12,7 +12,7 @@
   import ShipCard from '../../elements/ShipCard.vue';
 
   export default {
-    name: 'BuyIcebreaker',
+    name: 'Ships',
     components: {
       Page,
       ShipCard
