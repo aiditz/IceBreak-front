@@ -1,8 +1,8 @@
 <template>
   <v-card :id="id">
     <v-layout>
-      <v-flex xs4 style="padding: 0 0 0 16px">
-        <a :href="'#' + id" style="text-decoration: none;">
+      <v-flex xs5 style="padding: 0 0 0 16px">
+        <a :href="'#' + id" style="text-decoration: none;" v-if="item.parameters">
           <v-btn fab small dark color="grey" style="z-index: 1; margin: 0 -10px -30px;" @click="infoShown = !infoShown">
             <v-icon size="32px" v-if="!infoShown">info</v-icon>
             <v-icon size="20px" v-else>keyboard_arrow_up</v-icon>
@@ -17,27 +17,15 @@
         <v-expand-transition>
           <div v-show="infoShown"> 
             <table class="info-table">
-              <tr>
-                <th>Длина</th>
-                <td>{{ length }}</td>
-              </tr>
-              <tr>
-                <th>Ширина</th>
-                <td>{{ width }}</td>
-              </tr>
-              <tr>
-                <th>Высота</th>
-                <td>{{ height }}</td>
-              </tr>
-              <tr>
-                <th>Водоизмещение</th>
-                <td>{{ weight }}</td>
+              <tr v-for="param in item.parameters">
+                <th>{{ param[0] }}</th>
+                <td>{{ param[1] }}</td>
               </tr>
             </table>
           </div>
         </v-expand-transition>
       </v-flex>
-      <v-flex xs8>
+      <v-flex xs7>
         <v-card-title>
           <div class="headline">{{ item.name }}</div>
         </v-card-title>
@@ -106,17 +94,12 @@
     },
     data() {
       return {
-        length: 100,
-        width: 100,
-        height: 100,
-        weight: 100,
-        speed: 100,
-        infoShown: false,
-        id: null
+        id: null,
+        infoShown: false
       }
     },
     mounted () {
-      this.id = this._uid
+      this.id = this._uid;
     }
   };
 </script>

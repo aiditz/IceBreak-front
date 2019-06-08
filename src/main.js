@@ -30,6 +30,10 @@ new Vue({
     this.$store.commit('setGamestate', data);
 
     setInterval(async () => {
+      if ((this.$store.state.lastTs + 10000) < new Date().getTime()) {
+        this.$store.state.online = false;
+      }
+
       const data = await API.getGamestate(store.lastEventId);
 
       this.$store.commit('setGamestate', data);

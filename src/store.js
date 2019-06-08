@@ -26,7 +26,10 @@ export default new Vuex.Store({
       tileH: 40,
       rows: 13,
       cols: 24
-    }
+    },
+
+    online: true,
+    lastTs: new Date().getTime()
   },
   mutations: {
     set(state, {field, value}) {
@@ -35,6 +38,11 @@ export default new Vuex.Store({
 
     setGamestate(state, gs) {
       state.gs = gs;
+      
+      // Server online checker
+      state.online = true;
+      state.lastTs = new Date().getTime();
+
       state.config.rows = state.gs.colors.length;
       state.config.cols = state.gs.colors[1].length;
       state.config.tileH = (1440 / state.config.rows);
