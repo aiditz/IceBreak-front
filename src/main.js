@@ -15,7 +15,7 @@ Vue.use(VueTouch, {name: 'v-touch'})
 new Vue({
   store,
   render: h => h(App),
-  async created() {
+  created() {
     /*
     this.$store.commit('ui/dialogs/showInfo', {
       title: 'Hello in IceBreaker',
@@ -24,16 +24,19 @@ new Vue({
     });
     */
 
-    const data = await API.startGame();
+    let startIntervalId = setInterval(async () => {
+      const data = await API.startGame();
 
-    API.setSession(data.id);
-    this.$store.commit('setGamestate', data);
+      if (data.id) clearInterval(startIntervalId);
 
-
-    setInterval(async () => {
-      const data = await API.getGamestate(store.lastEventId);
-
+      API.setSession(data.id);
       this.$store.commit('setGamestate', data);
-    }, 5000);
+
+      setInterval(async () => {
+        const data = await API.getGamestate(store.lastEventId);
+
+        this.$store.commit('setGamestate', data);
+      }, 5000);
+    }, 1000);
   }
 }).$mount('#app');
