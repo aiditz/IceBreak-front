@@ -11,7 +11,9 @@
       <v-toolbar-items class="hidden-sm-and-down">
       </v-toolbar-items>
     </v-toolbar>
-    <slot></slot>
+    <v-card class="page-body">
+      <slot></slot>
+    </v-card>
   </div>
 </template>
 
@@ -29,8 +31,13 @@
 
 <style scoped>
   .root {
-    width: 100%;
+    display: flex;
+    flex-direction: column;
     height: 100%;
-    background: #ff0;
+    width: 100%;
+  }
+
+  .page-body {
+    padding: 20px;
   }
 </style>
