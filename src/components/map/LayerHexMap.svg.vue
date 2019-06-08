@@ -67,6 +67,7 @@
         console.log(e)
         self.debug = {
           length: e.changedTouches.length,
+          _length: e.touches.length,
           touches: []
         }
         for (let i = 0; i < e.changedTouches.length; i++) {
