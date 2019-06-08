@@ -16,11 +16,13 @@ new Vue({
   store,
   render: h => h(App),
   async created() {
-/*    this.$store.commit('ui/dialogs/showInfo', {
+    /*
+    this.$store.commit('ui/dialogs/showInfo', {
       title: 'Hello in IceBreaker',
       text: 'some text',
       buttons: [{title: 'OK'}]
-    });*/
+    });
+    */
 
     const data = await API.startGame();
 
