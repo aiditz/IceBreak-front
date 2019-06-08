@@ -1,5 +1,5 @@
 <template>
-  <Window>
+  <Window title="Флот">
     XXX
   </Window>
 </template>

@@ -8,14 +8,14 @@
 <script>
 import Map from './components/Map.vue';
 import Dialogs from './components/ui/Dialogs.vue';
-import BuyIcebreaker from './components/BuyIcebreaker.vue';
+import BuyShip from './components/BuyShip.vue';
 
 export default {
   name: 'app',
   components: {
     Dialogs,
     Map,
-    BuyIcebreaker,
+    BuyShip,
   },
 };
 </script>

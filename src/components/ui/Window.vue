@@ -4,7 +4,9 @@
       <v-toolbar-side-icon @click="$store.commit('ui/showMap')">
         <v-icon dark>arrow_back</v-icon>
       </v-toolbar-side-icon>
-      <v-toolbar-title>Title</v-toolbar-title>
+      <v-toolbar-title>
+        {{ title }}
+      </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
       </v-toolbar-items>
@@ -19,8 +21,7 @@
     name: 'BuyIcebreaker',
     components: {
     },
-    props: {
-    },
+    props: ['title'],
     computed: {
     }
   };
