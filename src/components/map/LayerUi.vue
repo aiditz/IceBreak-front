@@ -7,9 +7,9 @@
       </div>
 
       <div class="bottomRight">
-        <v-btn color="success" @click="$store.commit('ui/showPage', 'Satellites')">Спутники</v-btn>
-        <v-btn color="success" @click="$store.commit('ui/showPage', 'Research')">Наука</v-btn>
-        <v-btn color="success" @click="$store.commit('ui/showPage', 'Ships')">Флот</v-btn>
+        <img class="icon" src="/img/IconSatellite.svg" @click="$store.commit('ui/showPage', 'Satellites')">
+        <img class="icon" src="/img/IconScience.svg" @click="$store.commit('ui/showPage', 'Research')">
+        <img class="icon" src="/img/IconIcebreaker.svg" @click="$store.commit('ui/showPage', 'Ships')">
       </div>
     </div>
   </div>
@@ -37,6 +37,14 @@
     align-items: start;
   }
 
+  .icon {
+    height: 40px;
+    width: 40px;
+    margin: 4px;
+    cursor: pointer;
+    pointer-events: all;
+  }
+
   .root {
     z-index: 100;
     pointer-events: none;
@@ -53,6 +61,9 @@
   }
 
   .bottomRight {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
     align-self: end;
     text-align: right;
   }
