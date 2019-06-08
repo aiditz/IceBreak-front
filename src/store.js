@@ -1,19 +1,16 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import helpers from './common/helpers';
+import ui from './store/ui';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  modules: {
+    ui
+  },
   state: {
     lastEventId: null,
-    layers: {
-      background: true,
-      hexagons: true,
-      paths: false,
-      objects: true,
-    },
-    customEvents: [],
     gs: {}
   },
   mutations: {

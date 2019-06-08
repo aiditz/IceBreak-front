@@ -1,21 +1,27 @@
 <template>
   <div id="app">
     <Map></Map>
+    <Dialogs></Dialogs>
   </div>
 </template>
 
 <script>
 import Map from './components/Map.vue';
+import Dialogs from './components/ui/Dialogs.vue';
 
 export default {
   name: 'app',
   components: {
+    Dialogs,
     Map,
   },
 };
 </script>
 
 <style>
+  * {
+    box-sizing: border-box;
+  }
   body {
     padding: 0;
     margin: 0;
