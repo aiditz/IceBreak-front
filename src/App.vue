@@ -10,8 +10,10 @@
       </div>
     </v-expand-transition>
 
-    <Map v-show="$store.state.ui.page === null"></Map>
-    <component :is="$store.state.ui.page"></component>
+    <Map class="map" :class="{hidden: $store.state.ui.page !== null}"></Map>
+    <v-scale-transition>
+      <component v-show="$store.state.ui.page !== null" :is="$store.state.ui.page"></component>
+    </v-scale-transition>
   </v-app>
 </template>
 
@@ -69,5 +71,15 @@ export default {
     display: flex;
     justify-content: center;
     width: 100%;
+  }
+
+  .map {
+    transition: .5s;
+    opacity: 1;
+    z-index: 1;
+  }
+  .hidden {
+    opacity: 0;
+    z-index: -5;
   }
 </style>
