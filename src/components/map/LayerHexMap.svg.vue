@@ -1,5 +1,5 @@
 <template>
-  <v-touch tag="g" v-on:pinchin="onPinchin" v-on:pinchout="onPinchout">
+  <g>
     <g class="hexGrid" id="hexGrid"
       :transform="'translate(' + gridTranslate + ')'"
     >
@@ -14,8 +14,8 @@
         ></Hexagon>
       </g>
     </g>
-    <text style="fill: #FFF; transform: translate(10px,20px);">{{debug}}</text>
-  </v-touch>
+    <text style="fill: #FFF; transform: translate(200px, 150px);">{{debug}}</text>
+  </g>
 </template>
 
 <script>
@@ -62,13 +62,6 @@
       tileClicked(rowIndex, itemIndex) {
         console.log(rowIndex, itemIndex);
       },
-
-      onPinchin(event) {
-        this.debug = 'pinchIN';
-      },
-      onPinchout(event) {
-        this.debug = 'pinchOUT';
-      }
     },
     mounted() {
       
