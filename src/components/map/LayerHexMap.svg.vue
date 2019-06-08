@@ -1,5 +1,5 @@
 <template>
-  <v-touch tag="a" v-on:pinchin="onPinchin" v-on:pinchout="onPinchout">
+  <v-touch tag="g" v-on:pinchin="onPinchin" v-on:pinchout="onPinchout">
     <g class="hexGrid" id="hexGrid"
       :transform="'translate(' + gridTranslate + ')'"
     >
