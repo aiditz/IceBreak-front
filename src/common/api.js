@@ -18,7 +18,13 @@ function postData(url = '', data = {}) {
 }
 
 export default {
+  sessionId: null,
+
   async api(method, data = {}) {
+    if (this.sessionId) {
+      data.id = this.sessionId;
+    }
+
     const res = await postData(`${ENDPOINT}/${method}`, data);
 
     if (!res.ok || res.status !== 200) {
@@ -26,6 +32,14 @@ export default {
     }
 
     return res.json();
+  },
+
+  setSession(sessionId) {
+    this.sessionId = sessionId;
+  },
+
+  async startGame() {
+    return this.api('gamestate');
   },
 
   async getGamestate() {
