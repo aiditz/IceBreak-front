@@ -16,7 +16,7 @@ new Vue({
     this.$store.commit('setGamestate', data);
 
     setInterval(async () => {
-      const data = await API.getGamestate();
+      const data = await API.getGamestate(store.lastEventId);
 
       this.$store.commit('setGamestate', data);
     }, 5000);

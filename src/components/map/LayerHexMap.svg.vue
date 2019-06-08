@@ -1,6 +1,6 @@
 <template>
   <g>
-    <g v-for="(row, row_index) in gs.colors" :transform="'translate(' + getRowTranslate(row_index) + ')'">
+    <g v-for="(row, row_index) in gs.colors" :key="row_index" :transform="'translate(' + getRowTranslate(row_index) + ')'">
       <Hexagon v-for="(item, item_index) in row" :transform="'translate(' + getItemTranslate(item_index) + ' 0)'" :color="item"></Hexagon>
     </g>
   </g>

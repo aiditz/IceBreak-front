@@ -1,17 +1,19 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import helpers from './common/helpers';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    sessionId: null,
+    lastEventId: null,
     layers: {
       background: true,
       hexagons: true,
       paths: false,
       objects: true,
     },
+    customEvents: [],
     gs: {}
   },
   mutations: {
@@ -20,12 +22,17 @@ export default new Vuex.Store({
     },
 
     setGamestate(state, gs) {
-      Object.assign(state.gs, gs);
-
-      state.sessionId = gs.id;
+      state.gs = gs;
     }
   },
   actions: {
+    async setGamestate(context, gs) {
+      context.commit('setGamestate', gs);
 
-  },
+      if (gs.events) {
+        // Save last event id
+        context.commit('set', {field: 'lastEventId', value: gs.events[gs.events.length - 1].id});
+      }
+    }
+  }
 });

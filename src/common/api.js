@@ -42,8 +42,8 @@ export default {
     return this.api('gamestate');
   },
 
-  async getGamestate() {
-    return this.api('gamestate');
+  async getGamestate(lastEventId) {
+    return this.api('gamestate', {lastEventId});
   },
 
   async sendAction(actionName, data) {
