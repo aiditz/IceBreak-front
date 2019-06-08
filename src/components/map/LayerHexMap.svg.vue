@@ -4,7 +4,7 @@
       :transform="'translate(' + gridTranslate + ')'"
     >
       <g class="hexClass" v-for="(row, rowIndex) in gs.colors"
-        :transform="'translate(' + getRowTranslate(rowIndex) + ')'"
+        :transform="'translate(' + getItemTranslate(rowIndex) + ')'"
       >
         <Hexagon class="hexTile"
           v-for="(item, colIndex) in row"

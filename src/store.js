@@ -14,7 +14,7 @@ export default new Vuex.Store({
     lastEventId: null,
     layers: {
       background: true,
-      hexagons: true,
+      hexagons: false,
       paths: false,
       objects: true,
     },
@@ -38,7 +38,7 @@ export default new Vuex.Store({
 
     setGamestate(state, gs) {
       state.gs = gs;
-      
+
       // Server online checker
       state.online = true;
       state.lastTs = new Date().getTime();
