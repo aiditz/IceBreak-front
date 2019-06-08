@@ -1,15 +1,14 @@
 <template>
   <div class="root">
     <div class="topLeft">
-      <v-btn color="success">Icon</v-btn>
-      <v-btn color="success">Icon</v-btn>
-      <v-btn color="success">Icon</v-btn>
+      <p class="title">${{ $store.state.money | formatMoney }}</p>
+      <p class="title">Наука: 0%</p>
     </div>
 
     <div class="bottomRight">
-      <v-btn color="success">1</v-btn>
-      <v-btn color="success">2</v-btn>
-      <v-btn color="success" @click="$store.commit('ui/showWindow', 'BuyShip')">BUY</v-btn>
+      <v-btn color="success" @click="$store.commit('ui/showPage', 'Satellites')">Спутники</v-btn>
+      <v-btn color="success" @click="$store.commit('ui/showPage', 'Research')">Наука</v-btn>
+      <v-btn color="success" @click="$store.commit('ui/showPage', 'Ships')">Флот</v-btn>
     </div>
   </div>
 </template>
@@ -45,6 +44,5 @@
   .bottomRight {
     align-self: end;
     text-align: right;
-
   }
 </style>

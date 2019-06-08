@@ -6,7 +6,7 @@ export default {
     dialogs
   },
   state: {
-    window: null, // icebreakers, research, ... null = Map
+    page: null, // icebreakers, research, ... null = Map
 
     layers: {
       background: true,
@@ -19,11 +19,11 @@ export default {
   },
   mutations: {
     showMap(state) {
-      state.window = null;
+      state.page = null;
     },
 
-    showWindow(state, name) {
-      state.window = name;
+    showPage(state, name) {
+      state.page = name;
     }
   },
   actions: {

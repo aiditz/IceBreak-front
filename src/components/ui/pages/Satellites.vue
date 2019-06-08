@@ -1,11 +1,11 @@
 <template>
-  <Window title="Флот">
-    XXX
+  <Window title="Спутники">
+    Запустить спутник
   </Window>
 </template>
 
 <script>
-  import Window from './ui/Window.vue';
+  import Window from '../Page.vue';
 
   export default {
     name: 'BuyIcebreaker',
