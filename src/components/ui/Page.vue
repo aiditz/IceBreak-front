@@ -40,6 +40,7 @@
 
   .root {
       min-height: 100vh;
+      transform-origin: bottom right
   }
   .page-body {
       height: 100%;
