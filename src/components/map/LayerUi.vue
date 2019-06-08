@@ -9,7 +9,7 @@
     <div class="bottomRight">
       <v-btn color="success">1</v-btn>
       <v-btn color="success">2</v-btn>
-      <v-btn color="success">3</v-btn>
+      <v-btn color="success" @click="$store.commit('ui/showWindow', 'BuyShip')">BUY</v-btn>
     </div>
   </div>
 </template>
