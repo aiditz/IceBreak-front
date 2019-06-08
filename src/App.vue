@@ -34,4 +34,9 @@ export default {
     height: 100%;
     position: absolute;
   }
+  .application--wrap {
+    min-height: 100%;
+    height: 100%;
+    max-height: 100%;
+  }
 </style>
