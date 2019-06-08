@@ -1,4 +1,5 @@
 const ENDPOINT = 'https://ice-break.herokuapp.com';
+// const ENDPOINT = 'http://localhost:5000';
 
 function postData(url = '', data = {}) {
   // Default options are marked with *
@@ -25,7 +26,9 @@ export default {
       data.id = this.sessionId;
     }
 
-    const res = await postData(`${ENDPOINT}/${method}`, data);
+    const endpoint = window.endpoint || ENDPOINT;
+
+    const res = await postData(`${endpoint}/${method}`, data);
 
     if (!res.ok || res.status !== 200) {
       throw new Error('fetch fail', res);

@@ -51,6 +51,11 @@ new Vue({
           this.$store.state.online = false;
         }
         data = await API.getGamestate(store.lastEventId);
+
+        if (data.error) {
+          throw new Error(data.error);
+        }
+
         this.$store.commit('setGamestate', data);
       } catch (err) {
         console.error('Get gamestate loop error:', err);

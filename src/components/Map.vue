@@ -4,6 +4,7 @@
       <g id="map-content" :transform="'scale(' + this.mapScale + ')'">
         <LayerBackground></LayerBackground>
         <LayerHexMap v-if="false"></LayerHexMap>
+        <LayerShips></LayerShips>
       </g>
     </svg>
     <div>
@@ -16,6 +17,7 @@
   import LayerBackground from './map/LayerBackground.svg.vue';
   import LayerHexMap from './map/LayerHexMap.svg.vue';
   import LayerUi from './map/LayerUi.vue';
+  import LayerShips from './map/LayerShips.vue';
   import interact from 'interactjs';
 
   export default {
@@ -24,6 +26,7 @@
       LayerBackground,
       LayerHexMap,
       LayerUi,
+      LayerShips,
     },
     data() {
       return {

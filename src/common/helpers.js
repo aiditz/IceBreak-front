@@ -17,5 +17,9 @@ export default {
 
   async wait(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
-  }
+  },
+
+  degToRad(degrees) {
+    return degrees * Math.PI / 180;
+  },
 };
