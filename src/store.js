@@ -34,6 +34,10 @@ export default new Vuex.Store({
 
     setGamestate(state, gs) {
       state.gs = gs;
+      state.config.rows = state.gs.colors.length;
+      state.config.cols = state.gs.colors[1].length;
+      state.config.tileH = Math.floor(1080 / state.config.rows);
+      state.config.tileW = Math.floor(1920 / state.config.cols);
       state.loaded = true;
     }
   },

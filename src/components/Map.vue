@@ -1,6 +1,6 @@
 <template>
   <div>
-    <svg id="map" :viewBox="'0 0 ' + w + ' ' + h" :width="w" :height="h" :class="{loaded: !!loaded}">
+    <svg id="map" viewBox="150 0 1500 780" :class="{loaded: !!loaded}">
       <LayerBackground></LayerBackground>
       <LayerHexMap></LayerHexMap>
     </svg>
@@ -28,15 +28,15 @@
       },
       loaded() {
         return this.$store.state.loaded;
-      },
-      w() {
-        let w = Array.isArray(this.gs.colors) ? this.gs.colors[0].length - 1 : this.$store.state.config.cols;
-        return w * this.$store.state.config.tileW;
-      },
-      h() {
-        let h = Array.isArray(this.gs.colors) ? this.gs.colors.length - 2 : this.$store.state.config.rows;
-        return h * this.$store.state.config.tileH * 403/500;
       }
+      // w() {
+      //   let w = Array.isArray(this.gs.colors) ? this.gs.colors[0].length - 1 : this.$store.state.config.cols;
+      //   return w * this.$store.state.config.tileW;
+      // },
+      // h() {
+      //   let h = Array.isArray(this.gs.colors) ? this.gs.colors.length - 2 : this.$store.state.config.rows;
+      //   return h * this.$store.state.config.tileH * 403/500;
+      // }
     },
     data() {
       return {}
