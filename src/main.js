@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import VueTouch from 'vue-touch';
 import App from './App.vue';
 import store from './store';
 import API from './common/api';

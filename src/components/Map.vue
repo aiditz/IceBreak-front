@@ -1,10 +1,14 @@
 <template>
-  <div class="root" :class="{loaded}">
-    <LayerUi></LayerUi>
-    <svg id="map">
-      <LayerBackground></LayerBackground>
-      <LayerHexMap></LayerHexMap>
+  <div class="root">
+    <svg id="map" :class="{loaded}">
+      <g id="map-content" :transform="'scale(' + this.mapScale + ')'">
+        <LayerBackground></LayerBackground>
+        <LayerHexMap v-if="false"></LayerHexMap>
+      </g>
     </svg>
+    <div>
+      <LayerUi class="layer-ui"></LayerUi>
+    </div>
   </div>
 </template>
 
@@ -12,6 +16,7 @@
   import LayerBackground from './map/LayerBackground.svg.vue';
   import LayerHexMap from './map/LayerHexMap.svg.vue';
   import LayerUi from './map/LayerUi.vue';
+  import interact from 'interactjs';
 
   export default {
     name: 'IceBreak',
@@ -20,9 +25,21 @@
       LayerHexMap,
       LayerUi,
     },
+    data() {
+      return {
+        mapScale: 1
+      }
+    },
     props: {
     },
     mounted() {
+      /*
+      interact('#map-content').gesturable({
+        onmove: event => {
+          this.mapScale *= event.scale;
+        }
+      });
+      */
     },
     computed: {
       gs() {
@@ -32,37 +49,42 @@
         return this.$store.state.loaded;
       }
     },
-    data() {
-      return {}
-    }
   };
 </script>
 
 <style scoped>
-
   .root {
     position: absolute;
-    opacity: 0;
-    transition: .3s;
     left: 0;
     height: 100%;
     width: 100%;
+    overflow: scroll;
+  }
+
+  .root > * {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  .layer-ui {
+    position: fixed;
   }
 
   #map {
-    overflow: scroll;
-    width: 1920px;
-    height: 1080px;
+    opacity: 0;
+    transition: .3s;
+    width: 1780px;
+    height: 1039px;
   }
 
   #map > * {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    transform: scale(0.5);
   }
 
-  .root.loaded {
+  #map.loaded {
     opacity: 1;
   }
 
