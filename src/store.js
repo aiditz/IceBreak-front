@@ -5,24 +5,14 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    sessionId: null,
     layers: {
       background: true,
       hexagons: true,
       paths: false,
       objects: true,
     },
-    hexagons: [
-      {
-        color: 'rgba(255, 0, 0, 0.2)'
-      },
-      {
-        color: 'rgba(255, 0, 0, 0.2)'
-      },
-      {
-        color: 'rgba(0, 255, 0, 0.2)'
-      },
-    ],
-
+    gs: {}
   },
   mutations: {
     set(state, {field, value}) {
@@ -30,7 +20,7 @@ export default new Vuex.Store({
     },
 
     setGamestate(state, gs) {
-      Object.assign(state, gs);
+      Object.assign(state.gs, gs);
     }
   },
   actions: {

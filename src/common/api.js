@@ -14,15 +14,14 @@ function postData(url = '', data = {}) {
     redirect: 'follow', // manual, *follow, error
     referrer: 'no-referrer', // no-referrer, *client
     body: JSON.stringify(data), // body data type must match "Content-Type" header
-  })
-    .then(response => response.json()); // parses JSON response into native Javascript objects
+  });
 }
 
 export default {
   async api(method, data = {}) {
     const res = await postData(`${ENDPOINT}/${method}`, data);
 
-    if (!res.ok || !res.status !== 200) {
+    if (!res.ok || res.status !== 200) {
       throw new Error('fetch fail', res);
     }
 
@@ -30,6 +29,10 @@ export default {
   },
 
   async getGamestate() {
+    return this.api('gamestate');
+  },
+
+  async sendAction(actionName, data) {
     return this.api('gamestate');
   },
 };
