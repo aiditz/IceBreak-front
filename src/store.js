@@ -37,8 +37,9 @@ export default new Vuex.Store({
       state.gs = gs;
       state.config.rows = state.gs.colors.length;
       state.config.cols = state.gs.colors[1].length;
-      state.config.tileH = (1080 / state.config.rows);
-      state.config.tileW = (1920 / state.config.cols);
+      state.config.tileH = (1440 / state.config.rows);
+      state.config.tileW = state.config.tileH / 1.1547;
+      // state.config.tileW = (2560 / (state.config.cols - 1));
       state.loaded = true;
     }
   },

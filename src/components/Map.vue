@@ -1,10 +1,10 @@
 <template>
-  <div>
-    <svg id="map" viewBox="150 0 1470 770" :class="{loaded: !!loaded}">
+  <div class="root" :class="{loaded}">
+    <LayerUi></LayerUi>
+    <svg id="map">
       <LayerBackground></LayerBackground>
       <LayerHexMap></LayerHexMap>
     </svg>
-    <LayerUi></LayerUi>
   </div>
 </template>
 
@@ -12,6 +12,7 @@
   import LayerBackground from './map/LayerBackground.svg.vue';
   import LayerHexMap from './map/LayerHexMap.svg.vue';
   import LayerUi from './map/LayerUi.vue';
+  import svgPanZoom from 'svg-pan-zoom';
 
   export default {
     name: 'IceBreak',
@@ -21,6 +22,8 @@
       LayerUi,
     },
     props: {
+    },
+    mounted() {
     },
     computed: {
       gs() {
@@ -38,16 +41,30 @@
 
 <style scoped>
 
-#map {
-  position: absolute;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  opacity: 0;
-  transition: .3s;
-}
-#map.loaded {
-  opacity: 1;
-}
+  .root {
+    position: absolute;
+    opacity: 0;
+    transition: .3s;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  #map {
+    overflow: scroll;
+    width: 1920px;
+    height: 1080px;
+  }
+
+  #map > * {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    transform: scale(0.5);
+  }
+
+  .root.loaded {
+    opacity: 1;
+  }
 
 </style>
