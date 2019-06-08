@@ -43,7 +43,7 @@
 
   .root {
     position: absolute;
-    opacity: 0;
+    opacity: 1;
     transition: .3s;
     left: 0;
     height: 100%;
