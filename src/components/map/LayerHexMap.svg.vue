@@ -14,6 +14,7 @@
         ></Hexagon>
       </g>
     </g>
+    <text style="fill: #FFF; transform: translate(10px,20px);">{{debug}}</text>
   </g>
 </template>
 
@@ -31,7 +32,9 @@
       }
     },
     data: () => {
-      return {}
+      return {
+        debug: {}
+      }
     },
     components: {
       Hexagon
@@ -58,9 +61,19 @@
       }
     },
     mounted() {
+      let self = this;
+
       document.getElementById('hexGrid').addEventListener('touchstart', function(e) {
         console.log(e)
-      })
+        self.debug = {
+          length: e.changedTouches.length,
+          touches: []
+        }
+        for (let i = 0; i < e.changedTouches.length; i++) {
+          let v = e.changedTouches[i];
+          self.debug.touches.push({x: v.screenX, y: v.screenY});
+        }
+      });
     }
   };
 </script>
