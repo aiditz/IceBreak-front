@@ -38,8 +38,8 @@
   }
 
   .icon {
-    height: 40px;
-    width: 40px;
+    height: 56px;
+    width: 56px;
     margin: 4px;
     cursor: pointer;
     pointer-events: all;
