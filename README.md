@@ -1,5 +1,7 @@
 # front
 
+24 hexs в четных, 25 в нечетных, высота 13
+
 ## Project setup
 ```
 npm install
@@ -27,3 +29,4 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
