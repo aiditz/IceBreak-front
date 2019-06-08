@@ -1,16 +1,19 @@
 import Vue from 'vue';
-import './plugins/vuetify'
+import VueTouch from 'vue-touch';
 import App from './App.vue';
 import store from './store';
-import './registerServiceWorker';
 import API from './common/api';
-import 'roboto-fontface/css/roboto/roboto-fontface.css'
-import 'material-design-icons-iconfont/dist/material-design-icons.css'
+import helpers from './common/helpers';
+import './registerServiceWorker';
+import './plugins/vuetify';
+import 'roboto-fontface/css/roboto/roboto-fontface.css';
+import 'material-design-icons-iconfont/dist/material-design-icons.css';
 
 Vue.config.productionTip = false;
 
-var VueTouch = require('vue-touch')
-Vue.use(VueTouch, {name: 'v-touch'})
+Vue.use(VueTouch, {name: 'v-touch'});
+
+Vue.filter('formatMoney', helpers.formatMoney);
 
 new Vue({
   store,

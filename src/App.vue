@@ -1,21 +1,25 @@
 <template>
   <v-app id="app">
-    <Map v-show="$store.state.ui.window === null"></Map>
-    <component :is="$store.state.ui.window"></component>
+    <Map v-show="$store.state.ui.page === null"></Map>
+    <component :is="$store.state.ui.page"></component>
   </v-app>
 </template>
 
 <script>
 import Map from './components/Map.vue';
 import Dialogs from './components/ui/Dialogs.vue';
-import BuyShip from './components/BuyShip.vue';
+import Ships from './components/ui/pages/Ships.vue';
+import Research from './components/ui/pages/Research.vue';
+import Satellites from './components/ui/pages/Satellites.vue';
 
 export default {
   name: 'app',
   components: {
     Dialogs,
     Map,
-    BuyShip,
+    Ships,
+    Research,
+    Satellites,
   },
 };
 </script>

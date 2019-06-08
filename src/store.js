@@ -10,6 +10,7 @@ export default new Vuex.Store({
     ui
   },
   state: {
+    money: 1000000,
     lastEventId: null,
     layers: {
       background: true,
