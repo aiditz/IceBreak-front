@@ -1,7 +1,7 @@
 <template>
   <svg id="map" viewBox="0 0 640 360">
-    <LayerHexMap></LayerHexMap>
     <LayerBackground></LayerBackground>
+    <LayerHexMap></LayerHexMap>
   </svg>
 </template>
 
