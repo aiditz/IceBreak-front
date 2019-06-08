@@ -1,12 +1,10 @@
 <template>
-  <g class="ships">
-    <component
-      class="ship"
-      :is="`Ship${data.id}`"
-      :transform="`translate(${translate}) rotate(${rotate} 0 0)`"
-    >
-    </component>
-  </g>
+  <component
+    class="root"
+    :is="`Ship${data.id}`"
+    :transform="`translate(${translate}) rotate(${rotate} 0 0) scale(0.5)`"
+  >
+  </component>
 </template>
 
 <script>
@@ -25,8 +23,11 @@
     props: ['data'],
     computed: {
       translate() {
-        const col = this.data.movements[0].hex[0];
-        const row = this.data.movements[0].hex[1];
+        const centerX = -110;
+        const centerY = 103;
+
+        const col = this.data.movements[0].hex[1];
+        const row = this.data.movements[0].hex[0];
 
         let y = row * this.$store.state.config.tileH * 29/40;
         let x = col * this.$store.state.config.tileW;
@@ -35,7 +36,7 @@
           x += this.$store.state.config.tileW / 2;
         }
 
-        return `${x} ${y}`;
+        return `${x + centerX} ${y + centerY}`;
       },
 
       rotate() {
@@ -46,4 +47,7 @@
 </script>
 
 <style scoped>
+  .root {
+    opacity: 0.7;
+  }
 </style>

@@ -3,7 +3,7 @@
     <svg id="map" :class="{loaded}">
       <g id="map-content" :transform="'scale(' + this.mapScale + ')'">
         <LayerBackground></LayerBackground>
-        <LayerHexMap v-if="false"></LayerHexMap>
+        <LayerHexMap v-if="this.$store.state.layers.hexagons"></LayerHexMap>
         <LayerShips></LayerShips>
       </g>
     </svg>
