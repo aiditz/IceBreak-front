@@ -86,11 +86,6 @@
     height: 100%;
   }
 
-  .v-btn b {
-    font-weight: 900;
-    font-size: 14px;
-  }
-
   .opacity {
     opacity: .6;
     transition: .3s;
@@ -101,5 +96,9 @@
 
   .v-card__actions .v-btn {
     font-size: 12px;
+  }
+  .v-btn b {
+    font-weight: 900;
+    font-size: 14px;
   }
 </style>

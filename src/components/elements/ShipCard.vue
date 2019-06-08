@@ -54,7 +54,7 @@
             @click="$store.dispatch('orderShip', item.id)"
             :disabled="!isAvailable || isBuilding || isBuilt"
           >
-            <span v-if="!isAvailable">Требуется исследований - <b>{{ estimateRequirements }}</b></span>
+            <span v-if="!isAvailable">Требуется <b>{{ estimateRequirements }}</b> {{ estimateRequirementsText }}</span>
             <span v-else-if="item.progress == 0">Построить - {{ item.cost | formatMoney }} млрд.</span>
             <span v-else-if="isBuilding">
               Строится - 
@@ -92,6 +92,21 @@
         let left = 0;
         this.item.requirements.every(req => { if (!req.completed) left++ });
         return left;
+      },
+      estimateRequirementsText() {
+        let mod = this.estimateRequirements % 10;
+        if (this.estimateRequirements >= 5 && this.estimateRequirements <= 20) {
+          return 'исследований';
+        }
+        if (mod == 0 || mod >=5) {
+          return 'исследований';
+        }
+        if (mod == 1) {
+          return 'исследование';
+        }
+        if (mod >= 2 && mod <= 4) {
+          return 'исследования';
+        }
       }
     },
     data() {
@@ -173,6 +188,14 @@
 .info-table td {
   text-align: right;
   padding: 1px 0;
+}
+
+.v-card__actions .v-btn {
+  font-size: 13px;
+}
+.v-btn b {
+  font-weight: 900;
+  font-size: 15px;
 }
 
 </style>
