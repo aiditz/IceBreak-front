@@ -1,14 +1,16 @@
 <template>
-  <div class="root">
+  <Window>
     XXX
-  </div>
+  </Window>
 </template>
 
 <script>
+  import Window from './ui/Window.vue';
 
   export default {
     name: 'BuyIcebreaker',
     components: {
+      Window
     },
     props: {
     },

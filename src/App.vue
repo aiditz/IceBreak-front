@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Map v-show="$store.state.ui.window === null"></Map>
     <component :is="$store.state.ui.window"></component>
   </div>
 </template>
