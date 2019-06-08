@@ -47,6 +47,9 @@ new Vue({
       let data;
 
       try {
+        if ((this.$store.state.lastTs + 10000) < new Date().getTime()) {
+          this.$store.state.online = false;
+        }
         data = await API.getGamestate(store.lastEventId);
 
         if (data.error) {

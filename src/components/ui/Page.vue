@@ -35,6 +35,15 @@
     flex-direction: column;
     height: 100%;
     width: 100%;
+    max-height: 100vh;
+  }
+
+  .root {
+      min-height: 100vh;
+  }
+  .page-body {
+      height: 100%;
+      flex: 1;
   }
 
   /*.page-body {

@@ -1,7 +1,19 @@
 <template>
   <v-app id="app">
-    <Map v-show="$store.state.ui.page === null"></Map>
-    <component :is="$store.state.ui.page"></component>
+    <v-expand-transition>
+      <div v-show="serverOffline" class="server-status">
+        <v-chip color="warning">
+          <v-icon color="red" left>report</v-icon>
+
+          Нет подключения к серверу
+        </v-chip>
+      </div>
+    </v-expand-transition>
+
+    <Map class="map" :class="{hidden: $store.state.ui.page !== null}"></Map>
+    <v-scale-transition>
+      <component v-show="$store.state.ui.page !== null" :is="$store.state.ui.page"></component>
+    </v-scale-transition>
   </v-app>
 </template>
 
@@ -21,6 +33,11 @@ export default {
     Research,
     Satellites,
   },
+  computed: {
+    serverOffline() {
+      return !this.$store.state.online;
+    }
+  }
 };
 </script>
 
@@ -47,5 +64,22 @@ export default {
     min-height: 100%;
     height: 100%;
     max-height: 100%;
+  }
+  .server-status {
+    z-index: 10;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .map {
+    transition: .5s;
+    opacity: 1;
+    z-index: 1;
+  }
+  .hidden {
+    opacity: 0;
+    z-index: -5;
   }
 </style>

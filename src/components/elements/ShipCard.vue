@@ -1,9 +1,9 @@
 <template>
   <v-card :id="id">
     <v-layout>
-      <v-flex xs4 style="padding: 0 0 0 16px">
-        <a :href="'#' + id" style="text-decoration: none;">
-          <v-btn fab small dark color="grey" style="z-index: 1; margin: 0 -10px -30px;" @click="infoShown = !infoShown">
+      <v-flex xs5 class="card-left">
+        <a :href="'#' + id" class="info-toggler-link" v-if="item.parameters">
+          <v-btn fab small dark color="grey" class="info-toggler" @click="infoShown = !infoShown">
             <v-icon size="32px" v-if="!infoShown">info</v-icon>
             <v-icon size="20px" v-else>keyboard_arrow_up</v-icon>
           </v-btn>
@@ -17,37 +17,27 @@
         <v-expand-transition>
           <div v-show="infoShown"> 
             <table class="info-table">
-              <tr>
-                <th>Длина</th>
-                <td>{{ length }}</td>
-              </tr>
-              <tr>
-                <th>Ширина</th>
-                <td>{{ width }}</td>
-              </tr>
-              <tr>
-                <th>Высота</th>
-                <td>{{ height }}</td>
-              </tr>
-              <tr>
-                <th>Водоизмещение</th>
-                <td>{{ weight }}</td>
+              <tr v-for="param in item.parameters">
+                <th>{{ param[0] }}</th>
+                <td>{{ param[1] }}</td>
               </tr>
             </table>
           </div>
         </v-expand-transition>
       </v-flex>
-      <v-flex xs8>
+      <v-flex xs7 class="card-right">
         <v-card-title>
           <div class="headline">{{ item.name }}</div>
         </v-card-title>
 
-        <v-card-text style="padding-top: 0">
+        <v-card-text class="pt-0">
           {{ item.description }}
 
-          <v-layout style="margin: 8px 0 0">
-            <v-flex style="flex: 1; padding: 0 6px 0 0"><h4 style="margin: 8px 0">Требования:</h4></v-flex>
-            <v-flex style="flex: 10">
+          <v-layout class="requirements">
+            <v-flex class="requirements-header">
+              <h4 class="requirements-heading">Требования:</h4>
+            </v-flex>
+            <v-flex class="requirements-items">
               <v-chip v-for="req in item.requirements" outline :color="req.completed ? 'green' : 'red'" :class="{opacity: req.completed}">
                 <v-avatar>
                   <img :src="req.image" :alt="req.name">
@@ -59,16 +49,16 @@
             </v-flex>
           </v-layout>
         </v-card-text>
-        <v-card-actions class="pa-3" style="padding-top: 0 !important">
+        <v-card-actions class="pb-3 pl-3 pr-3 pt-0">
           <v-btn :color="isAvailable ? 'success' : 'default'"
             @click="$store.dispatch('orderShip', item.id)"
             :disabled="!isAvailable || isBuilding || isBuilt"
           >
-            <span v-if="!isAvailable">Требуется исследований - {{ estimateRequirements }}</span>
+            <span v-if="!isAvailable">Требуется <b>{{ estimateRequirements }}</b> {{ estimateRequirementsText }}</span>
             <span v-else-if="item.progress == 0">Построить - {{ item.cost | formatMoney }} млрд.</span>
             <span v-else-if="isBuilding">
               Строится - 
-              {{ estimateTime }} сек.
+              <b>{{ estimateTime }}</b> сек.
             </span>
             <span v-else-if="isBuilt">Построен</span>
           </v-btn>
@@ -102,59 +92,110 @@
         let left = 0;
         this.item.requirements.every(req => { if (!req.completed) left++ });
         return left;
+      },
+      estimateRequirementsText() {
+        let mod = this.estimateRequirements % 10;
+        if (this.estimateRequirements >= 5 && this.estimateRequirements <= 20) {
+          return 'исследований';
+        }
+        if (mod == 0 || mod >=5) {
+          return 'исследований';
+        }
+        if (mod == 1) {
+          return 'исследование';
+        }
+        if (mod >= 2 && mod <= 4) {
+          return 'исследования';
+        }
       }
     },
     data() {
       return {
-        length: 100,
-        width: 100,
-        height: 100,
-        weight: 100,
-        speed: 100,
-        infoShown: false,
-        id: null
+        id: null,
+        infoShown: false
       }
     },
     mounted () {
-      this.id = this._uid
+      this.id = this._uid;
     }
   };
 </script>
 
 <style scoped>
-  .root {
-    overflow: auto;
-  }
 
-  .ship-card {
-    overflow: hidden;
-    position: relative;
-  }
+.root {
+  overflow: auto;
+}
 
-  .description {
-    font-size: 12px;
-  }
+.card-left {
+  padding: 0 0 0 16px
+}
 
-  .opacity {
-    opacity: .6;
-    transition: .3s;
-  }
-  .opacity:hover {
-    opacity: 1;
-  }
+.ship-card {
+  overflow: hidden;
+  position: relative;
+}
 
-  .info-table {
-    width: 100%;
-    background-color: #FFF;
-    padding: 4px 0 12px;
-  }
-  .info-table th {
-    text-align: left;
-    padding: 1px 0;
-    font-size: 12px;
-  }
-  .info-table td {
-    text-align: right;
-    padding: 1px 0;
-  }
+.description {
+  font-size: 12px;
+}
+
+.v-btn b {
+  font-weight: 900;
+  font-size: 14px;
+}
+
+.info-toggler-link {
+  text-decoration: none;
+}
+.info-toggler {
+  z-index: 1;
+  margin: 0 -10px -30px;
+}
+
+.requirements {
+  margin: 8px 0 0;
+}
+.requirements-header {
+  flex: 1;
+  padding: 0 6px 0 0
+}
+.requirements-heading {
+  margin: 8px 0
+}
+.requirements-items {
+  flex: 10
+}
+
+.opacity {
+  opacity: .6;
+  transition: .3s;
+}
+.opacity:hover {
+  opacity: 1;
+}
+
+.info-table {
+  width: 100%;
+  background-color: #FFF;
+  padding: 4px 0 12px;
+}
+.info-table th {
+  text-align: left;
+  padding: 1px 0;
+  font-size: 12px;
+}
+.info-table td {
+  text-align: right;
+  padding: 1px 0;
+}
+
+.v-card__actions .v-btn {
+  font-size: 13px;
+}
+.v-btn b {
+  font-weight: 900;
+  font-size: 15px;
+}
+
 </style>

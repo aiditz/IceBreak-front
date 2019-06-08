@@ -1,9 +1,10 @@
 <template>
   <Page title="Исследования">
-    <span v-for="item in $store.state.gs.research">
-      <ResearchCard :item="item"></ResearchCard>
-      <br>
-    </span>
+    <v-layout row justify-space-between class="research-cards">
+      <v-flex xs6 v-for="item in $store.state.gs.research">
+        <ResearchCard :item="item"></ResearchCard>
+      </v-flex>
+    </v-layout>
   </Page>
 </template>
 
@@ -27,10 +28,7 @@
     overflow: auto;
   }
 
-  .ship-card {
-  }
-
-  .description {
-    font-size: 12px;
+  .research-cards {
+    padding: 8px;
   }
 </style>
