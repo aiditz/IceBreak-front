@@ -6,7 +6,7 @@ export default {
     dialogs
   },
   state: {
-    window: 'map', // icebreakers, research, ...
+    window: 'Map', // icebreakers, research, ...
 
     layers: {
       background: true,
@@ -18,6 +18,9 @@ export default {
   getters: {
   },
   mutations: {
+    showWindow(state, name) {
+      state.window = name;
+    }
   },
   actions: {
 

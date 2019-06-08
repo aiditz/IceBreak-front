@@ -1,19 +1,20 @@
 <template>
   <div id="app">
-    <Map></Map>
-    <template is="$store.state.window"></template>
+    <component :is="$store.state.ui.window"></component>
   </div>
 </template>
 
 <script>
 import Map from './components/Map.vue';
 import Dialogs from './components/ui/Dialogs.vue';
+import BuyIcebreaker from './components/BuyIcebreaker.vue';
 
 export default {
   name: 'app',
   components: {
     Dialogs,
     Map,
+    BuyIcebreaker,
   },
 };
 </script>
