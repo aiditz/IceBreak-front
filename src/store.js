@@ -14,7 +14,13 @@ export default new Vuex.Store({
       objects: true,
     },
     customEvents: [],
-    gs: {}
+    gs: {},
+    config: {
+      tileW: 35,
+      tileH: 40,
+      rows: 13,
+      cols: 24
+    }
   },
   mutations: {
     set(state, {field, value}) {

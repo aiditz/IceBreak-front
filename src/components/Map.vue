@@ -1,5 +1,5 @@
 <template>
-  <svg id="map" viewBox="0 0 640 360">
+  <svg id="map" :viewBox="'0 0 ' + w + ' ' + h">
     <LayerBackground></LayerBackground>
     <LayerHexMap></LayerHexMap>
   </svg>
@@ -17,13 +17,33 @@
     },
     props: {
     },
+    computed: {
+      gs() {
+        return this.$store.state.gs;
+      },
+      w() {
+        let w = Array.isArray(this.gs.colors) ? this.gs.colors[0].length - 1 : this.$store.state.config.cols;
+        return w * this.$store.state.config.tileW;
+      },
+      h() {
+        let h = Array.isArray(this.gs.colors) ? this.gs.colors.length - 2 : this.$store.state.config.rows;
+        return h * this.$store.state.config.tileH * 403/500;
+      }
+    },
+    data() {
+      return {}
+    }
   };
 </script>
 
 <style scoped>
-  #map {
-    width: calc(24 * 20px);
-    height: calc(13 * 2/3 * 1.414213562373095 * 20px);
-    position: absolute;
-  }
+
+#map {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: auto;
+}
+
 </style>

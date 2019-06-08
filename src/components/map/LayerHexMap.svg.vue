@@ -1,9 +1,5 @@
 <template>
-  <v-touch tag="g" v-on:tap="onTap" v-on:pinchin="pinchin" v-on:pinchout="pinchout">
-    <g>
-      <text>{{ finger }}</text>
-    </g>
-
+  <v-touch tag="g">
     <g class="hexGird"
       :transform="'translate(' + greadTranslate + ')'"
     >
@@ -31,21 +27,11 @@
         return this.$store.state.gs;
       },
       greadTranslate() {
-        return '-50, -5';
+        return -this.$store.state.config.tileW / 2 + ',' + -this.$store.state.config.tileH * 1/4;
       }
     },
     data: () => {
-      return {
-        tileW: 35,
-        tileH: 40,
-        finger: {
-          x: NaN,
-          y: NaN,
-          dX: NaN,
-          dY: NaN,
-          count: NaN
-        }
-      };
+      return {}
     },
     components: {
       Hexagon
@@ -54,14 +40,14 @@
     },
     methods: {
       getItemTranslate(item) {
-        return item * this.tileW;
+        return item * this.$store.state.config.tileW;
       },
       getRowTranslate(row) {
-        let y = row * this.tileH * 3/4;
+        let y = row * this.$store.state.config.tileH * 3/4;
         let x = 0;
 
         if (row % 2 == 0) {
-          x += this.tileW / 2;
+          x += this.$store.state.config.tileW / 2;
         }
 
         return `${x} ${y}`;
@@ -69,17 +55,6 @@
 
       tileClicked(rowIndex, itemIndex) {
         console.log(rowIndex, itemIndex);
-      },
-
-      onTap(event) {
-        console.log(event.pointers.length)
-        alert(event.pointers.length)
-      },
-      pinchin(event) {
-        alert('pinchin')
-      },
-      pinchout(event) {
-        alert('pinchout')
       }
     }
   };
