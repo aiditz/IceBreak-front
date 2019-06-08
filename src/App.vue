@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Map></Map>
-    <Dialogs></Dialogs>
+    <template is="$store.state.window"></template>
   </div>
 </template>
 

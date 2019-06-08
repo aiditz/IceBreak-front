@@ -1,6 +1,6 @@
 <template>
   <v-layout row justify-center>
-    <v-dialog v-model="dialog" max-width="300" lazy>
+    <v-dialog v-model="dialog" max-width="300" >
       <v-card>
         <v-card-title class="headline">
           {{ item.title }}

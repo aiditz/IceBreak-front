@@ -6,6 +6,8 @@ export default {
     dialogs
   },
   state: {
+    window: 'map', // icebreakers, research, ...
+
     layers: {
       background: true,
       hexagons: true,
