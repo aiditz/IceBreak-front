@@ -15,7 +15,7 @@
         </v-card-title>
         <v-divider light></v-divider>
         <v-card-actions class="pa-3">
-            <v-btn color="success" @click="$store.dispatch('orderShip', item.id)">Построить</v-btn>
+            <v-btn color="success" @click="$store.dispatch('orderShip', item.id)">Исследовать</v-btn>
         </v-card-actions>
       </v-flex>
     </v-layout>

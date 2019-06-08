@@ -1,5 +1,5 @@
 <template>
-  <Page title="Флот">
+  <Page title="Исследования">
     <span v-for="item in $store.state.gs.research">
       <ResearchCard :item="item"></ResearchCard>
       <br>

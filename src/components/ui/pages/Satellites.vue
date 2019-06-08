@@ -1,5 +1,5 @@
 <template>
-  <Page title="Флот">
+  <Page title="Спутники">
     <span v-for="item in $store.state.gs.icebreakers">
       <ShipCard :item="item"></ShipCard>
       <br>

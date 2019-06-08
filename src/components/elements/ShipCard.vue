@@ -9,10 +9,21 @@
       </v-flex>
       <v-flex xs8>
         <v-card-title>
-            <p class="headline">{{ item.name }}</p>
-            <p class="description">{{ item.description }}</p>
-            <p class="progress">Прогресс: {{ item.progress }}/{{ item.maximum_progress || 100 }} ({{ secondsLeft }} сек)</p>
+          <div class="headline">{{ item.name }}</div>
         </v-card-title>
+        <v-card-text>
+          {{ item.description }}
+
+          <div v-if="!isAvailable">
+            <span>Требования:</span>
+            <ul>
+              <li v-for="req in item.requirements" :key="req.id">
+                {{ item.name }}
+              </li>
+            </ul>
+          </div>
+          <div class="progress">Прогресс: {{ item.progress }}/{{ item.maximum_progress || 100 }} ({{ secondsLeft }} сек)</div>
+        </v-card-text>
         <v-divider light></v-divider>
         <v-card-actions class="pa-3">
             <v-btn color="success" @click="$store.dispatch('orderShip', item.id)">Построить</v-btn>
@@ -29,6 +40,10 @@
     computed: {
       secondsLeft() {
         return Math.max(0, Math.round((this.item.maximum_progress - this.item.progress) / 10));
+      },
+
+      isAvailable() {
+        return this.item.requirements.every(req => req.completed);
       }
     }
   };
