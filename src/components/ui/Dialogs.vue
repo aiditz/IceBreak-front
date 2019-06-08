@@ -1,10 +1,8 @@
 <template>
   <div>
     <Dialog
-      v-for="(item, index) in this.$store.state.ui.dialogs.list"
-      :item="item"
-      :key="index"
-      dialog="true"
+      v-if="dialogsCount > 0"
+      :item="this.$store.state.ui.dialogs.list[0]"
     >
     </Dialog>
   </div>
@@ -18,6 +16,9 @@
       Dialog,
     },
     computed: {
+      dialogsCount() {
+        return this.$store.state.ui.dialogs.list.length;
+      }
     }
   }
 </script>

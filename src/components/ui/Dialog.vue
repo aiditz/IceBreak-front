@@ -1,6 +1,6 @@
 <template>
   <v-layout row justify-center>
-    <v-dialog v-model="dialog" max-width="300">
+    <v-dialog v-model="dialog" max-width="300" lazy>
       <v-card>
         <v-card-title class="headline">
           {{ item.title }}
@@ -13,7 +13,7 @@
           <v-btn v-for="button in item.buttons"
                  color="green darken-1"
                  flat
-                 @click="$store.dispatch('ui/dialogs/handleAction', button.action)">
+                 @click.stop="$store.dispatch('ui/dialogs/handleAction', button.action)">
             OK
           </v-btn>
         </v-card-actions>
