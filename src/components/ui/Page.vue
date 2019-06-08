@@ -40,4 +40,13 @@
   .page-body {
     padding: 20px;
   }
+
+  .v-sheet {
+      max-height: 100%;
+      overflow: auto;
+  }
+
+  .v-sheet .v-card ~ .v-card {
+      margin-top: 20px;
+  }
 </style>
