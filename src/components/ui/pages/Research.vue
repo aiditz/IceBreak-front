@@ -1,10 +1,12 @@
 <template>
   <Page title="Исследования">
-    <v-layout row justify-space-between class="research-cards">
-      <v-flex xs6 v-for="item in $store.state.gs.research">
-        <ResearchCard :item="item"></ResearchCard>
-      </v-flex>
-    </v-layout>
+    <div class="research-cards">
+      <v-layout row justify-space-between v-for="row in researches" class="research-row">
+        <v-flex xs6 v-for="item in row">
+          <ResearchCard :item="item"></ResearchCard>
+        </v-flex>
+      </v-layout>
+    </div>
   </Page>
 </template>
 
@@ -19,6 +21,13 @@
       ResearchCard
     },
     computed: {
+      researches() {
+        return this.$store.state.gs.research.reduce(function(result, value, index, array) {
+          if (index % 2 === 0)
+            result.push(array.slice(index, index + 2));
+          return result;
+        }, []);
+      }
     }
   };
 </script>
@@ -26,6 +35,10 @@
 <style scoped>
   .root {
     overflow: auto;
+  }
+
+  .research-row {
+    padding: 8px 0;
   }
 
   .research-cards {

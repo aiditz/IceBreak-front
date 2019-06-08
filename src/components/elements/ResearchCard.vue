@@ -66,11 +66,19 @@
   }
 
   .research-card {
-    margin: 8px;
+    margin: 0 8px;
+    height: 100%;
+  }
+
+  .research-card .layout {
+    height: 100%;
   }
 
   .headline {
-    font-size: 17px !important;
+    font-size: 16px !important;
+    line-height: 20px !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .description {
