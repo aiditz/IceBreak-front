@@ -11,10 +11,6 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css';
 
 Vue.config.productionTip = false;
 
-<<<<<<< HEAD
-=======
-Vue.use(VueTouch, {name: 'v-touch'});
-
 Vue.filter('formatMoney', helpers.formatMoney);
 
 >>>>>>> origin/master
