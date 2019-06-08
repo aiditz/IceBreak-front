@@ -30,7 +30,6 @@ export default {
     background-color: #000;
   }
   #app {
-    overflow: hidden;
     width: 100%;
     height: 100%;
     position: absolute;
