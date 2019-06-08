@@ -7,13 +7,12 @@
         :transform="'translate(' + getRowTranslate(rowIndex) + ')'"
       >
         <Hexagon class="hexTile"
-          v-for="(item, itemIndex) in row"
-          :transform="'translate(' + getItemTranslate(itemIndex) + ' 0) scale(' + config.tileW / 35 + ')'"
+          v-for="(item, colIndex) in row"
+          :transform="'translate(' + getColTranslate(colIndex) + ' 0) scale(' + config.tileW / 35 + ')'"
           :color="item"
-          :arr="arr"
           :rowIndex="rowIndex"
-          :colIndex="itemIndex"
-          @click.native="tileClicked(rowIndex, itemIndex)"
+          :colIndex="colIndex"
+          @click.native="tileClicked(rowIndex, colIndex)"
         ></Hexagon>
       </g>
     </g>
@@ -23,9 +22,11 @@
 
 <script>
   import Hexagon from '../elements/Hexagon.svg.vue';
+  import hexGridMixin from '../mixins/hexGrid.mixin';
 
   export default {
-    name: 'IceBreak',
+    name: 'LayerHexMap',
+    mixins: [hexGridMixin],
     computed: {
       gs() {
         return this.$store.state.gs;
@@ -39,8 +40,7 @@
     },
     data: () => {
       return {
-        debug: {},
-        arr: []
+        debug: {}
       }
     },
     components: {
@@ -49,26 +49,7 @@
     props: {
     },
     methods: {
-      getItemTranslate(item) {
-        return item * this.$store.state.config.tileW;
-      },
-      getRowTranslate(row) {
-        let y = row * this.$store.state.config.tileH * 29/40;
-        let x = 0;
-
-        if (row % 2 == 0) {
-          x += this.$store.state.config.tileW / 2;
-        }
-
-        return `${x} ${y}`;
-      },
-
       tileClicked(rowIndex, colIndex) {
-        console.log(rowIndex, colIndex);
-
-        this.arr.push([rowIndex, colIndex]);
-
-        window.arr = this.arr;
       },
     },
     mounted() {

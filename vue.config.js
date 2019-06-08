@@ -6,7 +6,7 @@ module.exports = {
     disableHostCheck: true
   },
 
-  pwa: {
+/*  pwa: {
     workboxPluginMode: 'InjectManifest',
     workboxOptions: {
       swSrc: 'src/service-worker.js',
@@ -16,5 +16,5 @@ module.exports = {
       ],
     },
     themeColor: '#1da025'
-  },
+  },*/
 };

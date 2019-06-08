@@ -28,7 +28,7 @@ new Vue({
     let initNeeded = true;
 
     try {
-      const data = await API.startGame();
+      data = await API.startGame();
     } catch (err) {
       data = require('./common/backend-response.dist.json');
       initNeeded = false;
@@ -48,6 +48,11 @@ new Vue({
 
       try {
         data = await API.getGamestate(store.lastEventId);
+
+        if (data.error) {
+          throw new Error(data.error);
+        }
+
         this.$store.commit('setGamestate', data);
       } catch (err) {
         console.error('Get gamestate loop error:', err);
