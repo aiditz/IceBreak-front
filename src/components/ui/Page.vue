@@ -37,9 +37,9 @@
     width: 100%;
   }
 
-  .page-body {
+  /*.page-body {
     padding: 20px;
-  }
+  }*/
 
   .v-sheet {
       max-height: 100%;

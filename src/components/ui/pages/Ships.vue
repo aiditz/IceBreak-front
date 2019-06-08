@@ -1,9 +1,6 @@
 <template>
   <Page title="Флот">
-    <span v-for="item in $store.state.gs.icebreakers">
-      <ShipCard :item="item"></ShipCard>
-      <br>
-    </span>
+    <ShipCard v-for="item in $store.state.gs.icebreakers" :item="item"></ShipCard>
   </Page>
 </template>
 
@@ -25,9 +22,6 @@
 <style scoped>
   .root {
     overflow: auto;
-  }
-
-  .ship-card {
   }
 
   .description {

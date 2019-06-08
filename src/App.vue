@@ -28,6 +28,9 @@ export default {
   * {
     box-sizing: border-box;
   }
+  html, body {
+    overscroll-behavior: none;
+  }
   body {
     padding: 0;
     margin: 0;
