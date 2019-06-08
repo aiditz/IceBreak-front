@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import VueTouch from 'vue-touch';
 import App from './App.vue';
 import store from './store';
 import API from './common/api';
@@ -16,7 +15,7 @@ Vue.filter('formatMoney', helpers.formatMoney);
 new Vue({
   store,
   render: h => h(App),
-  created() {
+  async created() {
     /*
     this.$store.commit('ui/dialogs/showInfo', {
       title: 'Hello in IceBreaker',
@@ -25,19 +24,15 @@ new Vue({
     });
     */
 
-    let startIntervalId = setInterval(async () => {
-      const data = await API.startGame();
+    const data = await API.startGame();
 
-      if (data.id) clearInterval(startIntervalId);
+    API.setSession(data.id);
+    this.$store.commit('setGamestate', data);
 
-      API.setSession(data.id);
+    setInterval(async () => {
+      const data = await API.getGamestate(store.lastEventId);
+
       this.$store.commit('setGamestate', data);
-
-      setInterval(async () => {
-        const data = await API.getGamestate(store.lastEventId);
-
-        this.$store.commit('setGamestate', data);
-      }, 5000);
-    }, 1000);
+    }, 5000);
   }
 }).$mount('#app');

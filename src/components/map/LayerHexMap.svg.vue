@@ -10,6 +10,9 @@
           v-for="(item, itemIndex) in row"
           :transform="'translate(' + getItemTranslate(itemIndex) + ' 0) scale(' + config.tileW / 35 + ')'"
           :color="item"
+          :arr="arr"
+          :rowIndex="rowIndex"
+          :colIndex="itemIndex"
           @click.native="tileClicked(rowIndex, itemIndex)"
         ></Hexagon>
       </g>
@@ -32,11 +35,12 @@
       },
       gridTranslate() {
         return -this.$store.state.config.tileW / 2 + ',' + -this.$store.state.config.tileH * 1/4;
-      }
+      },
     },
     data: () => {
       return {
-        debug: {}
+        debug: {},
+        arr: []
       }
     },
     components: {
@@ -59,12 +63,16 @@
         return `${x} ${y}`;
       },
 
-      tileClicked(rowIndex, itemIndex) {
-        console.log(rowIndex, itemIndex);
+      tileClicked(rowIndex, colIndex) {
+        console.log(rowIndex, colIndex);
+
+        this.arr.push([rowIndex, colIndex]);
+
+        window.arr = this.arr;
       },
     },
     mounted() {
-      
+
     }
   };
 </script>

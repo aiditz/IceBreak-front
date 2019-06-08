@@ -29,7 +29,10 @@ export default {
     box-sizing: border-box;
   }
   html, body {
+    /*
+    // uncomment in production
     overscroll-behavior: none;
+    */
   }
   body {
     padding: 0;
@@ -39,7 +42,6 @@ export default {
   #app {
     width: 100%;
     height: 100%;
-    position: absolute;
   }
   .application--wrap {
     min-height: 100%;
