@@ -1,7 +1,7 @@
 <template>
   <g>
-    <g v-for="(row, row_index) in gs.colors" :key="row_index" :transform="'translate(' + getRowTranslate(row_index) + ')'">
-      <Hexagon v-for="(item, item_index) in row" :transform="'translate(' + getItemTranslate(item_index) + ' 0)'" :color="item"></Hexagon>
+    <g v-for="(row, rowIndex) in gs.colors" :transform="'translate(' + getRowTranslate(rowIndex) + ')'">
+      <Hexagon v-for="(item, itemIndex) in row" :transform="'translate(' + getItemTranslate(itemIndex) + ' 0)'" :color="item"></Hexagon>
     </g>
   </g>
 </template>
@@ -12,14 +12,14 @@
   export default {
     name: 'IceBreak',
     computed: {
-      gs() {
+      colors() {
         return this.$store.state.gs;
       }
     },
     data: () => {
       return {
-        tile_w: 35,
-        tile_h: 40,
+        tileW: 35,
+        tileH: 40
       };
     },
     components: {
@@ -29,17 +29,15 @@
     },
     methods: {
       getItemTranslate(item) {
-        return item * this.tile_w;
+        return item * this.tileW;
       },
       getRowTranslate(row) {
-        let y = row * this.tile_h * 3/4;
+        let y = row * this.tileH * 3/4;
         let x = 0;
 
         if (row % 2 == 0) {
-          x += this.tile_w / 2;
+          x += this.tileW / 2;
         }
-
-        console.log(row, y)
 
         return `${x} ${y}`;
       }
