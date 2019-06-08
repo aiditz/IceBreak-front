@@ -1,6 +1,6 @@
 <template>
   <div>
-    <svg id="map" :viewBox="'0 0 ' + w + ' ' + h" :width="w" :height="h">
+    <svg id="map" :viewBox="'0 0 ' + w + ' ' + h" :width="w" :height="h" :class="{loaded: !!loaded}">
       <LayerBackground></LayerBackground>
       <LayerHexMap></LayerHexMap>
     </svg>
@@ -26,6 +26,9 @@
       gs() {
         return this.$store.state.gs;
       },
+      loaded() {
+        return this.$store.state.loaded;
+      },
       w() {
         let w = Array.isArray(this.gs.colors) ? this.gs.colors[0].length - 1 : this.$store.state.config.cols;
         return w * this.$store.state.config.tileW;
@@ -48,6 +51,11 @@
   left: 0;
   height: 100%;
   width: auto;
+  opacity: 0;
+  transition: .3s;
+}
+#map.loaded {
+  opacity: 1;
 }
 
 </style>

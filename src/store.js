@@ -19,6 +19,7 @@ export default new Vuex.Store({
     },
     customEvents: [],
     gs: {},
+    loaded: false,
     config: {
       tileW: 35,
       tileH: 40,
@@ -33,6 +34,7 @@ export default new Vuex.Store({
 
     setGamestate(state, gs) {
       state.gs = gs;
+      state.loaded = true;
     }
   },
   actions: {
