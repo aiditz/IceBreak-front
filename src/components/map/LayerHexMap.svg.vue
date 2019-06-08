@@ -8,7 +8,7 @@
       >
         <Hexagon class="hexTile"
           v-for="(item, itemIndex) in row"
-          :transform="'translate(' + getItemTranslate(itemIndex) + ' 0)'"
+          :transform="'translate(' + getItemTranslate(itemIndex) + ' 0) scale(' + config.tileW / 35 + ')'"
           :color="item"
           @click.native="tileClicked(rowIndex, itemIndex)"
         ></Hexagon>
@@ -26,6 +26,9 @@
     computed: {
       gs() {
         return this.$store.state.gs;
+      },
+      config() {
+        return this.$store.state.config;
       },
       gridTranslate() {
         return -this.$store.state.config.tileW / 2 + ',' + -this.$store.state.config.tileH * 1/4;
@@ -46,7 +49,7 @@
         return item * this.$store.state.config.tileW;
       },
       getRowTranslate(row) {
-        let y = row * this.$store.state.config.tileH * 3/4;
+        let y = row * this.$store.state.config.tileH * 29/40;
         let x = 0;
 
         if (row % 2 == 0) {
