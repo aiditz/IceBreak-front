@@ -13,7 +13,6 @@ Vue.config.productionTip = false;
 
 Vue.filter('formatMoney', helpers.formatMoney);
 
->>>>>>> origin/master
 new Vue({
   store,
   render: h => h(App),
