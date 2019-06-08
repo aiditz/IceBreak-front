@@ -71,6 +71,7 @@ export default {
     display: flex;
     justify-content: center;
     width: 100%;
+    pointer-events: none;
   }
 
   .map {
