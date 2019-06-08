@@ -1,8 +1,8 @@
 <template>
-  <div id="app">
+  <v-app id="app">
     <Map v-show="$store.state.ui.window === null"></Map>
     <component :is="$store.state.ui.window"></component>
-  </div>
+  </v-app>
 </template>
 
 <script>
@@ -30,11 +30,6 @@ export default {
     background-color: #000;
   }
   #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
     overflow: hidden;
     width: 100%;
     height: 100%;

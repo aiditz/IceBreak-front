@@ -44,5 +44,7 @@
 
   .bottomRight {
     align-self: end;
+    text-align: right;
+
   }
 </style>
