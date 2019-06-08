@@ -10,8 +10,15 @@ new Vue({
   store,
   render: h => h(App),
   async created() {
-    const data = await API.getGamestate();
+    const data = await API.startGame();
 
+    API.setSession(data.id);
     this.$store.commit('setGamestate', data);
+
+    setInterval(async () => {
+      const data = await API.getGamestate();
+
+      this.$store.commit('setGamestate', data);
+    }, 5000);
   }
 }).$mount('#app');

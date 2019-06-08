@@ -16,6 +16,7 @@ module.exports = {
     'no-await-in-loop': 'off',
     'arrow-parens': 'off',
     'arrow-body-style': 'off',
+    'no-shadow': 'off',
     'no-param-reassign': 'off',
     'no-plusplus': 'off',
     'max-len': ['error', {

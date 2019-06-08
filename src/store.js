@@ -21,6 +21,8 @@ export default new Vuex.Store({
 
     setGamestate(state, gs) {
       Object.assign(state.gs, gs);
+
+      state.sessionId = gs.id;
     }
   },
   actions: {
