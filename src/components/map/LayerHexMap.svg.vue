@@ -1,7 +1,7 @@
 <template>
-  <v-touch tag="g">
+  <g>
     <g class="hexGird"
-      :transform="'translate(' + greadTranslate + ')'"
+      :transform="'translate(' + gridTranslate + ')'"
     >
       <g class="hexClass" v-for="(row, rowIndex) in gs.colors"
         :transform="'translate(' + getRowTranslate(rowIndex) + ')'"
@@ -14,7 +14,7 @@
         ></Hexagon>
       </g>
     </g>
-  </v-touch>
+  </g>
 </template>
 
 <script>
@@ -26,7 +26,7 @@
       gs() {
         return this.$store.state.gs;
       },
-      greadTranslate() {
+      gridTranslate() {
         return -this.$store.state.config.tileW / 2 + ',' + -this.$store.state.config.tileH * 1/4;
       }
     },
