@@ -61,27 +61,14 @@
       },
 
       onPinchin(event) {
-        alert('in')
+        this.debug = 'pinchIN';
       },
       onPinchout(event) {
-        alert('out')
+        this.debug = 'pinchOUT';
       }
     },
     mounted() {
-      let self = this;
-
-      document.getElementById('hexGrid').addEventListener('touchstart', function(e) {
-        console.log(e)
-        self.debug = {
-          length: e.changedTouches.length,
-          _length: e.touches.length,
-          touches: []
-        }
-        for (let i = 0; i < e.changedTouches.length; i++) {
-          let v = e.changedTouches[i];
-          self.debug.touches.push({x: v.screenX, y: v.screenY});
-        }
-      });
+      
     }
   };
 </script>
