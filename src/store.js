@@ -29,6 +29,9 @@ export default new Vuex.Store({
       state[field] = value;
     },
 
+    setGamestate(state, gs) {
+      Object.assign(state, gs);
+    }
   },
   actions: {
 
