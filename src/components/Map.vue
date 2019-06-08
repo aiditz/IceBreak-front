@@ -1,16 +1,19 @@
 <template>
   <svg id="map" viewBox="0 0 640 360">
-      <BackgroundLayer></BackgroundLayer>
+    <LayerHexMap></LayerHexMap>
+    <LayerBackground></LayerBackground>
   </svg>
 </template>
 
 <script>
-  import BackgroundLayer from './map/background.svg.vue';
+  import LayerBackground from './map/LayerBackground.svg.vue';
+  import LayerHexMap from './map/LayerHexMap.svg.vue';
 
   export default {
     name: 'IceBreak',
     components: {
-      BackgroundLayer
+      LayerBackground,
+      LayerHexMap,
     },
     props: {
     },
