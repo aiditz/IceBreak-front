@@ -1,5 +1,5 @@
 <template>
-  <svg id="map" :viewBox="'0 0 ' + w + ' ' + h">
+  <svg id="map" :viewBox="'0 0 ' + w + ' ' + h" :width="w" :height="h">
     <LayerBackground></LayerBackground>
     <LayerHexMap></LayerHexMap>
   </svg>

@@ -1,6 +1,6 @@
 <template>
   <g>
-    <g class="hexGird"
+    <g class="hexGrid" id="hexGrid"
       :transform="'translate(' + gridTranslate + ')'"
     >
       <g class="hexClass" v-for="(row, rowIndex) in gs.colors"
@@ -56,6 +56,11 @@
       tileClicked(rowIndex, itemIndex) {
         console.log(rowIndex, itemIndex);
       }
+    },
+    mounted() {
+      document.getElementById('hexGrid').addEventListener('touchstart', function(e) {
+        console.log(e)
+      })
     }
   };
 </script>
