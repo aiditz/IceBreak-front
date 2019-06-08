@@ -22,6 +22,7 @@
               </li>
             </ul>
           </div>
+
           <div class="progress">Прогресс: {{ item.progress }}/{{ item.maximum_progress || 100 }} ({{ secondsLeft }} сек)</div>
         </v-card-text>
         <v-divider light></v-divider>
@@ -44,7 +45,15 @@
 
       isAvailable() {
         return this.item.requirements.every(req => req.completed);
-      }
+      },
+
+      isBuilding() {
+        return this.item.progress > 0 && this.item.progress < this.item.maximum_progress;
+      },
+
+      isBuilt() {
+        return this.item.progress > 0 && this.item.progress >= this.item.maximum_progress;
+      },
     }
   };
 </script>
