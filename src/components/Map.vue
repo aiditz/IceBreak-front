@@ -12,7 +12,6 @@
   import LayerBackground from './map/LayerBackground.svg.vue';
   import LayerHexMap from './map/LayerHexMap.svg.vue';
   import LayerUi from './map/LayerUi.vue';
-  import svgPanZoom from 'svg-pan-zoom';
 
   export default {
     name: 'IceBreak',
