@@ -27,6 +27,7 @@
 
 <style scoped>
   .root {
+    pointer-events: none;
     width: 100%;
     height: 100%;
     position: absolute;
@@ -35,6 +36,10 @@
     grid-template-rows: auto;
     grid-template-columns: 1fr 1fr;
     align-items: start;
+  }
+
+  .root .v-btn {
+    pointer-events: all;
   }
 
   .bottomRight {
