@@ -1,18 +1,18 @@
 <template>
   <g>
     <g class="hexGrid" id="hexGrid"
-      :transform="'translate(' + gridTranslate + ')'"
+       :transform="'translate(' + gridTranslate + ')'"
     >
       <g class="hexClass" v-for="(row, rowIndex) in gs.colors"
-        :transform="'translate(' + getItemTranslate(rowIndex) + ')'"
+         :transform="'translate(' + getItemTranslate(0, rowIndex) + ')'"
       >
         <Hexagon class="hexTile"
-          v-for="(item, colIndex) in row"
-          :transform="'translate(' + getColTranslate(colIndex) + ' 0) scale(' + config.tileW / 35 + ')'"
-          :color="item"
-          :rowIndex="rowIndex"
-          :colIndex="colIndex"
-          @click.native="tileClicked(rowIndex, colIndex)"
+                 v-for="(item, colIndex) in row"
+                 :transform="'translate(' + getColTranslate(colIndex) + ' 0) scale(' + config.tileW / 35 + ')'"
+                 :color="item"
+                 :rowIndex="rowIndex"
+                 :colIndex="colIndex"
+                 @click.native="tileClicked(rowIndex, colIndex)"
         ></Hexagon>
       </g>
     </g>
@@ -20,11 +20,12 @@
 </template>
 
 <script>
-  import Hexagon from '../elements/Hexagon.svg.vue';
+  import config from '../../common/config';
+  import Hexagon from '../elements/svg/Hexagon.svg.vue';
   import hexGridMixin from '../mixins/hexGrid.mixin';
 
   export default {
-    name: 'LayerHexMap',
+    name: 'LayerHexGrid',
     mixins: [hexGridMixin],
     computed: {
       gs() {
@@ -48,23 +49,21 @@
     props: {
     },
     methods: {
-      tileClicked(rowIndex, colIndex) {
-      },
-    },
-    mounted() {
+      tileClicked() {
 
-    }
+      }
+    },
   };
 </script>
 
 <style scoped>
 
-.hexTile {
-  transition: .15s;
-  opacity: .5;
-}
-.hexTile:hover {
-  opacity: .9;
-}
+  .hexTile {
+    transition: .15s;
+    opacity: .5;
+  }
+  .hexTile:hover {
+    opacity: .9;
+  }
 
 </style>

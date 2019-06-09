@@ -3,7 +3,8 @@
     <svg id="map" :class="{loaded}">
       <g id="map-content" :transform="'scale(' + this.mapScale + ')'">
         <LayerBackground></LayerBackground>
-        <LayerHexMap v-if="this.$store.state.layers.hexagons"></LayerHexMap>
+        <LayerHexGrid v-if="this.$store.state.layers.hexGrid"></LayerHexGrid>
+        <LayerHexagonsOfShips v-if="this.$store.state.layers.hexOfShips"></LayerHexagonsOfShips>
         <LayerShips></LayerShips>
       </g>
     </svg>
@@ -15,16 +16,18 @@
 
 <script>
   import LayerBackground from './map/LayerBackground.svg.vue';
-  import LayerHexMap from './map/LayerHexMap.svg.vue';
+  import LayerHexGrid from './map/LayerHexGrid.svg.vue';
+  import LayerHexagonsOfShips from './map/LayerHexagonsOfShips.svg.vue';
   import LayerUi from './map/LayerUi.vue';
   import LayerShips from './map/LayerShips.vue';
   import interact from 'interactjs';
 
   export default {
-    name: 'IceBreak',
+    name: 'Map',
     components: {
       LayerBackground,
-      LayerHexMap,
+      LayerHexGrid,
+      LayerHexagonsOfShips,
       LayerUi,
       LayerShips,
     },
