@@ -10,8 +10,8 @@
 <script>
   import helpers from '../../common/helpers';
   import hexGridMixin from '../mixins/hexGrid.mixin';
-  import Ship1 from '../elements/Ship1.svg.vue';
-  import Ship2 from '../elements/Ship2.svg.vue';
+  import Ship1 from './svg/Ship1.svg.vue';
+  import Ship2 from './svg/Ship2.svg.vue';
 
   export default {
     name: 'Ship',
