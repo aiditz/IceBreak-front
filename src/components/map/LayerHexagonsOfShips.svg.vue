@@ -1,5 +1,5 @@
 <template>
-  <g>
+  <g v-if="false">
     <Hexagon class="hexTile"
              v-for="item in this.$store.getters['hexagonsOfShips'][0]"
              color="black"
