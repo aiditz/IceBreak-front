@@ -1,6 +1,6 @@
 <template>
   <Page title="Исследования">
-    <span class="level_bar">Вы досигли <b>{{ myResearchLevel }}</b> уровня</span>
+    <!-- <span class="level_bar">Вы досигли <b>{{ myResearchLevel }}</b> уровня</span> -->
 
     <div class="research-cards">
       <v-layout row justify-space-between v-for="row in researches" class="research-row">
