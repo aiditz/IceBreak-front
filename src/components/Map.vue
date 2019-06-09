@@ -5,10 +5,11 @@
     <svg id="map" :class="{loaded}">
       <g id="map-content" :transform="'scale(' + this.mapScale + ')'">
         <LayerBackground></LayerBackground>
-        <LayerBuildHexGrid v-if="this.$store.state.layers.buildHexGrid"></LayerBuildHexGrid>
+        <LayerBuildHexGrid v-if="false && this.$store.state.layers.buildHexGrid"></LayerBuildHexGrid>
         <LayerIcePieces v-if="this.$store.state.layers.icePieces"></LayerIcePieces>
         <LayerShips></LayerShips>
         <LayerHexagonsOfShips v-if="false && this.$store.state.layers.hexOfShips"></LayerHexagonsOfShips>
+        <LayerHexagonsOfDatacenters v-if="this.$store.state.layers.buildHexGrid"></LayerHexagonsOfDatacenters>
       </g>
     </svg>
   </div>
@@ -18,6 +19,7 @@
   import LayerBackground from './map/LayerBackground.svg.vue';
   import LayerBuildHexGrid from './map/LayerBuildHexGrid.svg.vue';
   import LayerHexagonsOfShips from './map/LayerHexagonsOfShips.svg.vue';
+  import LayerHexagonsOfDatacenters from './map/LayerHexagonsOfDatacenters.svg.vue';
   import LayerIcePieces from './map/LayerIcePieces.vue';
   import LayerUi from './map/LayerUi.vue';
   import LayerShips from './map/LayerShips.vue';
@@ -30,6 +32,7 @@
       LayerBackground,
       LayerBuildHexGrid,
       LayerHexagonsOfShips,
+      LayerHexagonsOfDatacenters,
       LayerIcePieces,
       LayerUi,
       LayerShips,

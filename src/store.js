@@ -68,6 +68,10 @@ export default new Vuex.Store({
       state.layers.hexOfShips = !state.layers.hexOfShips;
     },
 
+    toggleBuildHexGrid(state) {
+      state.layers.buildHexGrid = !state.layers.buildHexGrid;
+    },
+
     setGamestate(state, gs) {
       state.gs = gs;
 
