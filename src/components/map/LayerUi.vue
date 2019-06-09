@@ -45,8 +45,10 @@
         </div>
       </div>
 
-      <div class="topRight">
+      <div class="topRight text-xs-right">
+        <i style="opacity: .7; font-size: 11px; display: block; margin: -5px 0">бюджет</i>
         <Anumber :number="$store.state.gs.money"></Anumber> млрд.
+        ₽
       </div>
 
       <div class="bottomLeft" v-show="ships.length" :class="{collapsed: shipsCollapsed, expanded: !shipsCollapsed}">
@@ -110,7 +112,7 @@
         return this.gs.research.filter((item) => item.completed).length;
       },
       icebreakersCount() {
-        if (!this.gs.icebreakers) return 5;
+        if (!this.gs.icebreakers) return 0;
         return this.gs.icebreakers.length;
       },
       buildedIcebreakers() {
