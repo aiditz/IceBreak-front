@@ -20,10 +20,10 @@
           <v-tooltip bottom color="rgba(0,0,0,.6)">
             <template v-slot:activator="{ on }">
               <div v-on="on">
-                <v-progress-circular :size="45" :width="5" :value="failedTasks / 5 * 100" color="red">
-                  <v-icon>speaker_notes_off</v-icon>
+                <v-progress-circular :size="45" :width="5" :value="failedTasks / 3 * 100" color="#EA1525" class="c-icon">
+                  <component is="icon1"></component>
                 </v-progress-circular>
-                <b class="top-left-item-text">{{ failedTasks }} / 5</b>
+                <b class="top-left-item-text">{{ failedTasks }}/3</b>
               </div>
             </template>
             <span>Не пропускайте задачи!</span>
@@ -34,10 +34,10 @@
           <v-tooltip bottom color="rgba(0,0,0,.6)">
             <template v-slot:activator="{ on }">
               <div v-on="on">
-                <v-progress-circular :size="45" :width="5" :value="researched / researches * 100" color="blue">
-                  <component is="ResearchIcon"></component>
+                <v-progress-circular :size="45" :width="5" :value="researched / researches * 100" color="#55FFBE" class="c-icon">
+                  <component is="icon2"></component>
                 </v-progress-circular>
-                <b class="top-left-item-text">{{researched}} / {{researches}}</b>
+                <b class="top-left-item-text">{{researched}}/{{researches}}</b>
               </div>
             </template>
             <span>{{researched}} исследование изучено</span>
@@ -48,21 +48,26 @@
           <v-tooltip bottom color="rgba(0,0,0,.6)">
             <template v-slot:activator="{ on }">
               <div v-on="on">
-                <v-progress-circular :size="45" :width="5" :value="buildedIcebreakers / icebreakersCount * 100" color="green">
-                  <v-icon>directions_boat</v-icon>
+                <v-progress-circular :size="45" :width="5" :value="buildedIcebreakers / icebreakersCount * 100" color="#55FFBE" class="c-icon">
+                  <component is="icon3"></component>
                 </v-progress-circular>
-                <b class="top-left-item-text">{{ buildedIcebreakers }} / {{ icebreakersCount }}</b>
+                <b class="top-left-item-text">{{ buildedIcebreakers }}/{{ icebreakersCount }}</b>
               </div>
             </template>
             <span>Осталось построить {{ estimateIcebreakers }} ледоколов</span>
           </v-tooltip>
         </div>
+
+        <div class="researching" v-if="researchingItem">
+          <v-progress-linear v-model="researchingItem.progress" color="#55FFBE" class="research-progress"></v-progress-linear>
+          {{ researchingItem.progress }} %
+        </div>
       </div>
 
       <div class="topRight text-xs-right">
-        <i style="opacity: .7; font-size: 11px; display: block; margin: -5px 0">бюджет</i>
-        <Anumber :number="$store.state.gs.money"></Anumber> млрд.
-        ₽
+        <Anumber :number="$store.state.gs.money"></Anumber>
+        млрд.
+        <component is="rr"></component>
       </div>
 
       <div class="bottomLeft" v-show="ships.length" :class="{collapsed: shipsCollapsed, expanded: !shipsCollapsed}">
@@ -95,13 +100,21 @@
 <script>
   import Anumber from '../ui/Anumber';
   import helpers from '../../common/helpers';
+  import rr from '../elements/svg/rr.svg.vue';
   import ResearchIcon from '../elements/svg/ResearchIcon.svg.vue';
+  import icon1 from '../elements/svg/1.svg.vue';
+  import icon2 from '../elements/svg/2.svg.vue';
+  import icon3 from '../elements/svg/3.svg.vue';
 
   export default {
     name: 'LayerUi',
     components: {
       Anumber,
-      ResearchIcon
+      ResearchIcon,
+      rr,
+      icon1,
+      icon2,
+      icon3
     },
     props: {
     },
@@ -139,8 +152,14 @@
       },
 
       failedTasks() {
-        if (!this.gs.tasks) return 0;
-        return this.gs.tasks.filter((item) => this.failed).length;
+        if (!this.gs.quests) return 0;
+        return this.gs.quests.filter((item) => this.failed).length;
+      },
+
+      researchingItem() {
+        if (!this.gs.research) return null;
+        return this.gs.research[0];
+        return this.gs.research.find((item) => item.progress > 0 && item.progress < item.maximum_progress);
       }
     },
     methods: {
@@ -185,7 +204,7 @@
     padding: 8px 8px 2px !important;
     color: #FFF;
     transition: .3s;
-    margin-left: -73px;
+    margin-left: -105px;
   }
   .wrap {
     width: 100%;
@@ -321,4 +340,71 @@
       margin: 8px;
       pointer-events: none;
   }
+
+  .topRight {
+    background-color: #1A1942;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 20px !important;
+    padding-left: 16px !important;
+    margin: 16px !important;
+    text-transform: uppercase;
+}
+
+.topRight svg {
+    width: 50px;
+    height: 50px;
+    margin: -15px -15px -15px 8px;
+}
+
+.topRight span {
+    margin-right: 8px;
+}
+
+.topLeft {
+    top: 8px !important;
+    background-color: rgba(26, 25, 66, .7) !important;
+    border-radius: 16px !important;
+    padding: 0 16px !important;
+}
+.topLeft * {
+    z-index: 2;
+}
+.topLeft:before {
+    position: absolute;
+    content: '';
+    display: block;
+    left: 8px;
+    top: 8px;
+    background-color: rgba(26, 25, 66, .7) !important;
+    width: calc(100% - 16px);
+    height: calc(100% - 16px);
+    z-index: 1;
+    border-radius: 12px;
+}
+.top-left-item {
+    margin: 8px !important;
+}
+.topLeft {
+    padding: 8px 16px !important;
+}
+
+.researching {
+  padding: 0 8px;
+    position: absolute;
+    bottom: -35px;
+    display: flex;
+    width: 100%;
+    left: 0;
+    white-space: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    color: #1A1942;
+    font-weight: 600;
+}
+
+.researching .v-progress-linear {
+    margin-right: 10px;
+    border-radius: 4px;
+}
 </style>

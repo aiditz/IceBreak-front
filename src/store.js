@@ -35,7 +35,7 @@ export default new Vuex.Store({
       rows: 13,
       cols: 24
     },
-    
+
     showTasks: false,
 
     online: true,
@@ -68,7 +68,9 @@ export default new Vuex.Store({
     },
 
     setGamestate(state, gs) {
+      gs.quests = gs.quests.filter((item) => item.taken && !item.failed && !item.completed);
       state.gs = gs;
+      console.log(gs.quests)
 
       // Server online checker
       state.online = true;
@@ -82,37 +84,6 @@ export default new Vuex.Store({
       state.config = config;
 
       state.loaded = true;
-
-      state.gs.tasks = [
-          {
-            'id' : 1,
-            'name' : 'Ледовая 1 в Диксон',
-            'image': 'http://www.morvesti.ru.images.1c-bitrix-cdn.ru/upload/iblock/7c1/7787.jpg?1529918255125646',
-            'description': '',
-            'coordinates': [47, 15],
-            'progress': 300,
-            'ttl' : 600,
-            'completed': false,
-            'taken': true,
-            'failed': false
-          }, {
-            'id' : 1,
-            'name' : 'Ледовая 2 в Диксон',
-            'image': '',
-            'description': '',
-            'coordinates': [30,30],
-            'progress': 100,
-            'ttl': 200
-          }, {
-            'id' : 1,
-            'name' : 'Ледовая 3 в Диксон',
-            'image': 'https://cdn.iz.ru/sites/default/files/styles/900x506/public/article-2017-05/0fbbfa8ea4eb373e113ff0a9f4cf006a.jpg?itok=Qh1w1UO4',
-            'description': 'Test desc',
-            'coordinates': [50,50],
-            'progress': 600,
-            'ttl' : 600
-          }
-        ]
     }
   },
   actions: {
