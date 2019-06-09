@@ -10,7 +10,6 @@ export default new Vuex.Store({
     ui
   },
   state: {
-    money: 1000000,
     lastEventId: null,
     layers: {
       background: true,
@@ -20,7 +19,9 @@ export default new Vuex.Store({
       objects: true,
     },
     customEvents: [],
-    gs: {},
+    gs: {
+      money: 0
+    },
     loaded: false,
     config: {
       tileW: 35,

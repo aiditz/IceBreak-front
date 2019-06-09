@@ -40,7 +40,7 @@
       },
 
       rotate() {
-        return (this.data.movements[0].rotation);
+        return (this.data.movements[1].rotation + this.data.movements[2].rotation) / 2;
       }
     },
   };

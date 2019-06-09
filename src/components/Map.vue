@@ -1,5 +1,6 @@
 <template>
   <div class="root">
+    <LayerUi class="layer-ui"></LayerUi>
     <svg id="map" :class="{loaded}">
       <g id="map-content" :transform="'scale(' + this.mapScale + ')'">
         <LayerBackground></LayerBackground>
@@ -8,9 +9,6 @@
         <LayerShips></LayerShips>
       </g>
     </svg>
-    <div>
-      <LayerUi class="layer-ui"></LayerUi>
-    </div>
   </div>
 </template>
 
@@ -75,6 +73,7 @@
 
   .layer-ui {
     position: fixed;
+    box-shadow: inset 0 0 20px 0px #1A1942;
   }
 
   #map {

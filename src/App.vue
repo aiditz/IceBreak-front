@@ -78,6 +78,7 @@ export default {
     transition: .5s;
     opacity: 1;
     z-index: 1;
+    box-shadow: inset 0 0 20px 0px #1A1942;
   }
   .pages {
     z-index: 2;
