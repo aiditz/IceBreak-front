@@ -2,8 +2,17 @@
   <div class="root">
     <div class="wrap">
       <div class="topLeft">
-        <p class="title">${{ $store.state.money | formatMoney }}</p>
+        <p class="title">
+          <v-icon>monetization_on</v-icon>
+
+          {{ $store.state.money | formatMoney }}
+        </p>
         <p class="title">Наука: 0%</p>
+        <p class="title">
+          <v-icon>local_drink</v-icon>
+
+          Экология
+        </p>
       </div>
 
       <div class="bottomRight">

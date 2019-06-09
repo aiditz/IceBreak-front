@@ -50,4 +50,7 @@
   .root {
     opacity: 0.4;
   }
+  .ships > g {
+    transition: transform linear 5s;
+  }
 </style>
