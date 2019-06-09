@@ -246,6 +246,10 @@
     align-items: flex-end;
     align-self: end;
     text-align: right;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 146px;
+    justify-content: flex-end;
   }
   .bottomLeft {
     position: absolute;
