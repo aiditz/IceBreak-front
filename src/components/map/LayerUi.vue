@@ -20,10 +20,10 @@
           <v-tooltip bottom color="rgba(0,0,0,.6)">
             <template v-slot:activator="{ on }">
               <div v-on="on">
-                <v-progress-circular :size="45" :width="5" :value="failedTasks / 3 * 100" color="#EA1525" class="c-icon">
+                <v-progress-circular :size="45" :width="5" :value="$store.state.failedTasks / 3 * 100" color="#EA1525" class="c-icon">
                   <component is="icon1"></component>
                 </v-progress-circular>
-                <b class="top-left-item-text">{{ failedTasks }}/3</b>
+                <b class="top-left-item-text">{{ $store.state.failedTasks }}/3</b>
               </div>
             </template>
             <span>Не пропускайте задачи!</span>
@@ -60,7 +60,7 @@
 
         <div class="researching" v-if="researchingItem">
           <v-progress-linear v-model="researchingItem.progress" color="#55FFBE" class="research-progress"></v-progress-linear>
-          {{ researchingItem.progress / researchingItem.maximum_progress * 100 }} %
+          {{ Math.round(researchingItem.progress / researchingItem.maximum_progress * 100) }} %
         </div>
       </div>
 
@@ -89,7 +89,7 @@
       </div>
 
       <div class="bottomRight">
-        <img class="icon" src="/img/IconDatacenter.svg" @click="$store.dispatch('buildDatacenter')">
+        <img style="visibility: hidden;" class="icon" src="/img/IconDatacenter.svg" @click="$store.dispatch('buildDatacenter')">
         <img class="icon" src="/img/IconSatellite.svg" @click="$store.commit('toggleShipControls')">
         <img class="icon" src="/img/IconScience.svg" @click="$store.commit('ui/showPage', 'Research')">
         <img class="icon" src="/img/IconIcebreaker.svg" @click="$store.commit('ui/showPage', 'Ships')">
@@ -154,7 +154,7 @@
 
       failedTasks() {
         if (!this.gs.quests) return 0;
-        return this.gs.quests.filter((item) => this.failed).length;
+        return this.gs.quests.filter((item) => item.failed).length;
       },
 
       researchingItem() {

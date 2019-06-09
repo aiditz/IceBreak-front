@@ -8,7 +8,6 @@
         <LayerBuildHexGrid v-if="false && this.$store.state.layers.buildHexGrid"></LayerBuildHexGrid>
         <LayerIcePieces v-if="this.$store.state.layers.icePieces"></LayerIcePieces>
         <LayerShips></LayerShips>
-        <LayerHexagonsOfShips v-if="false && this.$store.state.layers.hexOfShips"></LayerHexagonsOfShips>
         <LayerHexagonsOfDatacenters v-if="this.$store.state.layers.buildHexGrid"></LayerHexagonsOfDatacenters>
       </g>
     </svg>
@@ -18,7 +17,6 @@
 <script>
   import LayerBackground from './map/LayerBackground.svg.vue';
   import LayerBuildHexGrid from './map/LayerBuildHexGrid.svg.vue';
-  import LayerHexagonsOfShips from './map/LayerHexagonsOfShips.svg.vue';
   import LayerHexagonsOfDatacenters from './map/LayerHexagonsOfDatacenters.svg.vue';
   import LayerIcePieces from './map/LayerIcePieces.vue';
   import LayerUi from './map/LayerUi.vue';
@@ -31,7 +29,6 @@
     components: {
       LayerBackground,
       LayerBuildHexGrid,
-      LayerHexagonsOfShips,
       LayerHexagonsOfDatacenters,
       LayerIcePieces,
       LayerUi,

@@ -31,7 +31,7 @@
         if (!('quests' in this.$store.state.gs)) return [];
 
         this.$store.state.gs.quests.every((item) => {
-          item.progress_ = item.progress / item.ttl * 100;
+          item.progress_ = item.ttl / item.start_ttl * 100;
           item.bg = helpers.getColorForPercentage(1 - item.progress_ / 100);
           item.color = item.progress % 20 >= 10 ? 'red' : 'yellow';
           item.center = helpers.hexMath.getItemCenterXY(item.coordinates[1], item.coordinates[0]);

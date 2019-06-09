@@ -37,6 +37,7 @@ export default new Vuex.Store({
     },
 
     showTasks: false,
+    failedTasks: 0,
 
     online: true,
     lastTs: new Date().getTime()
@@ -81,6 +82,7 @@ export default new Vuex.Store({
         gs.ice = state.gs.ice;
       }
 
+      state.failedTasks = gs.quests.filter((item) => item.failed).length;
       gs.quests = gs.quests.filter((item) => item.taken && !item.failed && !item.completed);
       state.gs = gs;
 
@@ -199,11 +201,11 @@ export default new Vuex.Store({
       });
     },
 
-    async controlShip(context, {shipId, target}) {
+    async controlShip(context, {shipId, direction}) {
       await context.dispatch('sendAction', {
         action: 'ControlShip',
         shipId,
-        hex: target,
+        direction,
       });
     },
   }

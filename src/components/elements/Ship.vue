@@ -1,22 +1,23 @@
 <template>
-  <g class="root">
+  <g
+    class="root ship"
+    :transform="`translate(${translate}) rotate(${rotate} 0 0)`"
+  >
     <component
-      class="ship"
+      class=""
       :is="`Ship${data.id}`"
-      :transform="`translate(${translate}) rotate(${rotate} 0 0)`"
     >
     </component>
 
     <g v-if="this.$store.state.layers.hexOfShips">
       <circle
         class="control-button"
-        v-for="targetHex in data.target_hexes"
+        v-for="point in controlPositions"
         r="20"
         fill="rgba(0, 91, 151, .9)"
-        @click="$store.dispatch('controlShip', {shipId: data.id, target: targetHex})"
-        :cx="6 + (getColTranslate(targetHex[1], targetHex[0]) - getColTranslate(col, row)) * 1.5"
-        :cy="8 + (getRowTranslate(targetHex[0]) - getRowTranslate(row)) * 1.5"
-        :transform="`translate(${getItemTranslate(targetHex[1], targetHex[0])}) rotate(0)`">
+        @click="clickControl(point.angle)"
+        :cx="point.x"
+        :cy="point.y">
 
         <!--image
           width="14"
@@ -50,9 +51,47 @@
     },
     props: ['data'],
     methods: {
+      clickControl(angle) {
+        this.$store.dispatch('controlShip', {
+          shipId: this.data.id,
+          direction: this.angleToDirection(angle)
+        });
 
+        this.$store.commit('toggleShipControls');
+      },
+      angleToDirection(angle) {
+        angle = (angle + 360) % 360;
+
+        return {
+          0: [1, 0],
+          60: [1, -1],
+          120: [-1, -1],
+          180: [-1, 0],
+          240: [-1, 1],
+          300: [1, 1]
+        }[angle];
+      }
     },
     computed: {
+      controlPositions() {
+        const angles = [
+          -120,
+          -60,
+          0,
+          +60,
+          +120,
+        ];
+
+        const r = 50;
+
+        const result = angles.map(angle => ({
+          x: r * Math.cos(helpers.degToRad(angle)),
+          y: r * Math.sin(helpers.degToRad(angle)),
+          angle: angle + this.rotate
+        }));
+
+        return result;
+      },
       col() {
         return this.data.movements[1].hex[1];
       },
@@ -66,7 +105,13 @@
       },
 
       rotate() {
-        return (this.data.movements[2].rotation);
+        let result = (this.data.movements[2].rotation) % 360;
+
+        if (result > 180) {
+          result -= 360;
+        }
+
+        return result;
       }
     },
   };
