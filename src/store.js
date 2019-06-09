@@ -35,7 +35,7 @@ export default new Vuex.Store({
       rows: 13,
       cols: 24
     },
-    
+
     showTasks: false,
 
     online: true,
@@ -163,7 +163,7 @@ export default new Vuex.Store({
           const data = await API.getGamestate(context.state.lastEventId);
 
           if (data.error) {
-            console.error('Get gamestate loop error:', err);
+            console.error('Get gamestate loop error:', data.error);
           } else {
             context.commit('setGamestate', data);
           }
