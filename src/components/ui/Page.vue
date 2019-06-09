@@ -10,7 +10,7 @@
       <v-toolbar-items class="hidden-sm-and-down"></v-toolbar-items>
 
       <v-btn icon @click="$store.commit('ui/showMap')">
-        <v-icon>clear</v-icon>
+        <v-icon color="white">clear</v-icon>
       </v-btn>
     </v-toolbar>
     <v-card class="page-body">
