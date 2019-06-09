@@ -21,6 +21,10 @@
     </div>
 
     <div class="tasks-popup" :class="{opened: tasksPopup}">
+      <div class="tasks-popup-header">
+        <h4>Задания</h4>
+        <p>Сделайте проводку по ледовому маршруту к соответствующим точкам на карте, чтобы выполнить задание</p>
+      </div>
       <v-card class="task-popup" v-for="item in tasks">
         <img :src="item.image" style="max-width: 100%"/>
         <v-card-title>{{ item.name }}</v-card-title>
@@ -170,6 +174,7 @@ export default {
     z-index: 101;
   }
   .task-popup table {
+    margin-left: 20px;
     float: left;
   }
   .task-key {
@@ -185,5 +190,25 @@ export default {
   .clear {
     display: block;
     clear: both;
+  }
+  .tasks-popup-header {
+      text-align: center;
+      max-width: 300px;
+      margin: 0 auto;
+      color: #FFF;
+      font-size: 14px;
+      line-height: 20px;
+      padding: 12px 0;
+  }
+
+  .tasks-popup-header h4 {
+      font-size: 24px;
+      line-height: 32px;
+      margin-bottom: 10px;
+      font-weight: 400;
+  }
+
+  .tasks-popup.opened {
+      background-color: rgba(0,0,0,.7);
   }
 </style>
