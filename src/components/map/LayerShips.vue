@@ -19,7 +19,7 @@
     },
     computed: {
       ships() {
-        return this.$store.state.gs.ships || [];
+        return this.$store.getters['activeShips'];
       },
     },
   };

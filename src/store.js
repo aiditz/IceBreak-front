@@ -35,6 +35,10 @@ export default new Vuex.Store({
     lastTs: new Date().getTime()
   },
   getters: {
+    activeShips(state) {
+      return (state.gs.ships || []).filter(ship => ship.active);
+    },
+
     hexagonsOfShips(state) {
       if (!state.gs.ships) {
         return [];
