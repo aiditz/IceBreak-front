@@ -94,11 +94,9 @@
         return this.$store.state.gs;
       },
       ships() {
-        if (!this.gs.ships) {
-          return [];
-        }
+        const ships = this.$store.getters['activeShips'];
 
-        return this.gs.ships.map(ship => ({
+        return ships.map(ship => ({
           ...ship,
           icebreaker: this.gs.icebreakers.find(a => a.id === ship.id)
         }));

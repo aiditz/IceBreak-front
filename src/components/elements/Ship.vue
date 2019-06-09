@@ -12,6 +12,9 @@
   import hexGridMixin from '../mixins/hexGrid.mixin';
   import Ship1 from './svg/Ship1.svg.vue';
   import Ship2 from './svg/Ship2.svg.vue';
+  import Ship3 from './svg/Ship3.svg.vue';
+  import Ship4 from './svg/Ship4.svg.vue';
+  import Ship5 from './svg/Ship5.svg.vue';
 
   export default {
     name: 'Ship',
@@ -19,6 +22,9 @@
     components: {
       Ship1,
       Ship2,
+      Ship3,
+      Ship4,
+      Ship5,
     },
     props: ['data'],
     computed: {
@@ -40,7 +46,6 @@
 
 <style scoped>
   .root {
-    opacity: 0.4;
   }
   .ships > g {
     transition: transform linear 5s;
