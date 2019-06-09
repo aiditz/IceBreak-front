@@ -19,7 +19,7 @@ export default new Vuex.Store({
       background: true,
       buildHexGrid: false,
       hexOfShips: false,
-      icePieces: false,
+      icePieces: true,
       paths: false,
       objects: true,
     },
