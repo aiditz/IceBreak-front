@@ -1,7 +1,5 @@
 import config from './config';
 
-console.log(1222222222222, config);
-
 export default {
   capitalizeFirstLetter(s) {
     return s.charAt(0).toLocaleUpperCase() + s.substr(1);
