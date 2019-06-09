@@ -1,5 +1,5 @@
 <template>
-  <div class="root">
+  <div id="map-wrapper" class="root">
     <LayerUi class="layer-ui"></LayerUi>
     <svg id="map" :class="{loaded}">
       <g id="map-content" :transform="'scale(' + this.mapScale + ')'">

@@ -50,7 +50,7 @@ export default {
       return rowIndex * config.tileH;
     },
 
-    getItemTranslate(col, row) {
+    getItemXY(col, row) {
       if (!config) {
         return '0 0';
       }
@@ -62,9 +62,11 @@ export default {
         x += config.tileW / 2;
       }
 
-      if (Number.isNaN(y)) {
-        debugger;
-      }
+      return {x, y};
+    },
+
+    getItemTranslate(col, row) {
+      const {x, y} = this.getItemXY(col, row);
 
       return `${x} ${y}`;
     },

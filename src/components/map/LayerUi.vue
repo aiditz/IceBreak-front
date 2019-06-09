@@ -55,7 +55,7 @@
           </v-avatar>
         </div>
 
-        <div class="bottom-left-item" v-for="item in ships">
+        <div class="bottom-left-item" v-for="item in ships" @click="click(item)">
           <v-avatar tile size="48px" color="primary">
             <img :src="item.icebreaker.image" />
           </v-avatar>
@@ -75,7 +75,8 @@
 </template>
 
 <script>
-import anumber from '../anumber';
+  import anumber from '../anumber';
+  import helpers from '../../common/helpers';
 
   export default {
     name: 'LayerUi',
@@ -89,10 +90,23 @@ import anumber from '../anumber';
         return this.$store.state.gs;
       },
       ships() {
+        if (!this.gs.ships) {
+          return [];
+        }
+
         return this.gs.ships.map(ship => ({
           ...ship,
           icebreaker: this.gs.icebreakers.find(a => a.id === ship.id)
         }));
+      }
+    },
+    methods: {
+      click(ship) {
+        var el = document.body.querySelector('#map-wrapper');
+        const [row, col] = ship.movements[1].hex;
+        const {x, y} = helpers.hexMath.getItemXY(col, row);
+        el.scrollTop = y - window.screen.height / 2;
+        el.scrollLeft = x - window.screen.width / 2;
       }
     },
     data() {
