@@ -64,6 +64,10 @@ export default new Vuex.Store({
       state[field] = value;
     },
 
+    toggleShipControls(state) {
+      state.layers.hexOfShips = !state.layers.hexOfShips;
+    },
+
     setGamestate(state, gs) {
       state.gs = gs;
 
@@ -181,17 +185,22 @@ export default new Vuex.Store({
       }
     },
 
-    async sendAction(context, researchId) {
-      const data = await API.sendAction('Research', {id: researchId});
+    async sendAction(context, postData) {
+      const data = await API.sendAction('Research', postData);
       await context.dispatch('refreshGs', data);
     },
 
     async research(context, researchId) {
       await context.dispatch('sendAction', {
         action: 'Research',
-        data: {
-          researchId: researchId
-        }
+        researchId,
+      });
+    },
+
+    async orderShip(context, icebreakerId) {
+      await context.dispatch('sendAction', {
+        action: 'Icebreaker',
+        icebreakerId,
       });
     },
   }

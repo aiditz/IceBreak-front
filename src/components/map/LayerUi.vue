@@ -68,7 +68,7 @@
       </div>
 
       <div class="bottomRight">
-        <img class="icon" src="/img/IconSatellite.svg" @click="$store.commit('ui/showPage', 'Satellites')">
+        <img class="icon" src="/img/IconSatellite.svg" @click="$store.commit('toggleShipControls')">
         <img class="icon" src="/img/IconScience.svg" @click="$store.commit('ui/showPage', 'Research')">
         <img class="icon" src="/img/IconIcebreaker.svg" @click="$store.commit('ui/showPage', 'Ships')">
       </div>
@@ -131,7 +131,7 @@
       return {
         shipsCollapsed: true
       }
-    }
+    },
   };
 </script>
 
