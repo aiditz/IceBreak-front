@@ -25,7 +25,8 @@ export default new Vuex.Store({
     },
     customEvents: [],
     gs: {
-      money: 0
+      money: 0,
+      status: 0 // -1: failed, 0: game, 1: win
     },
     loaded: false,
     config: {
@@ -34,7 +35,7 @@ export default new Vuex.Store({
       rows: 13,
       cols: 24
     },
-
+    
     showTasks: false,
 
     online: true,

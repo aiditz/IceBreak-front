@@ -1,5 +1,14 @@
 <template>
   <v-app id="app">
+    <v-scale-transition>
+      <div class="gameover" v-show="$store.state.gs.status !== 0" :class="{lose: $store.state.gs.status === -1, win: $store.state.gs.status === 1}">
+        <h1>Игра окончена!</h1>
+
+        <h2 v-if="$store.state.gs.status === 1">Вы покорили север!</h2>
+        <h2 v-if="$store.state.gs.status === -1">Вам не удалось противостоять стихии</h2>
+      </div>
+    </v-scale-transition>
+
     <v-expand-transition>
       <div v-show="serverOffline" class="server-status">
         <v-chip color="warning">
@@ -215,5 +224,45 @@ export default {
 
   .tasks-popup.opened {
       background-color: rgba(0,0,0,.7);
+  }
+
+  .gameover {
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+    z-index: 10000;
+    color: #FFF;
+    text-align: center;
+  }
+  .gameover.win {
+    background-color: rgba(46, 204, 113, .6);
+    box-shadow: inset 0 0 30px 10px rgb(46, 204, 113);
+  }
+  .gameover.lose {
+    background-color: rgba(231, 76, 60, .6);
+    box-shadow: inset 0 0 30px 10px rgb(231, 76, 60);
+  }
+  .gameover h1 {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 68px;
+    font-weight: 300;
+    line-height: 90px;
+  }
+  .gameover h2 {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 32px;
   }
 </style>
