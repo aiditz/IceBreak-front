@@ -21,7 +21,7 @@
             <template v-slot:activator="{ on }">
               <div v-on="on">
                 <v-progress-circular :size="45" :width="5" :value="researched / researches * 100" color="blue">
-                  <v-icon>local_drink</v-icon>
+                  <component is="ResearchIcon"></component>
                 </v-progress-circular>
                 <b class="top-left-item-text">{{researched}} / {{researches}}</b>
               </div>
@@ -34,29 +34,31 @@
           <v-tooltip bottom color="rgba(0,0,0,.6)">
             <template v-slot:activator="{ on }">
               <div v-on="on">
-                <v-progress-circular :size="45" :width="5" :value="30" color="orange">
-                  <v-icon>monetization_on</v-icon>
+                <v-progress-circular :size="45" :width="5" :value="buildedIcebreakers / icebreakersCount * 100" color="orange">
+                  <v-icon>directions_boat</v-icon>
                 </v-progress-circular>
-                <b class="top-left-item-text"><Anumber :number="$store.state.gs.money"></Anumber></b>
+                <b class="top-left-item-text">{{ buildedIcebreakers }} / {{ icebreakersCount }}</b>
               </div>
             </template>
-            <span><Anumber :number="$store.state.gs.money"></Anumber> млрд.</span>
+            <span>Осталось построить {{ estimateIcebreakers }} ледоколов</span>
           </v-tooltip>
         </div>
       </div>
 
-      <div class="topRight"></div>
+      <div class="topRight">
+        <Anumber :number="$store.state.gs.money"></Anumber> млрд.
+      </div>
 
       <div class="bottomLeft" v-show="ships.length" :class="{collapsed: shipsCollapsed, expanded: !shipsCollapsed}">
         <div class="bottom-left-item chevron" style="margin-bottom: 0" @click="shipsCollapsed = !shipsCollapsed">
-          <v-avatar size="48px" color="rgba(0, 91, 151, 1)">
+          <v-avatar size="41px" color="rgba(0, 91, 151, 1)">
             <v-icon color="white" v-if="shipsCollapsed">keyboard_arrow_up</v-icon>
             <v-icon color="white" v-else>keyboard_arrow_down</v-icon>
           </v-avatar>
         </div>
 
         <div class="bottom-left-item" v-for="item in ships" @click="click(item)">
-          <v-avatar tile size="48px" color="primary">
+          <v-avatar tile size="41px" color="primary">
             <img :src="item.icebreaker.image" />
           </v-avatar>
           <span class="ship-name">{{ item.icebreaker.name }}</span>
@@ -77,11 +79,13 @@
 <script>
   import Anumber from '../ui/Anumber';
   import helpers from '../../common/helpers';
+  import ResearchIcon from '../elements/svg/ResearchIcon.svg.vue';
 
   export default {
     name: 'LayerUi',
     components: {
-      Anumber
+      Anumber,
+      ResearchIcon
     },
     props: {
     },
@@ -106,6 +110,18 @@
       researched() {
         if (!this.gs.research) return 0;
         return this.gs.research.filter((item) => item.completed).length;
+      },
+      icebreakersCount() {
+        if (!this.gs.icebreakers) return 5;
+        return this.gs.icebreakers.length;
+      },
+      buildedIcebreakers() {
+        if (!this.gs.icebreakers) return 0;
+        return this.gs.icebreakers.filter((item) => item.progress >= item.maximum_progress).length;
+      },
+      estimateIcebreakers() {
+        if (!this.gs.icebreakers) return 0;
+        return this.gs.icebreakers.length - this.buildedIcebreakers;
       }
     },
     methods: {
@@ -204,7 +220,7 @@
   }
   .bottom-left-item {
     transition: .3s;
-    margin: 8px;
+    margin: 4px;
     position: relative;
     border-radius: 8px;
     overflow: hidden;
@@ -274,5 +290,16 @@
       display: block;
       text-align: center;
       width: 100%;
+  }
+  .topRight {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 8px 10px;
+      background-color: rgba(0, 91, 151, .9);
+      border-radius: 8px;
+      color: #FFF;
+      margin: 8px;
+      pointer-events: none;
   }
 </style>
