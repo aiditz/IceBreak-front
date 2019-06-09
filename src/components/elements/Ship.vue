@@ -28,8 +28,8 @@
         const centerX = config.tileW / 2;
         const centerY = config.tileH / 2;
 
-        const col = this.data.movements[0].hex[1];
-        const row = this.data.movements[0].hex[0];
+        const col = this.data.movements[1].hex[1];
+        const row = this.data.movements[1].hex[0];
 
         let x = col * config.tileW;
         let y = row * config.tileH * 29/40;
@@ -42,7 +42,7 @@
       },
 
       rotate() {
-        return (this.data.movements[1].rotation);
+        return (this.data.movements[2].rotation);
       }
     },
   };
