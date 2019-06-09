@@ -16,7 +16,7 @@
         </a>
 
         <v-expand-transition>
-          <div v-show="infoShown"> 
+          <div v-show="infoShown">
             <table class="info-table">
               <tr v-for="param in item.parameters">
                 <th>{{ param[0] }}</th>
@@ -58,7 +58,7 @@
             <span v-if="!isAvailable">Требуется <b>{{ estimateRequirements }}</b> {{ estimateRequirementsText }}</span>
             <span v-else-if="item.progress == 0">Построить - {{ item.cost | formatMoney }} млрд.</span>
             <span v-else-if="isBuilding">
-              Строится - 
+              Строится -
               <b>{{ estimateTime }}</b> сек.
             </span>
             <span v-else-if="isBuilt">Построен</span>
@@ -70,6 +70,7 @@
 </template>
 
 <script>
+  import helpers from '../../common/helpers';
   export default {
     name: 'ShipCard',
     props: ['item'],
@@ -90,24 +91,10 @@
         return Math.ceil((this.item.maximum_progress - this.item.progress) / 100);
       },
       estimateRequirements() {
-        let left = 0;
-        this.item.requirements.every(req => { if (!req.completed) left++ });
-        return left;
+        return this.item.requirements.filter(req => !req.completed).length;
       },
       estimateRequirementsText() {
-        let mod = this.estimateRequirements % 10;
-        if (this.estimateRequirements >= 5 && this.estimateRequirements <= 20) {
-          return 'исследований';
-        }
-        if (mod == 0 || mod >=5) {
-          return 'исследований';
-        }
-        if (mod == 1) {
-          return 'исследование';
-        }
-        if (mod >= 2 && mod <= 4) {
-          return 'исследования';
-        }
+        return helpers.getCase(this.estimateRequirements, 'исследование', 'исследования', 'исследований');
       }
     },
     data() {
@@ -219,7 +206,7 @@
   top: 0;
   right: 0;
   margin: 4px 5px;
-} 
+}
 
 
 .info-toggler {

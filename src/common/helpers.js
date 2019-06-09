@@ -13,6 +13,22 @@ export default {
     };
   }()),
 
+  getCase(i, var1, var2, var3) {
+    if (i % 10 === 1) {
+      return var1;
+    }
+
+    if ((i % 10 >= 2) && (i % 10 <= 4)) {
+      return var2;
+    }
+
+    return var3;
+  },
+
+  getCaseFull(i, var1, var2, var3) {
+    return i + ' ' + this.getCase(i, var1, var2, var3);
+  },
+
   formatMoney(value) {
     return new Intl.NumberFormat('ru', {currency: 'RUB'}).format(value);
   },
