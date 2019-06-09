@@ -43,16 +43,20 @@ export default new Vuex.Store({
       return (state.gs.ships || []).filter(ship => ship.active);
     },
 
-    hexagonsOfShips(state) {
-      if (!state.gs.ships) {
+    hexagonsOfShips(state, getters) {
+      const ships = getters['activeShips'];
+
+      if (!ships) {
         return [];
       }
 
-      return [
-        state.gs.ships.map(ship => ship.movements[0].hex),
-        state.gs.ships.map(ship => ship.movements[1].hex),
-        state.gs.ships.map(ship => ship.movements[2].hex),
-      ];
+      const hexes = [];
+
+      for (const ship of ships) {
+        hexes.push(...ship.target_hexes);
+      }
+
+      return hexes;
     }
   },
   mutations: {
@@ -78,27 +82,27 @@ export default new Vuex.Store({
 
       state.gs.tasks = [
           {
-            'id' : 1, 
-            'name' : 'Ледовая 1 в Диксон', 
-            'image': 'http://www.morvesti.ru.images.1c-bitrix-cdn.ru/upload/iblock/7c1/7787.jpg?1529918255125646', 
-            'description': '', 
+            'id' : 1,
+            'name' : 'Ледовая 1 в Диксон',
+            'image': 'http://www.morvesti.ru.images.1c-bitrix-cdn.ru/upload/iblock/7c1/7787.jpg?1529918255125646',
+            'description': '',
             'coordinates': [47, 15],
             'progress': 300,
             'ttl' : 600
           }, {
-            'id' : 1, 
-            'name' : 'Ледовая 2 в Диксон', 
-            'image': '', 
-            'description': '', 
+            'id' : 1,
+            'name' : 'Ледовая 2 в Диксон',
+            'image': '',
+            'description': '',
             'coordinates': [30,30],
             'progress': 100,
             'ttl': 200
           }, {
-            'id' : 1, 
-            'name' : 'Ледовая 3 в Диксон', 
-            'image': 'https://cdn.iz.ru/sites/default/files/styles/900x506/public/article-2017-05/0fbbfa8ea4eb373e113ff0a9f4cf006a.jpg?itok=Qh1w1UO4', 
-            'description': 'Test desc', 
-            'coordinates': [50,50], 
+            'id' : 1,
+            'name' : 'Ледовая 3 в Диксон',
+            'image': 'https://cdn.iz.ru/sites/default/files/styles/900x506/public/article-2017-05/0fbbfa8ea4eb373e113ff0a9f4cf006a.jpg?itok=Qh1w1UO4',
+            'description': 'Test desc',
+            'coordinates': [50,50],
             'progress': 600,
             'ttl' : 600
           }
@@ -154,7 +158,7 @@ export default new Vuex.Store({
         }
       } else {
         // already provided data
-        context.commit('setGamestate', data);
+        context.commit('setGamestate', responseData);
       }
 
       if ((context.state.lastTs + 10000) < new Date().getTime()) {

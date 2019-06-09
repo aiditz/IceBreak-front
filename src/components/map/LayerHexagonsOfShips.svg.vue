@@ -1,20 +1,7 @@
 <template>
-  <g v-if="false">
-    <Hexagon class="hexTile"
-             v-for="item in this.$store.getters['hexagonsOfShips'][0]"
+  <g>
+    <Hexagon v-for="item in this.$store.getters['hexagonsOfShips']"
              color="black"
-             :transform="'translate(' + getItemTranslate(item[1], item[0]) + ') scale(' + config.tileW / 35 + ')'"
-    ></Hexagon>
-
-    <Hexagon class="hexTile"
-             v-for="item in this.$store.getters['hexagonsOfShips'][1]"
-             color="darkblue"
-             :transform="'translate(' + getItemTranslate(item[1], item[0]) + ') scale(' + config.tileW / 35 + ')'"
-    ></Hexagon>
-
-    <Hexagon class="hexTile"
-             v-for="item in this.$store.getters['hexagonsOfShips'][2]"
-             color="blue"
              :transform="'translate(' + getItemTranslate(item[1], item[0]) + ') scale(' + config.tileW / 35 + ')'"
     ></Hexagon>
   </g>

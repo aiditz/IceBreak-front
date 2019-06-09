@@ -3,7 +3,9 @@
     <template v-for="(col, colIndex) in $store.state.gs.ice">
       <IcePiece
         v-for="(value, rowIndex) in col"
-        :data="value"
+        :opacity="value"
+        :colIndex="colIndex"
+        :rowIndex="rowIndex"
         :key="`${colIndex}_${rowIndex}`"
         :transform="'translate(' + getItemTranslate(colIndex, rowIndex) + ') scale(1)'"
       ></IcePiece>

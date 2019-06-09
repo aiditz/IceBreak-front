@@ -3,11 +3,11 @@
     <g>
       <image
         class="ice-peace"
-        v-if="data !== 0"
-        width="20"
-        height="20"
+        width="40"
+        height="40"
+        v-if="opacity !== 0 && colIndex % 2 === 0 && rowIndex % 2 === 0"
         :xlink:href="`/img/ice/${iceType}.svg`"
-        :style="{opacity: data / 100, 'animationDelay': animationDelay + 'ms'}" />
+        :style="{opacity: opacity / 100, 'animationDelay': animationDelay + 'ms', transform: 'translate(-20px, -20px) rotate(' + rotate + ')'}" />
     </g>
   </g>
 </template>
@@ -20,7 +20,7 @@
 
   export default {
     name: 'IcePiece',
-    props: ['data'],
+    props: ['opacity', 'colIndex', 'rowIndex'],
     components: {
     },
     beforeCreate() {
@@ -29,6 +29,9 @@
     computed: {
       animationDelay() {
         return Math.random() * 10000;
+      },
+      rotate() {
+        return Math.floor(Math.random() * 360) + 'deg';
       }
     },
   };
