@@ -1,8 +1,8 @@
 <template>
   <g>
-    <template v-for="(row, rowIndex) in $store.state.gs.ice">
+    <template v-for="(col, colIndex) in $store.state.gs.ice">
       <IcePiece
-        v-for="(value, colIndex) in row"
+        v-for="(value, rowIndex) in col"
         :data="value"
         :key="`${colIndex}_${rowIndex}`"
         :transform="'translate(' + getItemTranslate(colIndex, rowIndex) + ') scale(1)'"
