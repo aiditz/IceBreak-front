@@ -2,17 +2,18 @@
   <v-card :id="id">
     <v-layout>
       <v-flex xs5 class="card-left">
-        <a :href="'#' + id" class="info-toggler-link" v-if="item.parameters">
-          <v-btn fab small dark color="grey" class="info-toggler" @click="infoShown = !infoShown">
-            <v-icon size="32px" v-if="!infoShown">info</v-icon>
-            <v-icon size="20px" v-else>keyboard_arrow_up</v-icon>
-          </v-btn>
-        </a>
-
         <v-img
           :src="item.image"
           contain
         ></v-img>
+
+        <a :href="'#' + id" class="info-toggler-link" v-if="item.parameters">
+          <v-chip class="info-toggler" outline color="grey" @click="infoShown = !infoShown" :class="{opened: infoShown}">
+            <v-icon v-if="!infoShown">keyboard_arrow_down</v-icon>
+            <v-icon v-else>keyboard_arrow_up</v-icon>
+            <span v-show="!infoShown">Характеристики</span>
+          </v-chip>
+        </a>
 
         <v-expand-transition>
           <div v-show="infoShown"> 
@@ -38,11 +39,11 @@
               <h4 class="requirements-heading">Требования:</h4>
             </v-flex>
             <v-flex class="requirements-items">
-              <v-chip v-for="req in item.requirements" outline :color="req.completed ? 'green' : 'red'" :class="{opacity: req.completed}">
+              <v-chip v-for="req in item.requirements" outline :color="req.completed ? 'green' : 'red'" :class="{opacity: req.completed}" class="requirements-item">
                 <v-avatar>
                   <img :src="req.image" :alt="req.name">
                 </v-avatar>
-                {{ req.name }}
+                <span class="requirements-item-name">{{ req.name }}</span>
                 <v-icon v-if="req.completed" color="green" right>check_circle</v-icon>
                 <v-icon v-else color="red" right>report</v-icon>
               </v-chip>
@@ -128,7 +129,7 @@
 }
 
 .card-left {
-  padding: 0 0 0 16px
+  padding: 16px 0 0 16px
 }
 
 .ship-card {
@@ -147,10 +148,6 @@
 
 .info-toggler-link {
   text-decoration: none;
-}
-.info-toggler {
-  z-index: 1;
-  margin: 0 -10px -30px;
 }
 
 .requirements {
@@ -196,6 +193,64 @@
 .v-btn b {
   font-weight: 900;
   font-size: 15px;
+}
+
+.v-chip {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 280px;
+}
+
+.v-chip.v-chip.v-chip--outline .v-avatar {
+  position: absolute;
+  left: 0;
+  margin: 0;
+}
+
+.requirements-item-name {
+  padding: 0 25px;
+  max-width: 260px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.v-chip .v-icon--right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 4px 5px;
+} 
+
+
+.info-toggler {
+  display: block;
+  text-align: center;
+  margin: 0 !important;
+  max-width: 100% !important;
+  border: 0 !important;
+  padding: 5px;
+}
+.info-toggler.opened {
+  padding: 0;
+}
+.info-toggler.opened.v-chip .v-chip__content {
+    height: auto;
+    display: block;
+    padding: 0;
+    width: 100%;
+}
+.info-toggler.opened.v-chip .v-icon {
+    margin: 0 auto;
+    display: block;
+    width: 30px;
+}
+.info-toggler.opened.v-chip.v-chip--outline.theme--light.grey.grey--text {
+    height: auto;
+    border-radius: 0;
+    border-color: transparent !important;
+    margin: 0;
+    max-width: 100%;
+    width: 100%;
 }
 
 </style>

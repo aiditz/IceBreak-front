@@ -10,7 +10,7 @@
       <v-toolbar-items class="hidden-sm-and-down"></v-toolbar-items>
 
       <v-btn icon @click="$store.commit('ui/showMap')">
-        <v-icon>clear</v-icon>
+        <v-icon color="white">clear</v-icon>
       </v-btn>
     </v-toolbar>
     <v-card class="page-body">
@@ -44,6 +44,18 @@
       min-height: 100vh;
       transform-origin: bottom right
   }
+
+  .theme--light.v-toolbar {
+    background: rgba(0, 91, 151, .9);
+    color: #FFF;
+  }
+
+  .v-toolbar__content {
+    background: rgb(81,255,255);
+    background: linear-gradient(235deg, rgba(81,255,255,0) 0%, rgba(0,91,151,1) 100%);
+    color: #FFF;
+  }
+
   .page-body {
       height: 100%;
       flex: 1;
