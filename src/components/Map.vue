@@ -6,9 +6,9 @@
       <g id="map-content" :transform="'scale(' + this.mapScale + ')'">
         <LayerBackground></LayerBackground>
         <LayerBuildHexGrid v-if="this.$store.state.layers.buildHexGrid"></LayerBuildHexGrid>
-        <LayerHexagonsOfShips v-if="this.$store.state.layers.hexOfShips"></LayerHexagonsOfShips>
         <LayerIcePieces v-if="this.$store.state.layers.icePieces"></LayerIcePieces>
         <LayerShips></LayerShips>
+        <LayerHexagonsOfShips v-if="this.$store.state.layers.hexOfShips"></LayerHexagonsOfShips>
       </g>
     </svg>
   </div>

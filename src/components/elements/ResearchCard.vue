@@ -38,7 +38,7 @@
 
 <script>
   export default {
-    name: 'SatelliteCard',
+    name: 'ResearchCard',
     props: ['item'],
     computed: {
       myResearchLevel() {
