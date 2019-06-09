@@ -1,5 +1,6 @@
 <template>
     <g>
+      <g transform="translate(-44 2) scale(0.5)">
         <g>
             <linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="74.5623" y1="22.3106" x2="-48.1921"
                             y2="94.7808">
@@ -138,5 +139,6 @@
             <path fill="url(#SVGID_10_)" d="M85,38.6h27.9c0.9,0,1.7-0.7,1.7-1.7V9.1c0-0.9-0.7-1.7-1.7-1.7H85c-0.9,0-1.7,0.7-1.7,1.7v27.9
 			C83.4,37.9,84.1,38.6,85,38.6z"/>
         </g>
+    </g>
     </g>
 </template>

@@ -2,7 +2,7 @@
   <component
     class="root"
     :is="`Ship${data.id}`"
-    :transform="`translate(${translate}) rotate(${rotate} 0 0) scale(0.5)`"
+    :transform="`translate(${translate}) rotate(${rotate} 0 0)`"
   >
   </component>
 </template>
@@ -23,8 +23,8 @@
     props: ['data'],
     computed: {
       translate() {
-        const centerX = -110;
-        const centerY = 103;
+        const centerX = 0; // -110;
+        const centerY = 0; // 103;
 
         const col = this.data.movements[0].hex[1];
         const row = this.data.movements[0].hex[0];
@@ -48,6 +48,6 @@
 
 <style scoped>
   .root {
-    opacity: 0.7;
+    opacity: 0.4;
   }
 </style>
