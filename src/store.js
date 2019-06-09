@@ -19,7 +19,7 @@ export default new Vuex.Store({
       background: true,
       buildHexGrid: false,
       hexOfShips: true,
-      icePieces: true,
+      icePieces: false,
       paths: false,
       objects: true,
     },
@@ -68,6 +68,7 @@ export default new Vuex.Store({
     },
 
     toggleShipControls(state) {
+      debugger;
       state.layers.hexOfShips = !state.layers.hexOfShips;
     },
 
@@ -76,6 +77,11 @@ export default new Vuex.Store({
     },
 
     setGamestate(state, gs) {
+      if (!gs.ice || gs.ice.length === 0) {
+        // kostyil'
+        gs.ice = state.gs.ice;
+      }
+
       state.gs = gs;
 
       // Server online checker
