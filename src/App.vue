@@ -22,6 +22,7 @@
 
     <div class="tasks-popup" :class="{opened: tasksPopup}">
       <v-card class="task-popup" v-for="item in tasks">
+        <img :src="item.image" style="max-width: 100%"/>
         <v-card-title>{{ item.name }}</v-card-title>
         <v-card-text class="pt-0">
           {{ item.description }}

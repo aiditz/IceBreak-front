@@ -10,7 +10,7 @@
         :color="item.bg"
         style="border: 1px solid rgb(0, 91, 151); border-radius: 50%;"
       >
-        <v-avatar size="40px" color="rgb(0, 91, 151)">
+        <v-avatar size="38px" color="rgb(0, 91, 151)">
           <v-img v-if="item.image" :src="item.image" />
           <v-icon v-else size="32px" :color="item.color">location_on</v-icon>
         </v-avatar>
