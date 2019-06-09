@@ -22,7 +22,7 @@
     <div class="tasks-popup-open" @click="$store.state.showTasks = !$store.state.showTasks" v-if="tasks.length">
       <v-badge overlap color="warning">
         <template v-slot:badge>{{tasks.length}}</template>
-        <v-avatar tile size="48px" color="rgba(0, 91, 151, 1)" style="border-radius: 8px;">
+        <v-avatar tile size="48px" color="#1A1942" style="border-radius: 8px;">
           <v-icon v-if="!$store.state.showTasks" size="32px" color="white">speaker_notes</v-icon>
           <v-icon v-else color="white">clear</v-icon>
         </v-avatar>
