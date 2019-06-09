@@ -1,4 +1,5 @@
-const ENDPOINT = 'https://ice-break.herokuapp.com';
+// const ENDPOINT = 'https://ice-break.herokuapp.com';
+const ENDPOINT = 'https://icebreak.tech';
 // const ENDPOINT = 'http://localhost:5000';
 
 function postData(url = '', data = {}) {
