@@ -2,7 +2,7 @@
   <div class="root">
     <div class="wrap">
       <div class="topLeft">
-        <div class="top-left-item">
+        <div class="top-left-item" v-if="false">
           <v-tooltip bottom color="rgba(0,0,0,.6)">
             <template v-slot:activator="{ on }">
               <div v-on="on">
@@ -150,7 +150,7 @@
     padding: 8px 8px 2px !important;
     color: #FFF;
     transition: .3s;
-    margin-left: -105px;
+    margin-left: -73px;
   }
   .wrap {
     width: 100%;
