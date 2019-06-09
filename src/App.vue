@@ -11,9 +11,9 @@
     </v-expand-transition>
 
     <Map class="map" :class="{hidden: $store.state.ui.page !== null}"></Map>
-    <v-scale-transition>
-      <component class="pages" v-show="$store.state.ui.page !== null" :is="$store.state.ui.page"></component>
-    </v-scale-transition>
+    <!-- <v-scale-transition> v-show="$store.state.ui.page !== null" -->
+      <component class="pages" :is="$store.state.ui.page"></component>
+    <!-- </v-scale-transition> -->
   </v-app>
 </template>
 
