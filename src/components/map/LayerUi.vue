@@ -159,7 +159,6 @@
 
       researchingItem() {
         if (!this.gs.research) return null;
-        return this.gs.research[0];
         return this.gs.research.find((item) => item.progress > 0 && item.progress < item.maximum_progress);
       }
     },
