@@ -60,7 +60,7 @@
 
         <div class="researching" v-if="researchingItem">
           <v-progress-linear v-model="researchingItem.progress" color="#55FFBE" class="research-progress"></v-progress-linear>
-          {{ researchingItem.progress }} %
+          {{ researchingItem.progress / researchingItem.maximum_progress * 100 }} %
         </div>
       </div>
 
