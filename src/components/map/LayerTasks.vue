@@ -12,7 +12,7 @@
         @click="$store.state.showTasks = true"
       >
         <v-avatar size="38px" color="rgb(0, 91, 151)">
-          <v-img v-if="item.image" :src="item.image" />
+          <v-img v-if="false && item.image" :src="item.image" />
           <v-icon v-else size="32px" :color="item.color">location_on</v-icon>
         </v-avatar>
       </v-progress-circular>
@@ -28,16 +28,16 @@
     components: {},
     computed: {
       tasks() {
-        if (!('tasks' in this.$store.state.gs)) return [];
+        if (!('quests' in this.$store.state.gs)) return [];
 
-        this.$store.state.gs.tasks.every((item) => {
+        this.$store.state.gs.quests.every((item) => {
           item.progress_ = item.progress / item.ttl * 100;
           item.bg = helpers.getColorForPercentage(1 - item.progress_ / 100);
           item.color = item.progress % 20 >= 10 ? 'red' : 'yellow';
           item.center = helpers.hexMath.getItemCenterXY(item.coordinates[1], item.coordinates[0]);
           return item;
         });
-        return this.$store.state.gs.tasks;
+        return this.$store.state.gs.quests;
       },
     }
   };

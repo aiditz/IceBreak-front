@@ -42,7 +42,7 @@
         </div>
       </v-card>
       <v-card class="task-popup" v-for="item in tasks" v-if="item.progress < item.ttl">
-        <img :src="item.image" style="max-width: 100%"/>
+        <!-- <img :src="item.image" style="max-width: 100%"/> -->
         <v-card-title>{{ item.name }}</v-card-title>
         <v-card-text class="pt-0">
           {{ item.description }}
@@ -96,7 +96,7 @@ export default {
       return !this.$store.state.online;
     },
     tasks() {
-      return this.$store.state.gs.tasks || [];
+      return this.$store.state.gs.quests || [];
     }
   }
 };
