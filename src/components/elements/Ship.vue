@@ -13,7 +13,6 @@
         v-for="targetHex in data.target_hexes"
         r="20"
         fill="rgba(0, 91, 151, .9)"
-        stroke="black"
         @click="$store.dispatch('controlShip', {shipId: data.id, target: targetHex})"
         :cx="6 + (getColTranslate(targetHex[1], targetHex[0]) - getColTranslate(col, row)) * 1.5"
         :cy="8 + (getRowTranslate(targetHex[0]) - getRowTranslate(row)) * 1.5"
