@@ -25,6 +25,13 @@
         <h4>Задания</h4>
         <p>Сделайте проводку по ледовому маршруту к соответствующим точкам на карте, чтобы выполнить задание</p>
       </div>
+      <v-card class="task-popup" v-if="!tasks.length">
+        <div class="text-xs-center pa-3">
+          <p><big>На данный момент нет задач</big></p>
+          <p>Как только они появятся, <br/> Вы сможете найти их здесь</p>
+          <p class="pb-0">Также мы добавим все <br/> актуальные задачи на карту</p>
+        </div>
+      </v-card>
       <v-card class="task-popup" v-for="item in tasks" v-if="item.progress < item.ttl">
         <img :src="item.image" style="max-width: 100%"/>
         <v-card-title>{{ item.name }}</v-card-title>
