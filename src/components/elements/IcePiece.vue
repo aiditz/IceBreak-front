@@ -1,12 +1,12 @@
 <template>
   <g class="root">
-    <g transform="scale(0.35)">
+    <g>
       <image
         class="ice-peace"
         v-if="data !== 0"
+        width="20"
+        height="20"
         :xlink:href="`/img/ice/${iceType}.svg`"
-        width="50"
-        height="50"
         :style="{opacity: data / 100, 'animationDelay': animationDelay + 'ms'}" />
     </g>
   </g>
@@ -37,43 +37,43 @@
 <style scoped>
   @keyframes fluctuation {
     10% {
-      transform: translate3d(0, 0, 0);
+      transform: translate(0, 0);
     }
 
     20% {
-      transform: translate3d(-7px, 0, 0);
+      transform: translate(-7px, 0);
     }
 
     30% {
-      transform: translate3d(-10px, 9px, 0);
+      transform: translate(-10px, 9px);
     }
 
     40% {
-      transform: translate3d(-3px, -3px, 0);
+      transform: translate(-3px, -3px);
     }
 
     50% {
-      transform: translate3d(0px, -10px, 0);
+      transform: translate(0px, -10px);
     }
 
     60% {
-      transform: translate3d(-3px, -7px, 0);
+      transform: translate(-3px, -7px);
     }
 
     70% {
-      transform: translate3d(3px, -3px, 0);
+      transform: translate(3px, -3px);
     }
 
     80% {
-      transform: translate3d(10px, 3px, 0);
+      transform: translate(10px, 3px);
     }
 
     90% {
-      transform: translate3d(7px, -3px, 0);
+      transform: translate(7px, -3px);
     }
 
     100% {
-      transform: translate3d(3px, 0, 0);
+      transform: translate(3px, 0);
     }
   }
 
