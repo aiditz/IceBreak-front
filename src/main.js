@@ -38,6 +38,10 @@ new Vue({
     API.setSession(data.id);
     this.$store.commit('setGamestate', data);
 
+    if (Array.isArray(data.ships)) {
+      helpers.scrollToShip(data.ships[0]);
+    }
+
     if (!initNeeded) {
       return;
     }

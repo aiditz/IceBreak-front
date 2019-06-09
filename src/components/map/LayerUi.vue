@@ -102,11 +102,7 @@
     },
     methods: {
       click(ship) {
-        var el = document.body.querySelector('#map-wrapper');
-        const [row, col] = ship.movements[1].hex;
-        const {x, y} = helpers.hexMath.getItemXY(col, row);
-        el.scrollTop = y - window.screen.height / 2;
-        el.scrollLeft = x - window.screen.width / 2;
+        helpers.scrollToShip(ship);
       }
     },
     data() {

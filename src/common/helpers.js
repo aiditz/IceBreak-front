@@ -41,6 +41,18 @@ export default {
     return degrees * Math.PI / 180;
   },
 
+  scrollToShip(ship) {
+    var el = document.body.querySelector('#map-wrapper');
+    const [row, col] = ship.movements[1].hex;
+    const {x, y} = this.hexMath.getItemXY(col, row);
+
+    el.scrollTo({
+      left: x - window.screen.width / 2,
+      top: y - window.screen.height / 2,
+      behavior: 'smooth'
+    });
+  },
+
   hexMath: {
     getColTranslate(colIndex) {
       return colIndex * config.tileW;
@@ -52,7 +64,7 @@ export default {
 
     getItemXY(col, row) {
       if (!config) {
-        return '0 0';
+        return {x: 0, y: 0};
       }
 
       let x = col * config.tileW;
