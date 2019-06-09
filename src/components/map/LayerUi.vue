@@ -59,8 +59,8 @@
         </div>
 
         <div class="researching" v-if="researchingItem">
-          <v-progress-linear v-model="researchingItem.progress" color="#55FFBE" class="research-progress"></v-progress-linear>
-          {{ Math.round(researchingItem.progress / researchingItem.maximum_progress * 100) }} %
+          <v-progress-linear v-model="researchProgress" color="#55FFBE" class="research-progress"></v-progress-linear>
+          {{ researchProgress }} %
         </div>
       </div>
 
@@ -89,9 +89,23 @@
       </div>
 
       <div class="bottomRight">
-        <img class="icon" src="/img/IconDatacenter.svg" @click="$store.dispatch('buildDatacenter')">
-        <img class="icon" src="/img/IconSatellite.svg" @click="$store.commit('toggleShipControls')">
-        <img class="icon" src="/img/IconScience.svg" @click="$store.commit('ui/showPage', 'Research')">
+        <img
+          class="icon"
+          src="/img/IconDatacenter.svg"
+          :class="isDatacenterAvailable ? '' : 'disabled'"
+          @click="$store.dispatch('buildDatacenter')"
+        >
+        <img
+          class="icon"
+          :class="isSatellitesAvailable ? '' : 'disabled'"
+          src="/img/IconSatellite.svg"
+          @click="$store.commit('toggleShipControls')"
+        >
+        <img
+          class="icon"
+          src="/img/IconScience.svg"
+          @click="$store.commit('ui/showPage', 'Research')"
+        >
         <img class="icon" src="/img/IconIcebreaker.svg" @click="$store.commit('ui/showPage', 'Ships')">
       </div>
     </div>
@@ -123,6 +137,9 @@
       gs() {
         return this.$store.state.gs;
       },
+      researchProgress() {
+        return Math.round(this.researchingItem.progress / this.researchingItem.maximum_progress * 100);
+      },
       ships() {
         const ships = this.$store.getters['activeShips'];
 
@@ -130,6 +147,12 @@
           ...ship,
           icebreaker: this.gs.icebreakers.find(a => a.id === ship.id)
         }));
+      },
+      isSatellitesAvailable() {
+        return this.$store.getters['isResearchDone'](2);
+      },
+      isDatacenterAvailable() {
+        return this.$store.state.gs.money >= this.$store.state.gs.datacenter_cost;
       },
       researches() {
         if (!this.gs.research) return 0;
@@ -409,4 +432,8 @@
     margin-right: 10px;
     border-radius: 4px;
 }
+
+  .icon.disabled {
+    filter: brightness(2) grayscale(100%);
+  }
 </style>

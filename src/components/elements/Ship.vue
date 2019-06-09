@@ -19,14 +19,16 @@
         @click="clickControl(point.angle)"
         :cx="point.x"
         :cy="point.y">
+      </circle>
 
         <!--image
-          width="14"
-          height="14"
-          :transform="`translate(${getItemTranslate(targetHex[1], targetHex[0])}) rotate(0)`"
-          xlink:href="/img/right-arrow.png">
+          v-for="point in controlPositions"
+          width="40"
+          height="40"
+          @click="clickControl(point.angle)"
+          :transform="`translate(${point.x}px, ${point.y}px) rotate(${point.angle})`"
+          xlink:href="/img/right-arrow.png"
         /-->
-      </circle>
     </g>
   </g>
 </template>

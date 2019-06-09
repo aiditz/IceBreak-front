@@ -43,6 +43,14 @@ export default new Vuex.Store({
     lastTs: new Date().getTime()
   },
   getters: {
+    isResearchDone: state => researchId => {
+      if (!state.gs.research) {
+        return false;
+      }
+
+      return state.gs.research.find(r => r.id === researchId && r.progress === r.maximum_progress);
+    },
+
     activeShips(state) {
       return (state.gs.ships || []).filter(ship => ship.active);
     },
