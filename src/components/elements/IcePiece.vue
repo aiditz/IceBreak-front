@@ -3,11 +3,11 @@
     <g>
       <image
         class="ice-peace"
-        width="40"
-        height="40"
-        v-if="opacity !== 0 && colIndex % 2 === 0 && rowIndex % 2 === 0"
+        width="20"
+        height="20"
+        v-if="opacity !== 0 /* && colIndex % 2 === 0 && rowIndex % 2 === 0 */"
         :xlink:href="`/img/ice/${iceType}.svg`"
-        :style="{opacity: opacity / 100, 'animationDelay': animationDelay + 'ms', transform: 'translate(-20px, -20px) rotate(' + rotate + ')'}" />
+        :style="{opacity: opacity / 100, 'animationDelay': animationDelay + 'ms', transformx: 'translate(-20px, -20px) rotate(' + rotate + ')'}" />
     </g>
   </g>
 </template>

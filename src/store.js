@@ -18,7 +18,7 @@ export default new Vuex.Store({
     layers: {
       background: true,
       buildHexGrid: false,
-      hexOfShips: true,
+      hexOfShips: false,
       icePieces: true,
       paths: false,
       objects: true,
@@ -67,10 +67,22 @@ export default new Vuex.Store({
       state[field] = value;
     },
 
+    toggleShipControls(state) {
+      state.layers.hexOfShips = !state.layers.hexOfShips;
+    },
+
+    toggleBuildHexGrid(state) {
+      state.layers.buildHexGrid = !state.layers.buildHexGrid;
+    },
+
     setGamestate(state, gs) {
+      if (!gs.ice || gs.ice.length === 0) {
+        // kostyil'
+        gs.ice = state.gs.ice;
+      }
+
       gs.quests = gs.quests.filter((item) => item.taken && !item.failed && !item.completed);
       state.gs = gs;
-      console.log(gs.quests)
 
       // Server online checker
       state.online = true;
@@ -126,7 +138,7 @@ export default new Vuex.Store({
           const data = await API.getGamestate(context.state.lastEventId);
 
           if (data.error) {
-            console.error('Get gamestate loop error:', err);
+            console.error('Get gamestate loop error:', data.error);
           } else {
             context.commit('setGamestate', data);
           }
@@ -158,17 +170,32 @@ export default new Vuex.Store({
       }
     },
 
-    async sendAction(context, researchId) {
-      const data = await API.sendAction('Research', {id: researchId});
+    async sendAction(context, postData) {
+      const data = await API.sendAction('Research', postData);
       await context.dispatch('refreshGs', data);
     },
 
     async research(context, researchId) {
       await context.dispatch('sendAction', {
         action: 'Research',
-        data: {
-          researchId: researchId
-        }
+        researchId,
+      });
+    },
+
+    async orderShip(context, icebreakerId) {
+      await context.dispatch('sendAction', {
+        action: 'Icebreaker',
+        icebreakerId,
+      });
+    },
+
+    async controlShip(context, {shipId, target}) {
+      debugger;
+
+      await context.dispatch('sendAction', {
+        action: 'ControlShip',
+        shipId,
+        hex: target,
       });
     },
   }
