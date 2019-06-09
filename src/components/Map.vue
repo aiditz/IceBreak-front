@@ -8,7 +8,7 @@
         <LayerBuildHexGrid v-if="this.$store.state.layers.buildHexGrid"></LayerBuildHexGrid>
         <LayerIcePieces v-if="this.$store.state.layers.icePieces"></LayerIcePieces>
         <LayerShips></LayerShips>
-        <LayerHexagonsOfShips v-if="this.$store.state.layers.hexOfShips"></LayerHexagonsOfShips>
+        <LayerHexagonsOfShips v-if="false && this.$store.state.layers.hexOfShips"></LayerHexagonsOfShips>
       </g>
     </svg>
   </div>
