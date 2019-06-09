@@ -46,7 +46,7 @@
   }
 
   .theme--light.v-toolbar {
-    background: rgba(0, 91, 151, .9);
+    background: rgba(0, 91, 151, 1);
     color: #FFF;
   }
 
