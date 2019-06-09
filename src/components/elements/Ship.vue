@@ -23,14 +23,16 @@
     props: ['data'],
     computed: {
       translate() {
-        const centerX = 0; // -110;
-        const centerY = 0; // 103;
+        const config = this.$store.state.config;
+
+        const centerX = config.tileW / 2;
+        const centerY = config.tileH / 2;
 
         const col = this.data.movements[0].hex[1];
         const row = this.data.movements[0].hex[0];
 
-        let y = row * this.$store.state.config.tileH * 29/40;
-        let x = col * this.$store.state.config.tileW;
+        let x = col * config.tileW;
+        let y = row * config.tileH * 29/40;
 
         if (row % 2 === 0) {
           x += this.$store.state.config.tileW / 2;
@@ -40,7 +42,7 @@
       },
 
       rotate() {
-        return (this.data.movements[0].rotation);
+        return (this.data.movements[1].rotation);
       }
     },
   };
@@ -48,7 +50,7 @@
 
 <style scoped>
   .root {
-    opacity: 0.4;
+    opacity: 0.7;
   }
   .ships > g {
     transition: transform linear 5s;
