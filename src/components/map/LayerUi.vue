@@ -2,7 +2,7 @@
   <div class="root">
     <div class="wrap">
       <div class="topLeft">
-        <div class="top-left-item">
+        <div class="top-left-item" v-if="false">
           <v-tooltip bottom color="rgba(0,0,0,.6)">
             <template v-slot:activator="{ on }">
               <div v-on="on">
@@ -20,13 +20,13 @@
           <v-tooltip bottom color="rgba(0,0,0,.6)">
             <template v-slot:activator="{ on }">
               <div v-on="on">
-                <v-progress-circular :size="45" :width="5" :value="21 / 30 * 100" color="blue">
+                <v-progress-circular :size="45" :width="5" :value="researched / researches * 100" color="blue">
                   <v-icon>local_drink</v-icon>
                 </v-progress-circular>
-                <b class="top-left-item-text">21 / 30</b>
+                <b class="top-left-item-text">{{researched}} / {{researches}}</b>
               </div>
             </template>
-            <span>21 исследование изучено</span>
+            <span>{{researched}} исследование изучено</span>
           </v-tooltip>
         </div>
 
@@ -47,7 +47,7 @@
 
       <div class="topRight"></div>
 
-      <div class="bottomLeft" :class="{collapsed: shipsCollapsed, expanded: !shipsCollapsed}">
+      <div class="bottomLeft" v-show="ships.length" :class="{collapsed: shipsCollapsed, expanded: !shipsCollapsed}">
         <div class="bottom-left-item chevron" style="margin-bottom: 0" @click="shipsCollapsed = !shipsCollapsed">
           <v-avatar size="48px" color="rgba(0, 91, 151, 1)">
             <v-icon color="white" v-if="shipsCollapsed">keyboard_arrow_up</v-icon>
@@ -96,6 +96,14 @@
           ...ship,
           icebreaker: this.gs.icebreakers.find(a => a.id === ship.id)
         }));
+      },
+      researches() {
+        if (!this.gs.research) return 0;
+        return this.gs.research.length;
+      },
+      researched() {
+        if (!this.gs.research) return 0;
+        return this.gs.research.filter((item) => item.completed).length;
       }
     },
     methods: {
@@ -140,7 +148,7 @@
     padding: 8px 8px 2px !important;
     color: #FFF;
     transition: .3s;
-    margin-left: -105px;
+    margin-left: -73px;
   }
   .wrap {
     width: 100%;
