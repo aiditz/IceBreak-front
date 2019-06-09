@@ -10,22 +10,22 @@
       </div>
     </v-expand-transition>
 
-    <div class="tasks-popup-open" @click="tasksPopup = !tasksPopup" v-if="tasks.length">
+    <div class="tasks-popup-open" @click="$store.state.showTasks = !$store.state.showTasks" v-if="tasks.length">
       <v-badge overlap color="warning">
         <template v-slot:badge>{{tasks.length}}</template>
         <v-avatar tile size="48px" color="rgba(0, 91, 151, 1)" style="border-radius: 8px;">
-          <v-icon v-if="!tasksPopup" size="32px" color="white">assignment</v-icon>
+          <v-icon v-if="!$store.state.showTasks" size="32px" color="white">assignment</v-icon>
           <v-icon v-else color="white">clear</v-icon>
         </v-avatar>
       </v-badge>
     </div>
 
-    <div class="tasks-popup" :class="{opened: tasksPopup}">
+    <div class="tasks-popup" :class="{opened: $store.state.showTasks}">
       <div class="tasks-popup-header">
         <h4>Задания</h4>
         <p>Сделайте проводку по ледовому маршруту к соответствующим точкам на карте, чтобы выполнить задание</p>
       </div>
-      <v-card class="task-popup" v-for="item in tasks">
+      <v-card class="task-popup" v-for="item in tasks" v-if="item.progress < item.ttl">
         <img :src="item.image" style="max-width: 100%"/>
         <v-card-title>{{ item.name }}</v-card-title>
         <v-card-text class="pt-0">
@@ -73,9 +73,7 @@ export default {
     Satellites,
   },
   data() {
-    return {
-      tasksPopup: false
-    }
+    return {}
   },
   computed: {
     serverOffline() {

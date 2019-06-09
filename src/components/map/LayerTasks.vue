@@ -9,6 +9,7 @@
         :style="{top: item.center.y + 'px', left: item.center.x + 'px'}"
         :color="item.bg"
         style="border: 1px solid rgb(0, 91, 151); border-radius: 50%;"
+        @click="$store.state.showTasks = true"
       >
         <v-avatar size="38px" color="rgb(0, 91, 151)">
           <v-img v-if="item.image" :src="item.image" />

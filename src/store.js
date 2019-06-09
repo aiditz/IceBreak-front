@@ -35,6 +35,8 @@ export default new Vuex.Store({
       cols: 24
     },
 
+    showTasks: false,
+
     online: true,
     lastTs: new Date().getTime()
   },
@@ -88,7 +90,10 @@ export default new Vuex.Store({
             'description': '',
             'coordinates': [47, 15],
             'progress': 300,
-            'ttl' : 600
+            'ttl' : 600,
+            'completed': false,
+            'taken': true,
+            'failed': false
           }, {
             'id' : 1,
             'name' : 'Ледовая 2 в Диксон',
