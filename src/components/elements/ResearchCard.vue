@@ -11,21 +11,21 @@
         <v-card-title class="py-2 px-3 pb-1">
           <div class="headline">{{ item.name }}</div>
         </v-card-title>
-        
+
         <v-card-text class="pt-0">
           <div class="description">{{ item.description }}</div>
         </v-card-text>
 
         <v-card-actions class="pt-0 px-3 pb-3">
           <v-btn :color="isAvailable ? 'success' : 'default'"
-            @click="$store.dispatch('orderShip', item.id)"
+            @click="$store.dispatch('research', item.id)"
             :disabled="!isAvailable || isResearching || isResearched"
             small
           >
             <span v-if="!isAvailable">Требуется <b>{{ item.required_level }}</b> уровень</span>
             <span v-else-if="item.progress == 0">Исследовать</span>
             <span v-else-if="isResearching">
-              Исследуется - 
+              Исследуется -
               <b>{{ estimateTime }}</b> сек.
             </span>
             <span v-else-if="isResearched">Исследовано</span>
@@ -41,8 +41,12 @@
     name: 'SatelliteCard',
     props: ['item'],
     computed: {
+      myResearchLevel() {
+        return this.$store.state.gs.research_level || 1;
+      },
+
       isAvailable() {
-        return this.$store.state.gs.research_level >= this.item.required_level;
+        return this.myResearchLevel >= this.item.required_level;
       },
 
       isResearching() {

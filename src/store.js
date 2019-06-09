@@ -158,7 +158,7 @@ export default new Vuex.Store({
       await context.dispatch('sendAction', {
         action: 'Research',
         data: {
-          id: researchId
+          researchId: researchId
         }
       });
     },
