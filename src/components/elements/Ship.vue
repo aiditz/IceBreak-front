@@ -1,10 +1,33 @@
 <template>
-  <component
-    class="root"
-    :is="`Ship${data.id}`"
-    :transform="`translate(${translate}) rotate(${rotate} 0 0)`"
-  >
-  </component>
+  <g class="root">
+    <component
+      class="ship"
+      :is="`Ship${data.id}`"
+      :transform="`translate(${translate}) rotate(${rotate} 0 0)`"
+    >
+    </component>
+
+    <g v-if="this.$store.state.layers.hexOfShips">
+      <circle
+        class="control-button"
+        v-for="targetHex in data.target_hexes"
+        r="20"
+        fill="rgba(0, 91, 151, .9)"
+        stroke="black"
+        @click="$store.dispatch('controlShip', {shipId: data.id, target: targetHex})"
+        :cx="6 + (getColTranslate(targetHex[1], targetHex[0]) - getColTranslate(col, row)) * 1.5"
+        :cy="8 + (getRowTranslate(targetHex[0]) - getRowTranslate(row)) * 1.5"
+        :transform="`translate(${getItemTranslate(targetHex[1], targetHex[0])}) rotate(0)`">
+
+        <!--image
+          width="14"
+          height="14"
+          :transform="`translate(${getItemTranslate(targetHex[1], targetHex[0])}) rotate(0)`"
+          xlink:href="/img/right-arrow.png">
+        /-->
+      </circle>
+    </g>
+  </g>
 </template>
 
 <script>
@@ -27,12 +50,18 @@
       Ship5,
     },
     props: ['data'],
-    computed: {
-      translate() {
-        const col = this.data.movements[1].hex[1];
-        const row = this.data.movements[1].hex[0];
+    methods: {
 
-        const {x, y} = helpers.hexMath.getItemCenterXY(col, row);
+    },
+    computed: {
+      col() {
+        return this.data.movements[1].hex[1];
+      },
+      row() {
+        return this.data.movements[1].hex[0];
+      },
+      translate() {
+        const {x, y} = helpers.hexMath.getItemCenterXY(this.col, this.row);
 
         return `${x} ${y}`;
       },
@@ -47,7 +76,12 @@
 <style scoped>
   .root {
   }
-  .ships > g {
-    transition: transform linear 5s;
+  .ship {
+    transition: transform linear 6s;
   }
+  .control-button {
+
+  }
+
+
 </style>
