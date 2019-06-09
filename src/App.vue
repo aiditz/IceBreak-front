@@ -41,7 +41,7 @@
           <p class="pb-0">Также мы добавим все <br/> актуальные задачи на карту</p>
         </div>
       </v-card>
-      <v-card class="task-popup" v-for="item in tasks" v-if="item.progress < item.ttl">
+      <v-card class="task-popup" v-for="item in tasks">
         <!-- <img :src="item.image" style="max-width: 100%"/> -->
         <v-card-title>{{ item.name }}</v-card-title>
         <v-card-text class="pt-0">
@@ -52,11 +52,11 @@
           <table>
             <tr>
               <th class="task-key">Вознаграждение:</th>
-              <td class="task-val">{{ item.salary }}</td>
+              <td class="task-val">{{ item.salary }} млрд. руб.</td>
             </tr>
             <tr>
               <th class="task-key">Время:</th>
-              <td class="task-val">{{ item.ttl / 10 }} сек.</td>
+              <td class="task-val">{{ item.start_ttl / 10 }} сек. ({{Math.round(item.ttl/10)}} сек.)</td>
             </tr>
           </table>
 
@@ -183,8 +183,8 @@ export default {
   }
   .tasks-popup-open {
     position: fixed;
-    top: 16px;
-    left: 16px;
+    top: 11px;
+    right: 16px;
     z-index: 101;
   }
   .task-popup table {
@@ -199,7 +199,7 @@ export default {
   .task-val {
     padding: 0 0 0 6px;
     font-size: 14px;
-    text-align: right;
+    text-align: left;
   }
   .clear {
     display: block;

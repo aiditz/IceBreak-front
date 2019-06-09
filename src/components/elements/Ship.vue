@@ -1,11 +1,12 @@
 <template>
   <g
-    class="root ship"
-    :transform="`translate(${translate}) rotate(${rotate} 0 0)`"
+    class="root"
+    :transform="`translate(${translate})`"
   >
     <component
-      class=""
+      class="ship"
       :is="`Ship${data.id}`"
+      :transform="`rotate(${rotate} 0 0)`"
     >
     </component>
 
@@ -80,14 +81,15 @@
           0,
           +60,
           +120,
+          +180,
         ];
 
-        const r = 50;
+        const r = 50 * 1.4;
 
         const result = angles.map(angle => ({
           x: r * Math.cos(helpers.degToRad(angle)),
           y: r * Math.sin(helpers.degToRad(angle)),
-          angle: angle + this.rotate
+          angle: angle
         }));
 
         return result;
@@ -105,7 +107,7 @@
       },
 
       rotate() {
-        let result = (this.data.movements[2].rotation) % 360;
+        let result = (this.data.movements[1].rotation) % 360;
 
         if (result > 180) {
           result -= 360;
@@ -119,6 +121,7 @@
 
 <style scoped>
   .root {
+    transition: transform linear 6s;
   }
   .ship {
     transition: transform linear 6s;

@@ -194,10 +194,6 @@ export default new Vuex.Store({
     async buildDatacenter(context, hex) {
       await context.dispatch('sendAction', {
         action: 'Datacenter',
-        hex: [
-          Math.floor(Math.random() * 50),
-          Math.floor(Math.random() * 50),
-        ],
       });
     },
 

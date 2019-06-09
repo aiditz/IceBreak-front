@@ -89,7 +89,7 @@
       </div>
 
       <div class="bottomRight">
-        <img style="visibility: hidden;" class="icon" src="/img/IconDatacenter.svg" @click="$store.dispatch('buildDatacenter')">
+        <img class="icon" src="/img/IconDatacenter.svg" @click="$store.dispatch('buildDatacenter')">
         <img class="icon" src="/img/IconSatellite.svg" @click="$store.commit('toggleShipControls')">
         <img class="icon" src="/img/IconScience.svg" @click="$store.commit('ui/showPage', 'Research')">
         <img class="icon" src="/img/IconIcebreaker.svg" @click="$store.commit('ui/showPage', 'Ships')">
@@ -196,15 +196,13 @@
   .topLeft {
     position: absolute;
     display: flex;
-    padding: 8px;
     background-color: rgba(0,0,0,.2);
     border-radius: 0 0 8px 8px;
     top: 0;
-    left: 50%;
+    left: 8px;
     padding: 8px 8px 2px !important;
     color: #FFF;
     transition: .3s;
-    margin-left: -105px;
   }
   .wrap {
     width: 100%;
@@ -336,7 +334,7 @@
   .topRight {
       position: absolute;
       top: 0;
-      right: 0;
+      right: 66px;
       padding: 8px 10px;
       background-color: rgba(0, 91, 151, .9);
       border-radius: 8px;
