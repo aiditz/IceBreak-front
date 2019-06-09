@@ -16,7 +16,6 @@
         ></Hexagon>
       </g>
     </g>
-    <text style="fill: #FFF; transform: translate(200px, 150px);">{{debug}}</text>
   </g>
 </template>
 

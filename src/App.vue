@@ -3,7 +3,7 @@
     <v-expand-transition>
       <div v-show="serverOffline" class="server-status">
         <v-chip color="warning">
-          <v-icon color="red" left>report</v-icon>
+          <v-icon color="red" left>cloud_off</v-icon>
 
           Нет подключения к серверу
         </v-chip>
