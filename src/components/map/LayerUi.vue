@@ -72,7 +72,7 @@
 
       <div class="bottomLeft" v-show="ships.length" :class="{collapsed: shipsCollapsed, expanded: !shipsCollapsed}">
         <div class="bottom-left-item chevron" style="margin-bottom: 0" @click="shipsCollapsed = !shipsCollapsed">
-          <v-avatar size="41px" color="rgba(0, 91, 151, 1)">
+          <v-avatar size="41px" color="#1A1942">
             <v-icon color="white" v-if="shipsCollapsed">keyboard_arrow_up</v-icon>
             <v-icon color="white" v-else>keyboard_arrow_down</v-icon>
           </v-avatar>
@@ -159,7 +159,6 @@
 
       researchingItem() {
         if (!this.gs.research) return null;
-        return this.gs.research[0];
         return this.gs.research.find((item) => item.progress > 0 && item.progress < item.maximum_progress);
       }
     },
