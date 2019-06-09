@@ -131,12 +131,13 @@ import anumber from '../anumber';
     display: flex;
     padding: 8px;
     background-color: rgba(0,0,0,.2);
-    border-radius: 0 0 8px 0;
-    left: 0 !important;
-    top: 0 !important;
+    border-radius: 0 0 8px 8px;
+    top: 0;
+    left: 50%;
     padding: 8px 8px 2px !important;
     color: #FFF;
     transition: .3s;
+    margin-left: -105px;
   }
   .wrap {
     width: 100%;
