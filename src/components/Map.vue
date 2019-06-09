@@ -1,6 +1,7 @@
 <template>
   <div id="map-wrapper" class="root">
     <LayerUi class="layer-ui"></LayerUi>
+    <LayerTasks class="layer-tasks"></LayerTasks>
     <svg id="map" :class="{loaded}">
       <g id="map-content" :transform="'scale(' + this.mapScale + ')'">
         <LayerBackground></LayerBackground>
@@ -18,6 +19,7 @@
   import LayerHexagonsOfShips from './map/LayerHexagonsOfShips.svg.vue';
   import LayerUi from './map/LayerUi.vue';
   import LayerShips from './map/LayerShips.vue';
+  import LayerTasks from './map/LayerTasks.vue';
   import interact from 'interactjs';
 
   export default {
@@ -28,6 +30,7 @@
       LayerHexagonsOfShips,
       LayerUi,
       LayerShips,
+      LayerTasks
     },
     data() {
       return {
@@ -74,6 +77,18 @@
   .layer-ui {
     position: fixed;
     box-shadow: inset 0 0 20px 0px #1A1942;
+    z-index: 10000;
+  }
+
+  .layer-tasks {
+    z-index: 1000;
+    opacity: .8;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
   }
 
   #map {
