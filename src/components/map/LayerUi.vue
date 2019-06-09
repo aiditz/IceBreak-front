@@ -54,23 +54,12 @@
             <v-icon color="white" v-else>keyboard_arrow_down</v-icon>
           </v-avatar>
         </div>
-        <div class="bottom-left-item" style="margin-bottom: 12px;">
+
+        <div class="bottom-left-item" v-for="item in ships">
           <v-avatar tile size="48px" color="primary">
-            <img :src="gs.icebreakers[0].image" />
+            <img :src="item.icebreaker.image" />
           </v-avatar>
-          <span class="ship-name">{{gs.icebreakers[0].name}}</span>
-        </div>
-        <div class="bottom-left-item" style="margin-bottom: 8px">
-          <v-avatar tile size="48px" color="primary">
-            <img :src="gs.icebreakers[1].image" />
-          </v-avatar>
-          <span class="ship-name">{{gs.icebreakers[1].name}}</span>
-        </div>
-        <div class="bottom-left-item" style="margin-bottom: 4px">
-          <v-avatar tile size="48px" color="primary">
-            <img :src="gs.icebreakers[2].image" />
-          </v-avatar>
-          <span class="ship-name">{{gs.icebreakers[2].name}}</span>
+          <span class="ship-name">{{ item.icebreaker.name }}</span>
         </div>
 
         <b class="bottomLeft-heading">Флот</b>
@@ -98,6 +87,12 @@ import anumber from '../anumber';
     computed: {
       gs() {
         return this.$store.state.gs;
+      },
+      ships() {
+        return this.gs.ships.map(ship => ({
+          ...ship,
+          icebreaker: this.gs.icebreakers.find(a => a.id === ship.id)
+        }));
       }
     },
     data() {
