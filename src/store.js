@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import helpers from './common/helpers';
 import config from './common/config';
+import API from './common/api';
 import ui from './store/ui';
 
 Vue.use(Vuex);
@@ -10,7 +12,9 @@ export default new Vuex.Store({
     ui
   },
   state: {
+    lastActionDate: null,
     lastEventId: null,
+    requestTimeoutId: null,
     layers: {
       background: true,
       buildHexGrid: false,
@@ -74,6 +78,68 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    async init(context) {
+      let data;
+      let initNeeded = true;
+
+      try {
+        data = await API.startGame();
+      } catch (err) {
+        data = require('./common/backend-response.dist.json');
+        initNeeded = false;
+        console.warn('TEST GAMESTATE DATA USED');
+      }
+
+      API.setSession(data.id);
+      context.commit('setGamestate', data);
+
+      if (Array.isArray(data.ships)) {
+        helpers.scrollToShip(data.ships[0]);
+      }
+
+      if (!initNeeded) {
+        return;
+      }
+
+      await context.dispatch('refreshGs');
+    },
+
+    async refreshGs(context, responseData) {
+      if (context.state.requestTimeoutId) {
+        clearTimeout(context.state.requestTimeoutId);
+        context.commit('set', {field: 'requestTimeoutId', value: null});
+      }
+
+      const dateBefore = Date.now();
+
+      if (!responseData) {
+        try {
+          const data = await API.getGamestate(context.state.lastEventId);
+
+          if (data.error) {
+            console.error('Get gamestate loop error:', err);
+          } else {
+            context.commit('setGamestate', data);
+          }
+        } catch (err) {
+          console.error('Up server pls', err);
+        }
+      } else {
+        // already provided data
+        context.commit('setGamestate', data);
+      }
+
+      if ((context.state.lastTs + 10000) < new Date().getTime()) {
+        context.state.online = false;
+      }
+
+      const nextRequestIn = 5000 - Math.min(5000, Date.now() - dateBefore);
+      context.commit('set', {
+        field: 'requestTimeoutId',
+        value: setTimeout(() => context.dispatch('refreshGs'), nextRequestIn)
+      });
+    },
+
     async setGamestate(context, gs) {
       context.commit('setGamestate', gs);
 
@@ -83,6 +149,18 @@ export default new Vuex.Store({
       }
     },
 
+    async sendAction(context, researchId) {
+      const data = await API.sendAction('Research', {id: researchId});
+      await context.dispatch('refreshGs', data);
+    },
 
+    async research(context, researchId) {
+      await context.dispatch('sendAction', {
+        action: 'Research',
+        data: {
+          id: researchId
+        }
+      });
+    },
   }
 });

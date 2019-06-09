@@ -50,6 +50,9 @@ export default {
   },
 
   async sendAction(actionName, data) {
-    return this.api('gamestate');
+    return this.api('gamestate', {
+      action: actionName,
+      ...data
+    });
   },
 };
