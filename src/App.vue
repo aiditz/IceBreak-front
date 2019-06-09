@@ -48,7 +48,7 @@
           {{ item.description }}
 
           <div class="clear pb-2"></div>
-          
+
           <table>
             <tr>
               <th class="task-key">Вознаграждение:</th>
@@ -118,8 +118,8 @@ export default {
     background-color: #000;
   }
   #app {
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
   }
   .application--wrap {
     min-height: 100%;

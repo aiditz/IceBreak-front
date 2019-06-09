@@ -190,8 +190,6 @@ export default new Vuex.Store({
     },
 
     async controlShip(context, {shipId, target}) {
-      debugger;
-
       await context.dispatch('sendAction', {
         action: 'ControlShip',
         shipId,
