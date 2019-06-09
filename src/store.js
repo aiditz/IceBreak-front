@@ -25,7 +25,8 @@ export default new Vuex.Store({
     },
     customEvents: [],
     gs: {
-      money: 0
+      money: 0,
+      status: 0 // -1: failed, 0: game, 1: win
     },
     loaded: false,
     config: {
@@ -34,6 +35,8 @@ export default new Vuex.Store({
       rows: 13,
       cols: 24
     },
+    
+    showTasks: false,
 
     online: true,
     lastTs: new Date().getTime()
@@ -96,7 +99,10 @@ export default new Vuex.Store({
             'description': '',
             'coordinates': [47, 15],
             'progress': 300,
-            'ttl' : 600
+            'ttl' : 600,
+            'completed': false,
+            'taken': true,
+            'failed': false
           }, {
             'id' : 1,
             'name' : 'Ледовая 2 в Диксон',

@@ -20,6 +20,20 @@
           <v-tooltip bottom color="rgba(0,0,0,.6)">
             <template v-slot:activator="{ on }">
               <div v-on="on">
+                <v-progress-circular :size="45" :width="5" :value="failedTasks / 5 * 100" color="red">
+                  <v-icon>speaker_notes_off</v-icon>
+                </v-progress-circular>
+                <b class="top-left-item-text">{{ failedTasks }} / 5</b>
+              </div>
+            </template>
+            <span>Не пропускайте задачи!</span>
+          </v-tooltip>
+        </div>
+
+        <div class="top-left-item">
+          <v-tooltip bottom color="rgba(0,0,0,.6)">
+            <template v-slot:activator="{ on }">
+              <div v-on="on">
                 <v-progress-circular :size="45" :width="5" :value="researched / researches * 100" color="blue">
                   <component is="ResearchIcon"></component>
                 </v-progress-circular>
@@ -34,7 +48,7 @@
           <v-tooltip bottom color="rgba(0,0,0,.6)">
             <template v-slot:activator="{ on }">
               <div v-on="on">
-                <v-progress-circular :size="45" :width="5" :value="buildedIcebreakers / icebreakersCount * 100" color="orange">
+                <v-progress-circular :size="45" :width="5" :value="buildedIcebreakers / icebreakersCount * 100" color="green">
                   <v-icon>directions_boat</v-icon>
                 </v-progress-circular>
                 <b class="top-left-item-text">{{ buildedIcebreakers }} / {{ icebreakersCount }}</b>
@@ -45,8 +59,10 @@
         </div>
       </div>
 
-      <div class="topRight">
+      <div class="topRight text-xs-right">
+        <i style="opacity: .7; font-size: 11px; display: block; margin: -5px 0">бюджет</i>
         <Anumber :number="$store.state.gs.money"></Anumber> млрд.
+        ₽
       </div>
 
       <div class="bottomLeft" v-show="ships.length" :class="{collapsed: shipsCollapsed, expanded: !shipsCollapsed}">
@@ -111,7 +127,7 @@
         return this.gs.research.filter((item) => item.completed).length;
       },
       icebreakersCount() {
-        if (!this.gs.icebreakers) return 5;
+        if (!this.gs.icebreakers) return 0;
         return this.gs.icebreakers.length;
       },
       buildedIcebreakers() {
@@ -121,6 +137,11 @@
       estimateIcebreakers() {
         if (!this.gs.icebreakers) return 0;
         return this.gs.icebreakers.length - this.buildedIcebreakers;
+      },
+
+      failedTasks() {
+        if (!this.gs.tasks) return 0;
+        return this.gs.tasks.filter((item) => this.failed).length;
       }
     },
     methods: {
