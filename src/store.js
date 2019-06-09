@@ -13,7 +13,7 @@ export default new Vuex.Store({
     lastEventId: null,
     layers: {
       background: true,
-      hexGrid: false,
+      buildHexGrid: false,
       hexOfShips: true,
       paths: false,
       objects: true,
@@ -58,8 +58,8 @@ export default new Vuex.Store({
       state.online = true;
       state.lastTs = new Date().getTime();
 
-      state.config.rows = state.gs.colors.length;
-      state.config.cols = state.gs.colors[1].length;
+      state.config.rows = 70; // state.gs.colors.length;
+      state.config.cols = 101; // state.gs.colors[1].length;
 
       config.tileH = 1440 / state.config.rows;
       config.tileW = config.tileH / 1.1547;

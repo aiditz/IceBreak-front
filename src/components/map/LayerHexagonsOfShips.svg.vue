@@ -35,9 +35,6 @@
       config() {
         return this.$store.state.config;
       },
-      gridTranslate() {
-        return -this.$store.state.config.tileW / 2 + ',' + -this.$store.state.config.tileH * 1/4;
-      },
     },
     components: {
       Hexagon

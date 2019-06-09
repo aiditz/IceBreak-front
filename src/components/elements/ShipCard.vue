@@ -196,7 +196,7 @@
 
 .requirements-item-name {
   padding: 0 25px;
-  max-width: 230px;
+  max-width: 220px;
   overflow: hidden;
   text-overflow: ellipsis;
 }

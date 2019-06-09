@@ -1,9 +1,11 @@
 import helpers from '../../common/helpers';
 
 export default {
+  computed: {
+  },
   methods: {
-    getColTranslate(colIndex) {
-      return helpers.hexMath.getColTranslate(colIndex);
+    getColTranslate(colIndex, rowIndex) {
+      return helpers.hexMath.getColTranslate(colIndex, rowIndex);
     },
 
     getRowTranslate(rowIndex) {

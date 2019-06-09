@@ -37,10 +37,10 @@
                 <v-progress-circular :size="45" :width="5" :value="30" color="orange">
                   <v-icon>monetization_on</v-icon>
                 </v-progress-circular>
-                <b class="top-left-item-text"><anumber :number="$store.state.gs.money"></anumber></b>
+                <b class="top-left-item-text"><Anumber :number="$store.state.gs.money"></Anumber></b>
               </div>
             </template>
-            <span><anumber :number="$store.state.gs.money"></anumber> млрд.</span>
+            <span><Anumber :number="$store.state.gs.money"></Anumber> млрд.</span>
           </v-tooltip>
         </div>
       </div>
@@ -75,13 +75,13 @@
 </template>
 
 <script>
-  import anumber from '../anumber';
+  import Anumber from '../ui/Anumber';
   import helpers from '../../common/helpers';
 
   export default {
     name: 'LayerUi',
     components: {
-      anumber
+      Anumber
     },
     props: {
     },

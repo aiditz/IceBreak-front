@@ -4,7 +4,7 @@
     <svg id="map" :class="{loaded}">
       <g id="map-content" :transform="'scale(' + this.mapScale + ')'">
         <LayerBackground></LayerBackground>
-        <LayerHexGrid v-if="this.$store.state.layers.hexGrid"></LayerHexGrid>
+        <LayerBuildHexGrid v-if="this.$store.state.layers.buildHexGrid"></LayerBuildHexGrid>
         <LayerHexagonsOfShips v-if="this.$store.state.layers.hexOfShips"></LayerHexagonsOfShips>
         <LayerShips></LayerShips>
       </g>
@@ -14,7 +14,7 @@
 
 <script>
   import LayerBackground from './map/LayerBackground.svg.vue';
-  import LayerHexGrid from './map/LayerHexGrid.svg.vue';
+  import LayerBuildHexGrid from './map/LayerBuildHexGrid.svg.vue';
   import LayerHexagonsOfShips from './map/LayerHexagonsOfShips.svg.vue';
   import LayerUi from './map/LayerUi.vue';
   import LayerShips from './map/LayerShips.vue';
@@ -24,7 +24,7 @@
     name: 'Map',
     components: {
       LayerBackground,
-      LayerHexGrid,
+      LayerBuildHexGrid,
       LayerHexagonsOfShips,
       LayerUi,
       LayerShips,

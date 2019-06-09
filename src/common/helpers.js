@@ -54,12 +54,18 @@ export default {
   },
 
   hexMath: {
-    getColTranslate(colIndex) {
-      return colIndex * config.tileW;
+    getColTranslate(colIndex, rowIndex) {
+      let result = colIndex * config.tileW - config.tileW / 2;
+
+      if (rowIndex % 2 === 0) {
+        result += config.tileW / 2;
+      }
+
+      return result;
     },
 
     getRowTranslate(rowIndex) {
-      return rowIndex * config.tileH;
+      return rowIndex * config.tileH * 29/40 - config.tileH * 1/4;
     },
 
     getItemXY(col, row) {
@@ -67,14 +73,19 @@ export default {
         return {x: 0, y: 0};
       }
 
-      let x = col * config.tileW;
-      let y = row * config.tileH * 29/40;
-
-      if (row % 2 === 0) {
-        x += config.tileW / 2;
-      }
+      const x = this.getColTranslate(col, row);
+      const y = this.getRowTranslate(row);
 
       return {x, y};
+    },
+
+    getItemCenterXY(col, row) {
+      const {x, y} = this.getItemXY(col, row);
+
+      return {
+        x: x + config.tileW / 2,
+        y: y + config.tileH / 2,
+      };
     },
 
     getItemTranslate(col, row) {
