@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import App from './App.vue';
 import store from './store';
-import API from './common/api';
 import helpers from './common/helpers';
 import './registerServiceWorker';
 import './plugins/vuetify';
@@ -16,6 +15,6 @@ new Vue({
   store,
   render: h => h(App),
   async created() {
-    this.$store.dispatch('init');
+    await this.$store.dispatch('init');
   }
 }).$mount('#app');

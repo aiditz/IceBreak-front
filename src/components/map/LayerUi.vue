@@ -99,7 +99,7 @@
           class="icon"
           :class="isSatellitesAvailable ? '' : 'disabled'"
           src="/img/IconSatellite.svg"
-          @click="$store.commit('toggleShipControls')"
+          @click="isSatellitesAvailable && $store.commit('toggleShipControls')"
         >
         <img
           class="icon"

@@ -6,11 +6,13 @@
       <g id="map-content" :transform="'scale(' + this.mapScale + ')'">
         <LayerBackground></LayerBackground>
         <LayerBuildHexGrid v-if="false && this.$store.state.layers.buildHexGrid"></LayerBuildHexGrid>
-        <LayerIcePieces v-if="this.$store.state.layers.icePieces"></LayerIcePieces>
+        <!-- LayerIcePieces v-if="this.$store.state.layers.icePieces"></LayerIcePieces -->
         <LayerShips></LayerShips>
         <LayerHexagonsOfDatacenters v-if="this.$store.state.layers.buildHexGrid"></LayerHexagonsOfDatacenters>
       </g>
     </svg>
+    <div id="pixi-canvas"></div>
+    <LayerIcePieces :ices="this.$store.state.gs.ice"></LayerIcePieces>
   </div>
 </template>
 
@@ -19,10 +21,12 @@
   import LayerBuildHexGrid from './map/LayerBuildHexGrid.svg.vue';
   import LayerHexagonsOfDatacenters from './map/LayerHexagonsOfDatacenters.svg.vue';
   import LayerIcePieces from './map/LayerIcePieces.vue';
+  import LayerPixi from './map/LayerIcePieces.vue';
   import LayerUi from './map/LayerUi.vue';
   import LayerShips from './map/LayerShips.vue';
   import LayerTasks from './map/LayerTasks.vue';
   import interact from 'interactjs';
+  import pixi from '../pixi/pixi';
 
   export default {
     name: 'Map',
@@ -43,6 +47,9 @@
     props: {
     },
     mounted() {
+      pixi.addInitHandler(() => {
+        document.getElementById('pixi-canvas').appendChild(pixi.app.view);
+      });
       /*
       interact('#map-content').gesturable({
         onmove: event => {
@@ -75,6 +82,8 @@
     position: absolute;
     left: 0;
     top: 0;
+    height: 100%;
+    width: 100%;
   }
 
   .layer-ui {
