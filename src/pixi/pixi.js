@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js';
+import icePieces from './icePieces.pixi';
 
 let app;
 let inited = false;
@@ -24,6 +25,8 @@ export default {
     app.view.style['touch-action'] = 'auto';
 
     inited = true;
+
+    icePieces.init(app);
 
     initHandlers.forEach(fn => fn(app));
     initHandlers = [];

@@ -12,7 +12,6 @@
       </g>
     </svg>
     <div id="pixi-canvas"></div>
-    <LayerIcePieces :ices="this.$store.state.gs.ice"></LayerIcePieces>
   </div>
 </template>
 
@@ -20,13 +19,12 @@
   import LayerBackground from './map/LayerBackground.svg.vue';
   import LayerBuildHexGrid from './map/LayerBuildHexGrid.svg.vue';
   import LayerHexagonsOfDatacenters from './map/LayerHexagonsOfDatacenters.svg.vue';
-  import LayerIcePieces from './map/LayerIcePieces.vue';
-  import LayerPixi from './map/LayerIcePieces.vue';
   import LayerUi from './map/LayerUi.vue';
   import LayerShips from './map/LayerShips.vue';
   import LayerTasks from './map/LayerTasks.vue';
   import interact from 'interactjs';
   import pixi from '../pixi/pixi';
+  import icePieces from '../pixi/icePieces.pixi';
 
   export default {
     name: 'Map',
@@ -34,7 +32,6 @@
       LayerBackground,
       LayerBuildHexGrid,
       LayerHexagonsOfDatacenters,
-      LayerIcePieces,
       LayerUi,
       LayerShips,
       LayerTasks
@@ -49,6 +46,8 @@
     mounted() {
       pixi.addInitHandler(() => {
         document.getElementById('pixi-canvas').appendChild(pixi.app.view);
+
+        icePieces.render(this.gs.ice);
       });
       /*
       interact('#map-content').gesturable({
@@ -57,6 +56,11 @@
         }
       });
       */
+    },
+    watch: {
+      'gs.ice': function(value) {
+        icePieces.render(value);
+      }
     },
     computed: {
       gs() {
