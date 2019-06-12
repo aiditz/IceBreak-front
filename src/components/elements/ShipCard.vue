@@ -88,7 +88,7 @@
       },
 
       estimateTime() {
-        return Math.ceil((this.item.maximum_progress - this.item.progress) / 100);
+        return Math.ceil((this.item.maximum_progress - this.item.progress) / 10);
       },
       estimateRequirements() {
         return this.item.requirements.filter(req => !req.completed).length;

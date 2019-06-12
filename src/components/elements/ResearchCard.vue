@@ -58,7 +58,7 @@
       },
 
       estimateTime() {
-        return Math.ceil((this.item.maximum_progress - this.item.progress) / 100);
+        return Math.ceil((this.item.maximum_progress - this.item.progress) / 10);
       }
     }
   };

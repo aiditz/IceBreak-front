@@ -1,18 +1,18 @@
 <template>
-  <div class="root">
+  <div class="root" id="viewport">
     <LayerUi class="layer-ui"></LayerUi>
     <LayerTasks class="layer-tasks"></LayerTasks>
     <div id="map-wrapper">
+      <div id="pixi-canvas"></div>
       <svg id="map" :class="{loaded}">
         <g id="map-content" :transform="'scale(' + this.mapScale + ')'">
-          <LayerBackground></LayerBackground>
-          <LayerBuildHexGrid v-if="false && this.$store.state.layers.buildHexGrid"></LayerBuildHexGrid>
+          <!-- LayerBackground></LayerBackground -->
+          <!-- LayerBuildHexGrid v-if="false && this.$store.state.layers.buildHexGrid"></LayerBuildHexGrid -->
           <!-- LayerIcePieces v-if="this.$store.state.layers.icePieces"></LayerIcePieces -->
           <LayerShips></LayerShips>
-          <LayerHexagonsOfDatacenters v-if="this.$store.state.layers.buildHexGrid"></LayerHexagonsOfDatacenters>
+          <!-- LayerHexagonsOfDatacenters v-if="this.$store.state.layers.buildHexGrid"></LayerHexagonsOfDatacenters -->
         </g>
       </svg>
-      <div id="pixi-canvas"></div>
     </div>
   </div>
 </template>
@@ -26,7 +26,7 @@
   import LayerTasks from './map/LayerTasks.vue';
   import interact from 'interactjs';
   import pixi from '../pixi/pixi';
-  import icePieces from '../pixi/icePieces.pixi';
+  import icePieces from '../pixi/layerIcePieces';
 
   export default {
     name: 'Map',

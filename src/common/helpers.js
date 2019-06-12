@@ -42,7 +42,7 @@ export default {
   },
 
   scrollToShip(ship) {
-    var el = document.body.querySelector('#map-wrapper');
+    var el = document.body.querySelector('#viewport');
     const [row, col] = ship.movements[1].hex;
     const {x, y} = this.hexMath.getItemXY(col, row);
 

@@ -160,7 +160,7 @@
       },
       researched() {
         if (!this.gs.research) return 0;
-        return this.gs.research.filter((item) => item.completed).length;
+        return this.gs.research.filter((item) => item.progress === item.maximum_progress).length;
       },
       icebreakersCount() {
         if (!this.gs.icebreakers) return 0;
@@ -168,7 +168,7 @@
       },
       buildedIcebreakers() {
         if (!this.gs.icebreakers) return 0;
-        return this.gs.icebreakers.filter((item) => item.progress >= item.maximum_progress).length;
+        return this.gs.icebreakers.filter((item) => item.progress === item.maximum_progress).length;
       },
       estimateIcebreakers() {
         if (!this.gs.icebreakers) return 0;

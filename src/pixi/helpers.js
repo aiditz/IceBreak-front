@@ -18,6 +18,9 @@ export default {
   },
 
   translateScale(n = 1) {
-    return n * this.getPixelRatio();
+    return {
+      x: n * this.getPixelRatio(),
+      y: n * this.getPixelRatio(),
+    };
   }
 };

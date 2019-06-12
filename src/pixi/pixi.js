@@ -1,7 +1,13 @@
 import * as PIXI from 'pixi.js';
-import icePieces from './icePieces.pixi';
+import layerIcePieces from './layerIcePieces';
+import layerBackground from './layerBackground';
 import pixiHelpers from './helpers';
 import config from '../common/config';
+
+const layers = [
+  layerBackground,
+  layerIcePieces,
+];
 
 let app;
 let inited = false;
@@ -18,7 +24,6 @@ export default {
 
   init() {
     const pixelRatio = pixiHelpers.getPixelRatio();
-    // PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
 
     app = new PIXI.Application({
       width: config.mapWidth * pixelRatio,
@@ -37,19 +42,16 @@ export default {
 
     inited = true;
 
-    console.log('pixi inited');
-    icePieces.init(app);
-    /*
-    var graphics = new PIXI.Graphics();
-    graphics.beginFill(0xe74c3c); // Red
-    graphics.drawCircle(599, 500, 120); // drawCircle(x, y, radius)
-    graphics.endFill();
+    const resources = layers.reduce((p, c) => p.concat(c.resources), []);
 
-    app.stage.addChild(graphics);
-    */
+    resources.forEach(resource => app.loader.add(...resource));
 
-    initHandlers.forEach(fn => fn(app));
-    initHandlers = [];
+    app.loader.load(() => {
+      layers.forEach(layer => layer.init(app));
+
+      initHandlers.forEach(fn => fn(app));
+      initHandlers = [];
+    });
   },
 
   addInitHandler(fn) {
