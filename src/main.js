@@ -14,7 +14,6 @@ Vue.filter('formatMoney', helpers.formatMoney);
 new Vue({
   store,
   render: h => h(App),
-  async created() {
-    await this.$store.dispatch('init');
+  created() {
   }
 }).$mount('#app');

@@ -19,6 +19,7 @@ module.exports = {
     'no-shadow': 'off',
     'no-param-reassign': 'off',
     'no-plusplus': 'off',
+    'dot-notation': 'off',
     'max-len': ['error', {
       code: 120,
       ignoreUrls: true

@@ -92,9 +92,11 @@
     data() {
       return {}
     },
-    mounted() {
-      const scrollEl = document.getElementById('map-wrapper');
-      pixi.init(scrollEl);
+    async mounted() {
+      await this.$store.dispatch('init');
+
+      const el = document.getElementById('map-wrapper');
+      pixi.init(el);
     },
     computed: {
       serverOffline() {

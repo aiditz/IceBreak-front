@@ -98,12 +98,13 @@ export default new Vuex.Store({
       state.online = true;
       state.lastTs = new Date().getTime();
 
-      state.config.rows = 70; // state.gs.colors.length;
-      state.config.cols = 101; // state.gs.colors[1].length;
+      // config.rows = state.gs.colors.length;
+      // config.cols = state.gs.colors[1].length;
 
-      config.tileH = 1440 / state.config.rows;
-      config.tileW = config.tileH / 1.1547;
-      state.config = config;
+      config.tileH = config.mapHeight / (config.rows);
+      config.tileW = config.mapWidth / (config.cols);
+      // config.tileW = config.tileH / 1.1547;
+      // state.config = config;
 
       state.loaded = true;
     }

@@ -1,17 +1,19 @@
 <template>
-  <div id="map-wrapper" class="root">
+  <div class="root">
     <LayerUi class="layer-ui"></LayerUi>
     <LayerTasks class="layer-tasks"></LayerTasks>
-    <svg id="map" :class="{loaded}">
-      <g id="map-content" :transform="'scale(' + this.mapScale + ')'">
-        <LayerBackground></LayerBackground>
-        <LayerBuildHexGrid v-if="false && this.$store.state.layers.buildHexGrid"></LayerBuildHexGrid>
-        <!-- LayerIcePieces v-if="this.$store.state.layers.icePieces"></LayerIcePieces -->
-        <LayerShips></LayerShips>
-        <LayerHexagonsOfDatacenters v-if="this.$store.state.layers.buildHexGrid"></LayerHexagonsOfDatacenters>
-      </g>
-    </svg>
-    <div id="pixi-canvas"></div>
+    <div id="map-wrapper">
+      <svg id="map" :class="{loaded}">
+        <g id="map-content" :transform="'scale(' + this.mapScale + ')'">
+          <LayerBackground></LayerBackground>
+          <LayerBuildHexGrid v-if="false && this.$store.state.layers.buildHexGrid"></LayerBuildHexGrid>
+          <!-- LayerIcePieces v-if="this.$store.state.layers.icePieces"></LayerIcePieces -->
+          <LayerShips></LayerShips>
+          <LayerHexagonsOfDatacenters v-if="this.$store.state.layers.buildHexGrid"></LayerHexagonsOfDatacenters>
+        </g>
+      </svg>
+      <div id="pixi-canvas"></div>
+    </div>
   </div>
 </template>
 
@@ -46,8 +48,6 @@
     mounted() {
       pixi.addInitHandler(() => {
         document.getElementById('pixi-canvas').appendChild(pixi.app.view);
-
-        icePieces.render(this.gs.ice);
       });
       /*
       interact('#map-content').gesturable({
@@ -77,17 +77,35 @@
   .root {
     position: absolute;
     left: 0;
+    top: 0;
     height: 100%;
     width: 100%;
     overflow: scroll;
   }
-
   .root > * {
     position: absolute;
     left: 0;
     top: 0;
     height: 100%;
     width: 100%;
+  }
+
+  #map-wrapper {
+    position: absolute;
+    left: 0;
+    top: 0;
+    /* height: 100%; */
+    /* width: 100%; */
+    width: 1780px;
+    height: 1044px;
+  }
+
+  #map-wrapper > * {
+    position: absolute;
+    left: 0;
+    top: 0;
+    /* height: 100%; */
+    /* width: 100%; */
   }
 
   .layer-ui {
@@ -111,7 +129,7 @@
     opacity: 0;
     transition: .3s;
     width: 1780px;
-    height: 1039px;
+    height: 1044px;
   }
 
   #map > * {
@@ -122,6 +140,11 @@
 
   #map.loaded {
     opacity: 1;
+  }
+
+  #pixi-canvas {
+    width: 1780px;
+    height: 1044px;
   }
 
 </style>

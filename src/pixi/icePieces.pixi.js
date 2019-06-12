@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js';
-import helpers from '../common/helpers';
+import pixiHelpers from './helpers';
 
 let app;
 let container;
@@ -10,16 +10,52 @@ const MAX_VANGLE = 0.5;
 const FLUCTUATION_TIME_FACTOR = 6; // greater -> slower
 
 function fluctuate(p, delta) {
-  if (Math.abs(p.x - p.cx) > MAX_FLUCTUATION_RANGE) {
-    p.x += (p.cx - p.x) / MAX_FLUCTUATION_RANGE * delta / FLUCTUATION_TIME_FACTOR;
+  /*
+  const maxRange = pixiHelpers.translateXY(MAX_FLUCTUATION_RANGE);
+  let dx;
+  let dy;
+
+  if (Math.abs(p.x - p.cx) > maxRange) {
+    dx = (p.cx - p.x) / MAX_FLUCTUATION_RANGE * delta / FLUCTUATION_TIME_FACTOR;
   } else {
-    p.x += (Math.random() - 0.5) * delta / FLUCTUATION_TIME_FACTOR;
+    dx = (Math.random() - 0.5) * delta / FLUCTUATION_TIME_FACTOR;
   }
 
-  if (Math.abs(p.y - p.cy) > MAX_FLUCTUATION_RANGE) {
-    p.x += (p.cy - p.y) / MAX_FLUCTUATION_RANGE * delta / FLUCTUATION_TIME_FACTOR;
+  if (Math.abs(p.y - p.cy) > maxRange) {
+    dy = (p.cy - p.y) / MAX_FLUCTUATION_RANGE * delta / FLUCTUATION_TIME_FACTOR;
   } else {
-    p.y += (Math.random() - 0.5) * delta / FLUCTUATION_TIME_FACTOR;
+    dy = (Math.random() - 0.5) * delta / FLUCTUATION_TIME_FACTOR;
+  }
+
+  p.position = {
+    x: p.x + pixiHelpers.translateXY(dx),
+    y: p.y + pixiHelpers.translateXY(dy),
+  };
+  */
+
+  p.vangle += (Math.random() - 0.5) * delta / 10;
+
+  if (p.vangle > MAX_VANGLE) {
+    p.vangle = MAX_VANGLE;
+  } else if (p.vangle < -MAX_VANGLE) {
+    p.vangle = -MAX_VANGLE;
+  }
+
+  p.angle += p.vangle * delta;
+}
+
+function forEachIcePiece(fn) {
+  if (!ices) {
+    return;
+  }
+
+  let counter = 0;
+
+  for (let i = 0; i < ices.length; i++) {
+    for (let j = 0; j < ices[i].length; j++) {
+      fn(container.children[counter], ices[i][j], i, j);
+      counter++;
+    }
   }
 }
 
@@ -28,48 +64,28 @@ export default {
     app = _app;
 
     app.loader
-      .add('/img/ice/1.svg')
-      .add('/img/ice/2.svg')
-      .add('/img/ice/3.svg')
-      .add('/img/ice/4.svg')
-      .add('/img/ice/5.svg')
-      .add('/img/ice/6.svg')
-      .add('/img/ice/7.svg')
-      .add('/img/ice/8.svg')
-      .add('/img/ice/9.svg')
-      .add('/img/ice/10.svg')
+      .add('icePiece1', '/img/ice/1.svg.32x32.png')
+      .add('icePiece2', '/img/ice/2.svg.32x32.png')
+      .add('icePiece3', '/img/ice/3.svg.32x32.png')
+      .add('icePiece4', '/img/ice/4.svg.32x32.png')
+      .add('icePiece5', '/img/ice/5.svg.32x32.png')
+      .add('icePiece6', '/img/ice/6.svg.32x32.png')
+      .add('icePiece7', '/img/ice/7.svg.32x32.png')
+      .add('icePiece8', '/img/ice/8.svg.32x32.png')
+      .add('icePiece9', '/img/ice/9.svg.32x32.png')
+      .add('icePiece10', '/img/ice/10.svg.32x32.png')
       .load(() => {
-        this.render();
+        console.log('ice pieces imgs loaded');
+        this.render(ices);
 
         app.ticker.add(delta => {
-          let counter = 0;
-
-          if (!ices) {
-            return;
-          }
-
-          for (let i = 0; i < ices.length; i++) {
-            for (let j = 0; j < ices[i].length; j++) {
-              const p = container.children[counter];
-
-              if (!p) {
-                return;
-              }
-
-              fluctuate(p, delta);
-
-              p.vangle += (Math.random() - 0.5) * delta / 10;
-
-              if (p.vangle > MAX_VANGLE) {
-                p.vangle = MAX_VANGLE;
-              } else if (p.vangle < -MAX_VANGLE) {
-                p.vangle = -MAX_VANGLE;
-              }
-
-              p.angle += p.vangle * delta;
-              counter++;
+          forEachIcePiece((p, value) => {
+            if (!p || !value) {
+              return;
             }
-          }
+
+            fluctuate(p, delta);
+          });
         });
       });
   },
@@ -77,47 +93,46 @@ export default {
   createPieces() {
     container = new PIXI.Container();
 
-    for (let i = 0; i < ices.length; i++) {
-      for (let j = 0; j < ices[i].length; j++) {
-        const texture = app.loader.resources['/img/ice/' + ((i + j) % 10 + 1) + '.svg'].texture;
-        const icePiece = new PIXI.Sprite(texture);
-        // icePiece.scale = {x: 0.4, y: 0.4};
-        icePiece.x = helpers.hexMath.getColTranslate(j, i);
-        icePiece.y = helpers.hexMath.getRowTranslate(i);
-        icePiece.cx = icePiece.x;
-        icePiece.cy = icePiece.y;
-        icePiece.vx = 0;
-        icePiece.vy = 0;
-        icePiece.vangle = 0;
-        icePiece.alpha = ices[i][j] / 100;
-        icePiece.anchor.set(0.5);
-        container.addChild(icePiece);
-      }
-    }
+    forEachIcePiece((icePiece, alpha, i, j) => {
+      const texture = app.loader.resources['icePiece' + (((i + j) % 10) + 1)].texture;
+      icePiece = new PIXI.Sprite(texture);
+
+      icePiece.scale = {
+        x: pixiHelpers.translateScale(0.75),
+        y: pixiHelpers.translateScale(0.75),
+      };
+      icePiece.x = pixiHelpers.translateCol(j, i);
+      icePiece.y = pixiHelpers.translateRow(i);
+      icePiece.cx = icePiece.x;
+      icePiece.cy = icePiece.y;
+      icePiece.vx = 0;
+      icePiece.vy = 0;
+      icePiece.vangle = 0;
+      icePiece.alpha = ices[i][j] / 100;
+      icePiece.anchor.set(0.25);
+      container.addChild(icePiece);
+    });
 
     app.stage.addChild(container);
   },
 
   render(_ices) {
-    ices = _ices;
-    console.log('icePieces.render()');
+    if (!_ices || !_ices.length) {
+      return;
+    }
 
-    if (!ices) {
+    ices = _ices;
+
+    if (!app) {
       return;
     }
 
     if (!container) {
       this.createPieces();
     } else {
-      let counter = 0;
-
-      for (let i = 0; i < ices.length; i++) {
-        for (let j = 0; j < ices[i].length; j++) {
-          const icePiece = container.children[counter];
-          icePiece.alpha = ices[i][j] / 100;
-          counter++;
-        }
-      }
+      forEachIcePiece((icePiece, alpha, i, j) => {
+        icePiece.alpha = ices[i][j] / 100;
+      });
     }
   }
 };

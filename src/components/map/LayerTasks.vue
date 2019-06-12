@@ -50,7 +50,6 @@
 }
 .tasks-item {
   position: relative;
-  margin: -20px;
   pointer-events: all;
 }
 
