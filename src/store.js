@@ -107,8 +107,8 @@ export default new Vuex.Store({
       // config.rows = state.gs.colors.length;
       // config.cols = state.gs.colors[1].length;
 
-      config.tileH = config.mapHeight / (config.rows);
-      config.tileW = config.mapWidth / (config.cols);
+      config.tileH = config.mapHeight / (config.rows - 1);
+      config.tileW = config.mapWidth / (config.cols - 1);
       // config.tileW = config.tileH / 1.1547;
       // state.config = config;
 
