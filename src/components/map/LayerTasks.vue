@@ -3,10 +3,9 @@
     <div class="tasks-item" v-for="item in tasks" style="position: relative;">
       <v-progress-circular
         v-show="!item.disabled"
-        :size="48"
-        :width="20"
-        :value="100 - item.progress_"
-        :style="{top: item.center.y + 'px', left: item.center.x + 'px'}"
+        :size="size"
+        :value="100 - item.progress"
+        :style="{top: item.pos.y + 'px', left: item.pos.x + 'px'}"
         :color="item.bg"
         style="border: 1px solid rgb(0, 91, 151); border-radius: 50%;"
         @click="$store.state.showTasks = true"
@@ -26,18 +25,28 @@
   export default {
     name: 'LayerTasks',
     components: {},
+    data() {
+      return {
+        size: 48
+      }
+    },
     computed: {
       tasks() {
         if (!('quests' in this.$store.state.gs)) return [];
 
-        this.$store.state.gs.quests.every((item) => {
-          item.progress_ = item.ttl / item.start_ttl * 100;
-          item.bg = helpers.getColorForPercentage(1 - item.progress_ / 100);
-          item.color = item.progress % 20 >= 10 ? 'red' : 'yellow';
-          item.center = helpers.hexMath.getItemCenterXY(item.coordinates[1], item.coordinates[0]);
-          return item;
+        return this.$store.getters.quests.map((item) => {
+          const pos = helpers.hexMath.getItemCenterXY(item.coordinates[1], item.coordinates[0]);
+          pos.x -= this.size / 2;
+          pos.y -= this.size / 2;
+
+          return {
+            ...item,
+            progress: item.ttl / item.start_ttl * 100,
+            bg: helpers.getColorForPercentage(1 - item.progress / 100),
+            color: item.progress % 20 >= 10 ? 'red' : 'yellow',
+            pos,
+          };
         });
-        return this.$store.state.gs.quests;
       },
     }
   };

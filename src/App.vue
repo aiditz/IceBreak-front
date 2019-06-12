@@ -103,7 +103,7 @@
         return !this.$store.state.online;
       },
       tasks() {
-        return this.$store.state.gs.quests || [];
+        return this.$store.getters['quests'];
       }
     }
   };

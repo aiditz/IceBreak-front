@@ -176,8 +176,7 @@
       },
 
       failedTasks() {
-        if (!this.gs.quests) return 0;
-        return this.gs.quests.filter((item) => item.failed).length;
+        return this.$store.getters['quests'].filter((item) => item.failed).length;
       },
 
       researchingItem() {

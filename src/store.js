@@ -69,7 +69,14 @@ export default new Vuex.Store({
       }
 
       return hexes;
-    }
+    },
+    quests(state) {
+      if (!state.gs.quests) {
+        return [];
+      }
+
+      return state.gs.quests.filter((item) => item.taken && !item.failed && !item.completed);
+    },
   },
   mutations: {
     set(state, {field, value}) {
@@ -91,7 +98,6 @@ export default new Vuex.Store({
       }
 
       state.failedTasks = gs.quests.filter((item) => item.failed).length;
-      gs.quests = gs.quests.filter((item) => item.taken && !item.failed && !item.completed);
       state.gs = gs;
 
       // Server online checker
