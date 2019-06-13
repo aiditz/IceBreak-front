@@ -4,38 +4,31 @@
     <LayerTasks class="layer-tasks"></LayerTasks>
     <div id="map-wrapper">
       <div id="pixi-canvas"></div>
-      <svg id="map" :class="{loaded}">
+      <!-- svg id="map" :class="{loaded}">
         <g id="map-content" :transform="'scale(' + this.mapScale + ')'">
-          <!-- LayerBackground></LayerBackground -->
-          <!-- LayerBuildHexGrid v-if="false && this.$store.state.layers.buildHexGrid"></LayerBuildHexGrid -->
-          <!-- LayerIcePieces v-if="this.$store.state.layers.icePieces"></LayerIcePieces -->
-          <LayerShips></LayerShips>
-          <!-- LayerHexagonsOfDatacenters v-if="this.$store.state.layers.buildHexGrid"></LayerHexagonsOfDatacenters -->
+          LayerBackground></LayerBackground>
+          LayerBuildHexGrid v-if="false && this.$store.state.layers.buildHexGrid"></LayerBuildHexGrid>
+          LayerIcePieces v-if="this.$store.state.layers.icePieces"></LayerIcePieces>
+          LayerShips></LayerShips>
         </g>
-      </svg>
+      </svg -->
     </div>
   </div>
 </template>
 
 <script>
-  import LayerBackground from './map/LayerBackground.svg.vue';
   import LayerBuildHexGrid from './map/LayerBuildHexGrid.svg.vue';
-  import LayerHexagonsOfDatacenters from './map/LayerHexagonsOfDatacenters.svg.vue';
   import LayerUi from './map/LayerUi.vue';
-  import LayerShips from './map/LayerShips.vue';
   import LayerTasks from './map/LayerTasks.vue';
   import interact from 'interactjs';
   import pixi from '../pixi/pixi';
   import icePieces from '../pixi/layerIcePieces';
+  import layerShips from '../pixi/layerShips';
 
   export default {
     name: 'Map',
     components: {
-      LayerBackground,
-      LayerBuildHexGrid,
-      LayerHexagonsOfDatacenters,
       LayerUi,
-      LayerShips,
       LayerTasks
     },
     data() {
@@ -59,8 +52,11 @@
     },
     watch: {
       'gs.ice': function(value) {
-        icePieces.render(value);
-      }
+        icePieces.refreshData(value);
+      },
+      '$store.getters.activeShips': function(value) {
+        layerShips.refreshData(value);
+      },
     },
     computed: {
       gs() {

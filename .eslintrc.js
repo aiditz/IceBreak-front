@@ -20,6 +20,7 @@ module.exports = {
     'no-param-reassign': 'off',
     'no-plusplus': 'off',
     'dot-notation': 'off',
+    'no-use-before-define': 'off',
     'max-len': ['error', {
       code: 120,
       ignoreUrls: true

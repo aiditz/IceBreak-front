@@ -1,12 +1,14 @@
 import * as PIXI from 'pixi.js';
 import layerIcePieces from './layerIcePieces';
 import layerBackground from './layerBackground';
+import layerShips from './layerShips';
 import pixiHelpers from './helpers';
 import config from '../common/config';
 
 const layers = [
   layerBackground,
   layerIcePieces,
+  layerShips,
 ];
 
 let app;
@@ -42,16 +44,26 @@ export default {
 
     inited = true;
 
-    const resources = layers.reduce((p, c) => p.concat(c.resources), []);
-
-    resources.forEach(resource => app.loader.add(...resource));
+    layers.forEach(layer => {
+      layer.resources.forEach(resource => {
+        app.loader.add(...resource);
+      });
+    });
 
     app.loader.load(() => {
-      layers.forEach(layer => layer.init(app));
+      console.log('pixi loader done');
+
+      layers.forEach(layer => {
+        const container = new PIXI.Container();
+        layer.init(app, container);
+        app.stage.addChild(container);
+      });
 
       initHandlers.forEach(fn => fn(app));
       initHandlers = [];
     });
+
+    console.log('pixi init.done');
   },
 
   addInitHandler(fn) {
